@@ -1,0 +1,54 @@
+{
+  "name": "tracnghiem_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "beautiful": "prettier --single-quote --trailing-comma all --tab-width 4 --write src/**/*.{js,json,scss}",
+    "start": "nodemon --inspect src/index.js",
+    "auth": "nodemon --inspect src/authServer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phuduy1999/TracNghiem_Nodejs.git"
+  },
+  "keywords": [
+    "chungkhoan"
+  ],
+  "author": "duy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phuduy1999/TracNghiem_Nodejs/issues"
+  },
+  "homepage": "https://github.com/phuduy1999/TracNghiem_Nodejs#readme",
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "formidable": "^1.2.2",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "msnodesqlv8": "^2.4.0",
+    "mssql": "^7.2.1",
+    "multer": "^1.4.3",
+    "tedious": "^12.2.0",
+    "uuid": "^8.3.2",
+    "xlsx": "^0.17.2"
+  },
+  "devDependencies": {
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.0"
+  }
+}
