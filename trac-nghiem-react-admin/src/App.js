@@ -1,8 +1,9 @@
-import React, { Component, useEffect, useState } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import './scss/style.scss'
+import React, { useState } from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import loginApi from 'src/api/loginApi';
 import AppModalCustom from 'src/components/AppModalCustom';
+import './scss/style.scss';
+import InfoUserLogin from 'src/_infoUser';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -22,14 +23,15 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 const App = () => {
   const [visible, setVisible] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [isLogin, setIsLogin] = useState(false)
   const [mess, setMess] = useState(false)
   const pageRedirect = '/login';
 
   const handleLogout = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) return;
+
+    if (!InfoUserLogin()) return;
     loginApi.logout({
-      refreshToken: user.refreshToken,
+      refreshToken: InfoUserLogin().refreshToken,
     })
       .then(function (response) {
         localStorage.removeItem("user");
@@ -38,11 +40,13 @@ const App = () => {
         setIsSuccess(true);
         setMess('Đăng xuất thành công!')
 
+        setIsLogin(false);
       })
       .catch(function (error) {
         console.log(error)
         localStorage.removeItem("user");
 
+        setIsLogin(false);
         setVisible(true);
         setIsSuccess(true);
         setMess('Đăng xuất thất bại! ' + error)
@@ -61,12 +65,19 @@ const App = () => {
             exact
             path="/login"
             name="Login Page"
-            render={(props) => <Login {...props} />} />
+            render={(props) => <Login {...props} setIsLogin={setIsLogin} />} />
           <Route
             exact
             path="/change-password"
             name="Change Password"
-            render={(props) => <ChangePassword {...props} />} />
+            render={(props) => {
+              if (isLogin) {
+                return <ChangePassword {...props} />
+              }
+              else {
+                return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
+              }
+            }} />
           <Route
             exact
             path="/404"
@@ -80,7 +91,15 @@ const App = () => {
           <Route
             path="/"
             name="Home"
-            render={(props) => <DefaultLayout {...props} handleLogout={handleLogout} />} />
+            render={(props) => {
+              if (isLogin) {
+                return <DefaultLayout {...props} handleLogout={handleLogout} isLogin={isLogin} />
+              }
+              else {
+                return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
+              }
+            }}
+          />
         </Switch>
       </React.Suspense>
       <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}

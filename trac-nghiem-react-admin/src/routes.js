@@ -28,6 +28,8 @@ const DSBoDe = React.lazy(() => import('./views/components/bode/DSBoDe'))
 const ThemBoDe = React.lazy(() => import('./views/components/bode/ThemBoDe'))
 const SuaBoDe = React.lazy(() => import('./views/components/bode/SuaBoDe'))
 
+const SaoLuuPhucHoi = React.lazy(() => import('./views/components/csdl/saoLuuPhucHoi'))
+
 const DSDangKy = React.lazy(() => import('./views/components/dangky/DSDangKy'))
 const ThemDangKy = React.lazy(() => import('./views/components/dangky/ThemDangKy'))
 const SuaDangKy = React.lazy(() => import('./views/components/dangky/SuaDangKy'))
@@ -77,8 +79,8 @@ const routes = [
   { path: '/dangky/ds-dangky', name: 'Danh sách đăng ký thi', component: DSDangKy },
   { path: '/dangky/them-dangky', name: 'Đăng ký thi mới', component: ThemDangKy },
   { path: '/dangky/sua-dangky/:id', name: 'Sửa đăng ký thi', component: SuaDangKy },
-
-
+  //CSDL
+  { path: '/csdl', name: 'Sao lưu phục hồi database', component: SaoLuuPhucHoi, exact: true },
 
 
   //404

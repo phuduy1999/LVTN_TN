@@ -35,7 +35,7 @@ export default function index() {
 
   const handleClickXoa = (id) => {
     setVisibleCheck(!visibleCheck);
-    setMessCheck(`khoa có mã là ${id}`);
+    setMessCheck(`xóa khoa có mã là ${id}`);
     setIdCanXoa(id);
   }
 

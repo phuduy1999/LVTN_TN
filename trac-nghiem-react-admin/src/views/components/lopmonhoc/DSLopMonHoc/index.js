@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import lopMHApi from 'src/api/lopMHApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [ds, setDS] = useState([]);
@@ -35,7 +36,7 @@ export default function index() {
 
   const handleClickXoa = (id) => {
     setVisibleCheck(!visibleCheck);
-    setMessCheck(`lớp môn học có id là ${id}`);
+    setMessCheck(`xóa lớp môn học có id là ${id}`);
     setIdCanXoa(id);
   }
 
@@ -114,7 +115,7 @@ export default function index() {
                         </Link>
                       </CTooltip>
                       <span>   </span>
-                      {localStorage.getItem('MANQ') === 'PGV' &&
+                      {InfoUserLogin()?.MANQ === 'PGV' &&
                         <span>
                           <CTooltip content="Sửa" placement="top" className='me-3'>
                             <Link to={`/lopmonhoc/sua-lopmonhoc/${lmh.IDLMH}`}>

@@ -1,10 +1,8 @@
-import React from 'react'
-import { NavLink, useHistory, useLocation } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
-import { CBadge } from '@coreui/react'
-
-import jwt_decode from "jwt-decode";
+import { CBadge } from '@coreui/react';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import authorizationSidebarNav from './AuthorizationSidebarNav';
 
 export const AppSidebarNav = ({ items }) => {
   const location = useLocation()
@@ -39,6 +37,7 @@ export const AppSidebarNav = ({ items }) => {
       </Component>
     )
   }
+
   const navGroup = (item, index) => {
     const { component, name, icon, to, ...rest } = item
     const Component = component
@@ -57,27 +56,9 @@ export const AppSidebarNav = ({ items }) => {
     )
   }
 
-  let toArr = []; // items
-  let idArr = []; // titles
-
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (user && user.accessToken) {
-    if (user.MANQ === 'PGV') {
-      idArr = ['nhap-lieu', 'soan-cht', 'dk-thi']
-      toArr = ['/dashboard', '/khoa', '/giaovien', '/sinhvien', '/monhoc', '/lopmonhoc', '/bode', '/loaicauhoi', '/dangky'];
-    }
-    else if (user.MANQ === 'GV') {
-      idArr = ['soan-cht', 'dk-thi']
-      toArr = ['/dashboard', '/bode', '/loaicauhoi', '/dangky', '/lopmonhoc/ds-lopmonhoc'];
-    }
-    else {
-      const history = useHistory();
-      history.push('/500');
-    }
-  } else {
-    idArr = ['tai-khoan']
-    toArr = ['/login'];
-  }
+  const result = authorizationSidebarNav();
+  let toArr = result.toArr; // items
+  let idArr = result.idArr; // titles
 
   return (
     <React.Fragment>

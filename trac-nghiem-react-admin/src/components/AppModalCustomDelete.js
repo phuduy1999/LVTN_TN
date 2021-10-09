@@ -10,7 +10,7 @@ export default function AppModalCustom(props) {
         <CModalTitle>Thông báo</CModalTitle>
       </CModalHeader>
       <CModalBody>
-        Bạn có đồng ý xóa {mess} ?
+        Bạn có đồng ý {mess} ?
       </CModalBody>
       <CModalFooter>
         <CButton color="secondary" onClick={() => handleSetVisibleCheck()}>

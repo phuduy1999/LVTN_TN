@@ -1,12 +1,22 @@
-import React, { Suspense } from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
 import { CContainer, CSpinner } from '@coreui/react'
-
+import React, { Suspense, useEffect, useState } from 'react'
+import { Switch } from 'react-router-dom'
 // routes config
 import routes from '../routes'
+import ProtectedRoute from './ProtectedRoute'
+import InfoUserLogin from 'src/_infoUser';
+
 
 const AppContent = (props) => {
-  const { LoginEmail, LoginMaGV } = props;
+  const { isLogin } = props;
+  const [isAuth, setIsAuth] = useState(false);
+  useEffect(() => {
+    if (InfoUserLogin()) {
+      setIsAuth(true);
+    }
+    else setIsAuth(false);
+  })
+
   return (
     <CContainer lg>
       <Suspense fallback={<CSpinner color="primary" />}>
@@ -14,16 +24,13 @@ const AppContent = (props) => {
           {routes.map((route, idx) => {
             return (
               route.component && (
-                <Route
+                <ProtectedRoute
                   key={idx}
                   path={route.path}
                   exact={route.exact}
                   name={route.name}
-                  render={(props) => (
-                    <>
-                      <route.component {...props} />
-                    </>
-                  )}
+                  component={route.component}
+                  isAuth={isLogin}
                 />
               )
             )

@@ -6,6 +6,7 @@ import sinhVienApi from 'src/api/sinhVienApi';
 import { Link } from "react-router-dom";
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
+import _formatDate from 'src/_formatDate';
 
 export default function index() {
   const [ds, setDS] = useState([]);
@@ -35,7 +36,7 @@ export default function index() {
 
   const handleClickXoa = (id) => {
     setVisibleCheck(!visibleCheck);
-    setMessCheck(`sinh viên có mã là ${id}`);
+    setMessCheck(`xóa sinh viên có mã là ${id}`);
     setIdCanXoa(id);
   }
 
@@ -100,8 +101,7 @@ export default function index() {
                     <CTableDataCell>{sv.MASV}</CTableDataCell>
                     <CTableDataCell>{sv.HO}</CTableDataCell>
                     <CTableDataCell>{sv.TEN}</CTableDataCell>
-                    <CTableDataCell>{sv.NGAYSINH.slice(8, 10) + "/" +
-                      sv.NGAYSINH.slice(5, 7) + "/" + sv.NGAYSINH.slice(0, 4)}</CTableDataCell>
+                    <CTableDataCell>{_formatDate(sv.NGAYSINH, false)}</CTableDataCell>
                     <CTableDataCell>{sv.DIACHI}</CTableDataCell>
                     <CTableDataCell>{sv.EMAIL}</CTableDataCell>
                     <CTableDataCell>

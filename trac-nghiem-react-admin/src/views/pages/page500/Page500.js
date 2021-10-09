@@ -1,17 +1,9 @@
-import React from 'react'
 import {
-  CButton,
   CCol,
-  CContainer,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CNavItem,
-  CNavLink,
-  CRow,
+  CContainer, CNavLink,
+  CRow
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilMagnifyingGlass } from '@coreui/icons'
+import React from 'react'
 
 const Page500 = () => {
   return (

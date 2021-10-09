@@ -6,6 +6,7 @@ import { cilDelete, cilPenAlt } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [ds, setDS] = useState([]);
@@ -35,7 +36,7 @@ export default function index() {
 
   const handleClickXoa = (id) => {
     setVisibleCheck(!visibleCheck);
-    setMessCheck(`câu hỏi thi có id là ${id}`);
+    setMessCheck(`xóa câu hỏi thi có id là ${id}`);
     setIdCanXoa(id);
   }
 
@@ -106,7 +107,7 @@ export default function index() {
                     <CTableDataCell>{ch.TENLOAICH}</CTableDataCell>
                     <CTableDataCell>{ch.HO + " " + ch.TEN}</CTableDataCell>
                     <CTableDataCell>
-                      {ch.MAGV.trim() === localStorage.getItem('MAGV') &&
+                      {ch.MAGV.trim() === InfoUserLogin()?.MAGV &&
                         <span>
                           <CTooltip content="Sửa" placement="left">
                             <Link to={`/bode/sua-bode/${ch.IDCAUHOI}`}>

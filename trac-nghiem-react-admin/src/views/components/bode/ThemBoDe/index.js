@@ -1,8 +1,8 @@
-import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem, CButton, CCard, CCardBody, CCardHeader, CCol, CForm, CFormInput, CFormLabel, CInputGroup } from '@coreui/react';
+import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem, CCard, CCardBody, CCardHeader, CCol } from '@coreui/react';
 import React, { useState } from 'react';
-import FormNhapBoDe2 from './FormNhapBoDe2';
-import FormNhapTuExcel from './FormNhapTuExcel';
 import AppModalCustom from 'src/components/AppModalCustom';
+import FormNhapBoDe from './FormNhapBoDe';
+import FormNhapTuExcel from './FormNhapTuExcel';
 
 export default function index() {
   const [visible, setVisible] = useState(false)
@@ -27,7 +27,7 @@ export default function index() {
                 #1 Nhập trực tiếp từ trang web
               </CAccordionHeader>
               <CAccordionBody>
-                <FormNhapBoDe2
+                <FormNhapBoDe
                   setVisible={setVisible}
                   setIsSuccess={setIsSuccess}
                   setMess={setMess}

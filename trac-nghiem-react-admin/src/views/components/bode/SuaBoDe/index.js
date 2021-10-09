@@ -8,6 +8,7 @@ import loaiCHApi from 'src/api/loaiCHApi';
 import monHocApi from 'src/api/monHocApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import _chuanHoaChuoi from 'src/_chuanHoaChuoi.js';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   //new
@@ -125,7 +126,7 @@ export default function index() {
         const response2 = await monHocApi.getAll();
         setDSLCH(response1);
         setDSMH(response2);
-        setMagv(localStorage.getItem('MAGV'));
+        setMagv(InfoUserLogin()?.MAGV);
       } catch (error) {
         console.log(error);
       }

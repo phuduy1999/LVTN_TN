@@ -3,14 +3,14 @@ import { AppContent, AppFooter, AppHeader, AppSidebar } from '../components/inde
 
 
 const DefaultLayout = (props) => {
-  const { handleLogout } = props;
+  const { handleLogout, isLogin } = props;
   return (
     <div>
       <AppSidebar />
       <div className="wrapper d-flex flex-column min-vh-100 bg-light">
         <AppHeader handleLogout={handleLogout} />
         <div className="body flex-grow-1 px-3">
-          <AppContent />
+          <AppContent {...props} />
         </div>
         <AppFooter />
       </div>

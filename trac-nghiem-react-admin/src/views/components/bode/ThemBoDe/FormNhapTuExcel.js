@@ -1,14 +1,15 @@
-import { CButton, CCallout, CForm, CFormInput, CFormLabel, CInputGroup, CRow, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
-import React, { useState } from 'react';
-import XLSX from 'xlsx';
-import { useForm, useController } from "react-hook-form";
+import { CButton, CCol, CForm, CFormInput, CFormLabel, CFormSelect, CInputGroup, CRow, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
+import React, { useEffect, useState } from 'react';
+import { useController, useForm } from "react-hook-form";
 import boDeApi from 'src/api/boDeApi';
 import monHocApi from 'src/api/monHocApi';
-import _chuanHoaChuoi from 'src/_chuanHoaChuoi'
+import _chuanHoaChuoi from 'src/_chuanHoaChuoi';
+import XLSX from 'xlsx';
+import InfoUserLogin from 'src/_infoUser';
+import { cilWarning } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
-import { cilArrowRight } from '@coreui/icons';
 
-const FileInput = ({ control, name, handleFile, setData, setMonHoc, setIsLoaded }) => {
+const FileInput = ({ control, name, handleFile, setData, setIsLoaded }) => {
   const { field } = useController({ control, name });
   const [value, setValue] = useState("");
   return (
@@ -26,7 +27,6 @@ const FileInput = ({ control, name, handleFile, setData, setMonHoc, setIsLoaded 
         }
         else {
           setData([]);
-          setMonHoc('');
           setIsLoaded(false);
         }
       }}
@@ -36,7 +36,9 @@ const FileInput = ({ control, name, handleFile, setData, setMonHoc, setIsLoaded 
 
 export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
   const [data, setData] = useState([]);
-  const [monhoc, setMonHoc] = useState('');
+  const [dsmh, setDSMH] = useState([]);
+  const [dsch, setDSCH] = useState([]);
+  const [mamh, setMamh] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
 
   const { control, handleSubmit } = useForm();
@@ -49,6 +51,8 @@ export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
     console.log(data);
     const formData = new FormData();
     formData.append('fileExcel', data.fileExcel[0]);
+    formData.append('MAMH', mamh);
+    formData.append('MAGV', InfoUserLogin()?.MAGV);
     try {
       const response = await boDeApi.addByExcel(formData);
       console.log(response);
@@ -63,76 +67,21 @@ export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
     }
   }
 
-  const getMonHoc = (data) => {
-    let tenMonHoc = '';
-    let dongNoiDung = 0;
-    let cotNoiDung = 0;
-    //get môn học
-    for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data[i].length; j++) {
-        if (typeof data[i][j] === 'string') {
-          let str = _chuanHoaChuoi(data[i][j]).toLowerCase();
-          if (str === 'môn học' || str === 'mon hoc' || str === 'monhoc') {
-            if (tenMonHoc === '') {
-              tenMonHoc = _chuanHoaChuoi(data[i][j + 1]);
-              for (let k = i + 1; k < data.length; k++) {
-                const nd = _chuanHoaChuoi(data[k][j]).toUpperCase();
-                if (nd === 'NOIDUNG' || nd === 'NOI DUNG' || nd === 'NỘI DUNG') {
-                  dongNoiDung = k;
-                  cotNoiDung = j;
-                }
-              }
-              break;
-            }
-          }
-        }
+  useEffect(() => {
+    const fetchDS = async () => {
+      try {
+        const response = await monHocApi.getAll();
+        const response1 = await boDeApi.getAll();
+        setDSCH(response1.map((r) => r.NOIDUNG));
+        setDSMH(response);
+        setMamh(response[0].MAMH);
+      } catch (error) {
+        console.log(error);
       }
-      if (tenMonHoc !== '') break;
     }
 
-    monHocApi.getOneByName(tenMonHoc)
-      .then(response => {
-        if (response.data === '') {
-          throw Error('Không tồn tại môn học trong file excel. Vui lòng kiểm tra lại!')
-        }
-        setMonHoc(response);
-      })
-      .catch(error => {
-        setVisible(true);
-        setMess(error.message);
-        setMonHoc('');
-        setData([]);
-        setIsLoaded(false);
-      })
-
-    return {
-      dong: dongNoiDung,
-      cot: cotNoiDung
-    }
-  }
-
-  const getListCauHoi = (data, t) => {
-    const headers = ['NOIDUNG', 'MALOAICH', 'TRINHDO', 'DAP_AN'];
-    const listCauHoi = [];
-    //get nội dung câu hỏi
-    for (let i = t.dong + 1; i < data.length; i++) {
-      if (data[i][t.cot] === '') continue;
-
-      let cauhoi = {};
-      headers.forEach((h, idx) => {
-        cauhoi[h] = _chuanHoaChuoi(data[i][t.cot + idx].toString());
-      })
-
-      let vt = t.cot + headers.length;
-      for (let j = vt; j < data[i].length; j++) {
-        cauhoi[String.fromCharCode(65 + j - vt)] = _chuanHoaChuoi(data[i][j].toString());
-      }
-
-      listCauHoi.push(cauhoi);
-    }
-
-    return listCauHoi;
-  }
+    fetchDS();
+  }, [])
 
   const handleFile = (file) => {
     const reader = new FileReader();
@@ -147,55 +96,73 @@ export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
       const data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
       console.log(data);
 
-      const t = getMonHoc(data);
+      const t = getViTriBatDauNoiDung(data);
       console.log(t);
-      if (t.dong === 0) {
+      if (!t.isValid) {
         setIsLoaded(false);
         setData([]);
+        setVisible(true);
+        setMess('File excel không hợp lệ! Vui lòng kiểm tra lại.');
         return;
       }
 
       const listCauHoi = getListCauHoi(data, t);
+      if (listCauHoi.length === 0) {
+        setIsLoaded(false);
+        setData([]);
+        setVisible(true);
+        setMess('File excel không hợp lệ! Vui lòng kiểm tra lại.(không tìm thấy nội dung câu hỏi)');
+        return;
+      }
 
-      console.log(listCauHoi);
+      //check trùng câu hỏi(nội dung)
+      const listCauHoiDaCheck = checkTrungCauhoi_DB(listCauHoi, dsch);
+
+      console.log(listCauHoiDaCheck);
       setIsLoaded(true);
       /* Update state */
-      setData(listCauHoi);
+      setData(listCauHoiDaCheck);
     };
     reader.readAsArrayBuffer(file);
   }
 
   return (
     <CForm onSubmit={handleSubmit(onSubmit)}>
-      <div className="mb-3">
-        <CFormLabel htmlFor="formFile">Chọn file câu hỏi dạng excel</CFormLabel>
-        <CInputGroup>
-          <FileInput
-            control={control} name='fileExcel'
-            handleFile={handleFile} setData={setData} setMonHoc={setMonHoc}
-            setIsLoaded={setIsLoaded}
-          />
-          <CButton type="submit" color="primary">
-            Thêm
-          </CButton>
-        </CInputGroup>
-
-        {monhoc !== '' &&
-          <CCallout color="secondary">
-            Môn học: {monhoc.TENMH + "  "}
-            <span><CIcon icon={cilArrowRight} />  </span>
-            Mã môn học: {monhoc.MAMH}
-            <span className='text-success'>(Hợp lệ)</span>
-          </CCallout>
-        }
+      <CFormLabel htmlFor="formFile">Chọn file câu hỏi dạng excel</CFormLabel>
+      <CRow className='mt-4'>
+        <CCol md={4}>
+          <CFormSelect className="mb-3"
+            value={mamh}
+            onChange={(e) => setMamh(e.target.value)}>
+            <option disabled>Chọn môn học...</option>
+            {dsmh && (dsmh.map((mh) => (
+              <option value={mh.MAMH} key={mh.MAMH}>{mh.TENMH}</option>
+            )))}
+          </CFormSelect>
+        </CCol>
+        <CCol md={8}>
+          <CInputGroup>
+            <FileInput
+              control={control} name='fileExcel'
+              handleFile={handleFile} setData={setData}
+              setIsLoaded={setIsLoaded}
+            />
+            <CButton type="submit" color="primary">
+              Thêm
+            </CButton>
+          </CInputGroup>
+        </CCol>
 
         <CTable striped hover>
           <CTableHead>
             <CTableRow>
               <CTableHeaderCell scope="col">#</CTableHeaderCell>
               {data[0] && Object.keys(data[0]).map((title, idx) => (
-                <CTableHeaderCell scope="col" key={idx}>{title}</CTableHeaderCell>
-              ))}
+                <CTableHeaderCell scope="col" key={idx} className='text-center'>
+                  {title !== 'trung' ? title : 'Trạng thái'}
+                </CTableHeaderCell>
+              )
+              )}
             </CTableRow>
           </CTableHead>
           <CTableBody>
@@ -203,13 +170,23 @@ export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
               <CTableRow key={idx}>
                 <CTableDataCell>{idx + 1}</CTableDataCell>
                 {data[0] && Object.keys(data[0]).map((title, index) => (
-                  <CTableDataCell key={index}>{ch[title]}</CTableDataCell>
-                ))}
+                  <CTableDataCell
+                    key={index}
+                    className={'text-center ' + (ch['trung'] ? 'text-danger' : '')}>
+                    {title === 'trung' && ch['trung'] &&
+                      <CTooltip content="Câu hỏi đã tồn tại!" placement="left" >
+                        <CIcon icon={cilWarning} size='xl' />
+                      </CTooltip>
+                    }
+                    {title !== 'trung' && ch[title]}
+                  </CTableDataCell>
+                )
+                )}
               </CTableRow>
             ))}
           </CTableBody>
         </CTable>
-      </div>
+      </CRow>
     </CForm>
   )
 }
@@ -218,3 +195,58 @@ export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
 const SheetJSFT = [
   "xlsx", "xlsb", "xlsm", "xls", "xml", "csv", "txt", "ods", "fods", "uos", "sylk", "dif", "dbf", "prn", "qpw", "123", "wb*", "wq*", "html", "htm"
 ].map(x => `.${x}`).join(",");
+
+const getViTriBatDauNoiDung = (data) => {
+  for (let i = 0; i < data.length; i++) {
+    for (let j = 0; j < data[i].length; j++) {
+      if (typeof data[i][j] === 'string') {
+        const nd = _chuanHoaChuoi(data[i][j]).toUpperCase();
+        if (nd === 'NOIDUNG' || nd === 'NOI DUNG' || nd === 'NỘI DUNG') {
+          return {
+            isValid: true,
+            dong: i,
+            cot: j
+          }
+        }
+      }
+    }
+  }
+  return {
+    isValid: false,
+  }
+}
+
+const getListCauHoi = (data, t) => {
+  const headers = ['NOIDUNG', 'MALOAICH', 'TRINHDO', 'DAP_AN'];
+  const listCauHoi = [];
+  //get nội dung câu hỏi
+  for (let i = t.dong + 1; i < data.length; i++) {
+    if (data[i][t.cot] === '') break;
+
+    let cauhoi = {};
+    headers.forEach((h, idx) => {
+      cauhoi[h] = _chuanHoaChuoi(data[i][t.cot + idx].toString());
+    })
+
+    let vt = t.cot + headers.length;
+    for (let j = vt; j < data[i].length; j++) {
+      cauhoi[String.fromCharCode(65 + j - vt)] = _chuanHoaChuoi(data[i][j].toString());
+    }
+
+    listCauHoi.push(cauhoi);
+  }
+
+  return listCauHoi;
+}
+
+function checkTrungCauhoi_DB(listCauHoi, dsch) {
+  const values = [...listCauHoi];
+  const arr = values.map((val) => {
+    const trung = dsch.some((d) => d === val.NOIDUNG);
+    return {
+      ...val,
+      trung: trung,
+    }
+  })
+  return arr;
+}

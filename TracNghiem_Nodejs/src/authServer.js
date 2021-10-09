@@ -125,7 +125,7 @@ app.post('/api/refreshToken', (req, res) => {
 app.post('/api/logout', authenticateToken, (req, res) => {
     sqlConnect.then(pool => {
         return pool.request()
-            .input('refresh_token', sql.NVarChar, '')
+            .input('refresh_token', sql.NVarChar, null)
             .input('refreshToken', sql.NVarChar, req.body.refreshToken)
             .query('update TAIKHOAN set REFRESH_TOKEN=@refresh_token where REFRESH_TOKEN=@refreshToken');
     })

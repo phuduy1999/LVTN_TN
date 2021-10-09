@@ -6,6 +6,8 @@ import { cilDelete, cilPenAlt } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
+import _formatDate from 'src/_formatDate';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [ds, setDS] = useState([]);
@@ -35,7 +37,7 @@ export default function index() {
 
   const handleClickXoa = (id) => {
     setVisibleCheck(!visibleCheck);
-    setMessCheck(`đăng ký có id là ${id} (hủy đăng ký)`);
+    setMessCheck(`hủy đăng ký id ${id}`);
     setIdCanXoa(id);
   }
 
@@ -106,12 +108,11 @@ export default function index() {
                     <CTableDataCell>{dk.TENMH}</CTableDataCell>
                     <CTableDataCell>{dk.HO + " " + dk.TEN}</CTableDataCell>
                     <CTableDataCell>{dk.TRINHDODK}</CTableDataCell>
-                    <CTableDataCell>{dk.NGAYTHI.slice(8, 10) + "/" +
-                      dk.NGAYTHI.slice(5, 7) + "/" + dk.NGAYTHI.slice(0, 4)}</CTableDataCell>
+                    <CTableDataCell>{_formatDate(dk.NGAYTHI, false)}</CTableDataCell>
                     <CTableDataCell>{dk.SCT}</CTableDataCell>
                     <CTableDataCell>{dk.THOIGIANTHI}</CTableDataCell>
                     <CTableDataCell>
-                      {dk.MAGVDK.trim() === localStorage.getItem('MAGV') &&
+                      {dk.MAGVDK.trim() === InfoUserLogin()?.MAGV &&
                         <span>
                           <CTooltip content="Sửa" placement="left">
                             <Link to={`/dangky/sua-dangky/${dk.IDLMH}`}>

@@ -11,11 +11,6 @@ const boDeApi = {
     return axiosClient.post(url, data);
   },
 
-  addOne2: (data) => {
-    const url = '/questions/add2';
-    return axiosClient.post(url, data);
-  },
-
   addByExcel: (data) => {
     const url = '/questions/excel';
     return axiosClient.post(url, data);

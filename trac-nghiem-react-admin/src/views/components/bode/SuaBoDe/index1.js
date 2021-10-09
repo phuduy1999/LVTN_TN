@@ -5,6 +5,7 @@ import boDeApi from 'src/api/boDeApi';
 import loaiCHApi from 'src/api/loaiCHApi';
 import monHocApi from 'src/api/monHocApi';
 import AppModalCustom from 'src/components/AppModalCustom';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const { id } = useParams();
@@ -122,7 +123,7 @@ export default function index() {
         const response2 = await monHocApi.getAll();
         setDSLCH(response1);
         setDSMH(response2);
-        setMagv(localStorage.getItem('MAGV'));
+        setMagv(InfoUserLogin()?.MAGV);
         console.log(response1, response2);
       } catch (error) {
         console.log(error);

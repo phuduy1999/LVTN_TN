@@ -1,68 +1,61 @@
-import { CButton, CCol, CForm, CFormCheck, CFormFeedback, CFormInput, CFormLabel, CFormSelect, CFormTextarea, CRow, CSpinner } from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { CButton, CCol, CForm, CFormCheck, CFormFeedback, CFormInput, CFormLabel, CFormSelect, CFormTextarea, CRow, CSpinner, CTooltip } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
 import boDeApi from 'src/api/boDeApi';
 import loaiCHApi from 'src/api/loaiCHApi';
 import monHocApi from 'src/api/monHocApi';
-import AppModalCustom from 'src/components/AppModalCustom';
+import { cilPlus, cilWarning, cilX } from '@coreui/icons'
+import _chuanHoaChuoi from 'src/_chuanHoaChuoi.js';
+import InfoUserLogin from 'src/_infoUser';
 
-export default function FormNhapBoDe() {
+export default function FormNhapBoDe({ setVisible, setIsSuccess, setMess }) {
+  //new
+  const [choices, setChoices] = useState(['Tùy chọn 1', 'Tùy chọn 2']);
+
+  //old
   const [trinhdo, setTrinhDo] = useState('A');
   const [noidung, setNoiDung] = useState('');
   const [dap_an_dk, setDapAnDK] = useState('');
-  const [dap_an_nlc, setDapAnNLC] = useState('A');
-  const [a, setA] = useState('');
-  const [b, setB] = useState('');
-  const [c, setC] = useState('');
-  const [d, setD] = useState('');
+  const [dap_an_nlc, setDapAnNLC] = useState(null);
   const [mamh, setMamh] = useState('');
   const [magv, setMagv] = useState('');
   const [malch, setMalch] = useState('');
   const [isPending, setIsPending] = useState(false);
-  const [visible, setVisible] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [mess, setMess] = useState(false)
   const [isDK, setIsDK] = useState(true);
-  const pageRedirect = '/bode/ds-bode';
+
+  const checkLuaChonPhanBietNhau = (choices) => {
+    const values = [...choices];
+    let arrSort = values.sort((a, b) => a > b ? 1 : -1);
+    for (let i = 0; i < arrSort.length - 1; i++) {
+      if (arrSort[i] === arrSort[i + 1]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const arrToJsonChoices = (choices) => {
+    return choices.map((choice, idx) => {
+      return {
+        STT: String.fromCharCode(65 + idx),
+        NOIDUNG: choice,
+      }
+    })
+  }
 
   const [validated, setValidated] = useState(false)
   const handleSubmit = event => {
-    const form = event.currentTarget
-    event.preventDefault()
+    const form = event.currentTarget;
+    event.preventDefault();
     if (form.checkValidity() === false) {
       event.stopPropagation()
     }
+    else if (!checkLuaChonPhanBietNhau(choices)) {
+      setIsPending(false);
+      setVisible(true);
+      setMess('Các lựa chọn phải phân biệt nhau!');
+    }
     else {
-      let dapAn;
-      if (isDK) dapAn = dap_an_dk;
-      else {
-        dapAn = dap_an_nlc;
-        if ((dap_an_nlc === 'C' && c === '') || (dap_an_nlc === 'D' && d === '')) {
-          setVisible(!visible);
-          setMess(`Chọn đáp án ${dap_an_nlc} vui lòng nhập nội dung!`);
-          return;
-        }
-        else if (c === '' && d !== '') {
-          setVisible(!visible);
-          setMess('Có lựa chọn D vui lòng nhập thêm lựa chọn C!');
-          return;
-        }
-        else {
-          let arrLc = [a, b];
-          if (c !== '') arrLc.push(c);
-          if (d !== '') arrLc.push(d);
-
-          let arrSort = arrLc.sort((a, b) => a > b ? 1 : -1);
-
-          for (let i = 0; i < arrSort.length - 1; i++) {
-            if (arrSort[i] === arrSort[i + 1]) {
-              setVisible(!visible);
-              setMess('Các lựa chọn phải phân biệt nhau!');
-              return;
-            }
-          }
-        }
-      }
-
       setIsPending(true);
       boDeApi.addOne({
         TRINHDO: trinhdo,
@@ -70,17 +63,14 @@ export default function FormNhapBoDe() {
         MALOAICH: malch,
         NOIDUNG: noidung,
         MAGV: magv,
-        DAP_AN: dapAn,
-        A: a,
-        B: b,
-        C: c,
-        D: d,
+        DAP_AN: isDK ? dap_an_dk : String.fromCharCode(65 + parseInt(dap_an_nlc)),
+        CAC_LUA_CHON: arrToJsonChoices(choices),
       })
         .then(response => {
           console.log(response);
 
           setIsPending(false);
-          setVisible(!visible);
+          setVisible(true);
           setIsSuccess(true);
           setMess('Thêm bộ đề thành công!')
         })
@@ -88,12 +78,11 @@ export default function FormNhapBoDe() {
           console.log(error);
 
           setIsPending(false);
-          setVisible(!visible);
+          setVisible(true);
           setMess('Lỗi thêm bộ đề! ' + error.response.data.err)
         })
     }
-    setValidated(true)
-    console.log(dap_an_nlc);
+    setValidated(true);
   }
 
   const [dslch, setDSLCH] = useState([]);
@@ -108,8 +97,7 @@ export default function FormNhapBoDe() {
         setMalch(response1[0].MALOAICH);
         setDSMH(response2);
         setMamh(response2[0].MAMH);
-        setMagv(localStorage.getItem('MAGV'));
-        console.log(response1, response2);
+        setMagv(InfoUserLogin()?.MAGV);
       } catch (error) {
         console.log(error);
       }
@@ -118,24 +106,15 @@ export default function FormNhapBoDe() {
     fetchDS();
   }, [])
 
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
   const handleLoaiCauHoi = (e) => {
     setMalch(e.target.value);
-    if (e.target.value.trim() === 'DK') {
-      setIsDK(true);
-    } else {
-      setIsDK(false);
-    }
+    setIsDK(e.target.value.trim() === 'DK');
   }
 
-  useEffect(() => {
-    if (malch.trim() === 'NLC') {
-      document.getElementById(`da-${dap_an_nlc}`).checked = true;
-    }
-  }, [malch])
+  const demSoLanXuatHien = (str) => {
+    let arr = choices.filter(choice => choice === str);
+    return arr.length;
+  }
 
   return (
     <CForm
@@ -192,8 +171,10 @@ export default function FormNhapBoDe() {
           <CFormTextarea
             type="text"
             required
+            placeholder="Nhập nội dung câu hỏi..."
             value={noidung}
             onChange={(e) => setNoiDung(e.target.value)}
+            onBlur={(e) => setNoiDung(_chuanHoaChuoi(e.target.value))}
           ></CFormTextarea>
           <CFormFeedback invalid>Vui lòng nhập nội dung!</CFormFeedback>
         </div>
@@ -206,8 +187,10 @@ export default function FormNhapBoDe() {
             <CFormInput
               type="text"
               required
+              placeholder="Nhập đáp án..."
               value={dap_an_dk}
               onChange={(e) => setDapAnDK(e.target.value)}
+              onBlur={(e) => setDapAnDK(_chuanHoaChuoi(e.target.value))}
             />
             <CFormFeedback invalid>Vui lòng nhập đáp án!</CFormFeedback>
           </div>
@@ -217,72 +200,88 @@ export default function FormNhapBoDe() {
       {!isDK &&
         <CRow className="mt-3">
           <CFormLabel>Các lựa chọn(vui lòng chọn đáp án)</CFormLabel>
-          <CCol md={6}>
-            <div className="mb-3">
-              <CFormCheck onChange={(e) => setDapAnNLC(e.target.value)}
-                type="radio" value="A"
-                name="flexRadioDefault"
-                id="da-A"
-                label="A"
-                defaultChecked />
-              <CFormInput
-                type="text"
-                required
-                value={a}
-                onChange={(e) => setA(e.target.value)}
-              />
-              <CFormFeedback invalid>Vui lòng nhập câu A!</CFormFeedback>
-            </div>
-          </CCol>
-          <CCol md={6}>
-            <div className="mb-3">
-              <CFormCheck onChange={(e) => setDapAnNLC(e.target.value)}
-                type="radio" value="B"
-                name="flexRadioDefault"
-                id="da-B"
-                label="B" />
-              <CFormInput
-                type="text"
-                required
-                value={b}
-                onChange={(e) => setB(e.target.value)}
-              />
-              <CFormFeedback invalid>Vui lòng nhập câu B!</CFormFeedback>
-            </div>
-          </CCol>
-          <CCol md={6}>
-            <div className="mb-3">
-              <CFormCheck onChange={(e) => {
-                setDapAnNLC(e.target.value);
+          {choices.map((choice, idx) => (
+            <CRow key={idx}>
+              <CCol md={2}>
+                <div className="mb-3">
+                  <CFormCheck onChange={(e) => setDapAnNLC(e.target.value)}
+                    type="radio"
+                    name="flexRadioDefault"
+                    value={idx}
+                    label={`Lựa chọn ${String.fromCharCode(65 + idx)}`}
+                    checked={idx === parseInt(dap_an_nlc)}
+                    required
+                  />
+                </div>
+              </CCol>
+              <CCol md={8}>
+                <div className="mb-3">
+                  <CFormInput
+                    type="text"
+                    required
+                    value={choice}
+                    onChange={(e) => {
+                      const values = [...choices];
+                      values[idx] = e.target.value;
+                      setChoices(values);
 
-              }}
-                type="radio" value="C"
-                name="flexRadioDefault"
-                id="da-C"
-                label="C" />
-              <CFormInput
-                type="text"
-                value={c}
-                onChange={(e) => setC(e.target.value)}
-              />
-              <CFormFeedback invalid>Vui lòng nhập câu C!</CFormFeedback>
-            </div>
-          </CCol>
-          <CCol md={6}>
-            <div className="mb-3">
-              <CFormCheck onChange={(e) => setDapAnNLC(e.target.value)}
-                type="radio" value="D"
-                name="flexRadioDefault"
-                id="da-D"
-                label="D" />
-              <CFormInput
-                type="text"
-                value={d}
-                onChange={(e) => setD(e.target.value)}
-              />
-              <CFormFeedback invalid>Vui lòng nhập câu D!</CFormFeedback>
-            </div>
-          </CCol>
+                    }}
+                    onBlur={() => {
+                      const values = [...choices];
+                      values[idx] = (choice.trim() === '') ? `Tùy chọn ${idx + 1}` : _chuanHoaChuoi(values[idx]);
+                      setChoices(values);
+                    }}
+                    onFocus={(e) => {
+                      e.target.select();
+                    }}
+                  />
+                </div>
+              </CCol>
+              <CCol md={1}>
+                {choices.length > 2 &&
+                  <CIcon
+                    icon={cilX}
+                    size='xl'
+                    onClick={() => {
+                      const values = [...choices];
+                      values.splice(idx, 1);
+                      setChoices(values);
+                      if (idx === parseInt(dap_an_nlc)) {
+                        setDapAnNLC(null)
+                      }
+                      else if (idx < parseInt(dap_an_nlc)) {
+                        setDapAnNLC(parseInt(dap_an_nlc) - 1);
+                      }
+                    }}
+                  />
+                }
+                {idx === choices.length - 1 && idx < 25 &&
+                  < CIcon
+                    icon={cilPlus}
+                    size='xl'
+                    onClick={() => {
+                      setChoices([...choices, `Tùy chọn ${idx + 2}`]);
+                    }}
+                  />
+                }
+              </CCol>
+              <CCol md={1}>
+                {demSoLanXuatHien(_chuanHoaChuoi(choice)) > 1 &&
+                  <CTooltip
+                    content="Trùng lựa chọn"
+                    placement="right"
+                  >
+                    <span className="text-warning mt-3">
+                      <CIcon
+                        icon={cilWarning}
+                        size='xl'
+                      />
+                    </span>
+                  </CTooltip>
+                }
+              </CCol>
+            </CRow>
+          ))}
         </CRow>
       }
 
@@ -295,8 +294,6 @@ export default function FormNhapBoDe() {
           Thêm...
         </CButton>}
       </CCol>
-      <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
-        mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
     </CForm>
   )
 }

@@ -20,6 +20,7 @@ import loginApi from 'src/api/loginApi'
 import AppModalCustom from 'src/components/AppModalCustom'
 
 const Login = (props) => {
+  const { setIsLogin } = props;
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [visible, setVisible] = useState(false)
@@ -60,12 +61,14 @@ const Login = (props) => {
           localStorage.setItem("user", JSON.stringify(user));
         }
 
+        setIsLogin(true);
         setVisible(!visible);
         setIsSuccess(true);
         setMess('Đăng nhập thành công!')
 
       }).catch(error => {
         console.log(error);
+        setIsLogin(false);
         setVisible(!visible);
         setMess('Đăng nhập không thành công!. Vui lòng kiểm tra lại Email và mật khẩu.')
       })

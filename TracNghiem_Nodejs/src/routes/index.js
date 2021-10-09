@@ -11,11 +11,13 @@ const optionRouter = require('./option');
 const registerClassRouter = require('./registerClass');
 const recordMarkRouter = require('./recordMark');
 const historyTestRouter = require('./historyTest');
+const recoveryRouter = require('./recovery');
 const roleRouter = require('./role');
 const authenticateToken = require('../app/middlewares/auth');
 const roleTeacher = require('../app/middlewares/roleTeacher');
 const roleTeacher_PGV = require('../app/middlewares/roleTeacher_PGV');
 const roleStudent = require('../app/middlewares/roleStudent');
+const roleAdmin = require('../app/middlewares/roleAdmin');
 
 function route(app) {
     app.use('/api/faculties', authenticateToken, roleTeacher_PGV, facultyRouter);
@@ -31,6 +33,7 @@ function route(app) {
     app.use('/api/record-mark', authenticateToken, roleStudent, recordMarkRouter);
     app.use('/api/history-test', authenticateToken, roleStudent, historyTestRouter);
     app.use('/api/roles', authenticateToken, roleTeacher_PGV, roleRouter);
+    app.use('/api/recovery', authenticateToken, roleAdmin, recoveryRouter);
     app.use('/', siteRouter);
 }
 

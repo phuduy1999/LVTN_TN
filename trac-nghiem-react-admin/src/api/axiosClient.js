@@ -4,11 +4,12 @@ import dotenv from 'dotenv'
 import loginApi from 'src/api/loginApi';
 import { createBrowserHistory } from 'history';
 let history = createBrowserHistory();
+import InfoUserLogin from 'src/_infoUser';
 
 dotenv.config();
 
 const getToken = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = InfoUserLogin();
   if (user && user.accessToken) {
     return user.accessToken;
   } else {
@@ -17,7 +18,7 @@ const getToken = () => {
 }
 
 const getRefreshToken = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = InfoUserLogin();
   if (user && user.refreshToken) {
     return user.refreshToken;
   } else {
@@ -63,7 +64,7 @@ axiosClient.interceptors.response.use((response) => {
           refreshToken: getRefreshToken(),
         })
 
-        let user = JSON.parse(localStorage.getItem("user"));
+        let user = InfoUserLogin();
         user.accessToken = rs.accessToken;
         localStorage.setItem("user", JSON.stringify(user));
 

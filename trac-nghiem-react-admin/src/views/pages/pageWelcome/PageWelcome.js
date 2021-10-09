@@ -1,24 +1,17 @@
-import React from 'react'
 import {
-  CButton,
   CCol,
-  CContainer,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
+  CContainer, CRow
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilMagnifyingGlass } from '@coreui/icons'
+import React from 'react'
 
 const Page404 = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md={6}>
+          <CCol md={5}>
             <div className="clearfix">
-              <h1 className="float-start display-3 me-4">Welcome</h1>
+              <h1 className="float-start display-3 me-4">Welcome back!</h1>
             </div>
           </CCol>
         </CRow>

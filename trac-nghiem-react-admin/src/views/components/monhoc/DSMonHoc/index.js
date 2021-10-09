@@ -35,7 +35,7 @@ export default function index() {
 
   const handleClickXoa = (id) => {
     setVisibleCheck(!visibleCheck);
-    setMessCheck(`môn học có mã là ${id}`);
+    setMessCheck(`xóa môn học có mã là ${id}`);
     setIdCanXoa(id);
   }
 

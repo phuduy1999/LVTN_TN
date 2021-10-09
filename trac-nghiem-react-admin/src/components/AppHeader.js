@@ -14,7 +14,7 @@ import { NavLink } from 'react-router-dom'
 import { logo } from 'src/assets/brand/logo'
 import { AppHeaderDropdown } from './header/index'
 import { AppBreadcrumb } from './index'
-
+import InfoUserLogin from 'src/_infoUser';
 
 const AppHeader = (props) => {
   const { handleLogout } = props;
@@ -25,7 +25,7 @@ const AppHeader = (props) => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = InfoUserLogin();
     if (user && user.accessToken) {
       setEmail(email + user.EMAIL);
       setIsLogin(true);

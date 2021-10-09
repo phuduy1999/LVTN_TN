@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import dangKyApi from 'src/api/dangKyApi';
 import monHocApi from 'src/api/monHocApi';
 import AppModalCustom from 'src/components/AppModalCustom';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [trinhdo, setTrinhDo] = useState('A');
@@ -43,7 +44,7 @@ export default function index() {
       setIsPending(true);
 
       dangKyApi.addOne({
-        MAGVDK: localStorage.getItem('MAGV'),
+        MAGVDK: InfoUserLogin()?.MAGV,
         NIENKHOA: nienkhoa,
         HOCKY: hocky,
         NHOM: nhom,

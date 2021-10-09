@@ -5,6 +5,7 @@ import {
   cibHackhands, cibSublimeText,
   cibTumblr, cilPeople, cilSpeedometer,
   cilStar,
+  cilStorage,
   cilUserFemale
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
@@ -185,6 +186,17 @@ const _nav = [
     name: 'Login',
     to: '/login',
     icon: <CIcon icon={cilStar} customClassName="nav-icon" />
+  },
+  {
+    component: CNavTitle,
+    name: 'Cơ sở dữ liệu',
+    id: 'cs-dl'
+  },
+  {
+    component: CNavItem,
+    name: 'Sao lưu và phục hồi',
+    to: '/csdl',
+    icon: <CIcon icon={cilStorage} customClassName="nav-icon" />
   },
 ]
 
