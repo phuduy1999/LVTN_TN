@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <Demo Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>Demo</Alias>
+        <Key>d28753db2cf041469f375933efcce6aa</Key>
+        <Name>Demo</Name>
+        <PathData>C:\Users\Administrator\Desktop\clone\Samples-JS\React\01. Working with report designer\reports\Demo.json</PathData>
+      </Demo>
+    </Databases>
+    <DataSources isList="true" count="13">
+      <Auto Ref="3" type="DataTableSource" isKey="true">
+        <Alias>Auto</Alias>
+        <Columns isList="true" count="5">
+          <value>Rank,System.Decimal</value>
+          <value>Country,System.String</value>
+          <value>Year2009,System.Decimal</value>
+          <value>Year2005,System.Decimal</value>
+          <value>Year2000,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>b0929b0757ed42e4949023704daeb653</Key>
+        <Name>Auto</Name>
+        <NameInSource>Demo.Auto</NameInSource>
+      </Auto>
+      <Categories Ref="4" type="DataTableSource" isKey="true">
+        <Alias>Categories</Alias>
+        <Columns isList="true" count="4">
+          <value>CategoryID,System.Decimal</value>
+          <value>CategoryName,System.String</value>
+          <value>Description,System.String</value>
+          <value>Picture,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>ea3650c2dbdb40949cc8c557371f1dc6</Key>
+        <Name>Categories</Name>
+        <NameInSource>Demo.Categories</NameInSource>
+      </Categories>
+      <Countries Ref="5" type="DataTableSource" isKey="true">
+        <Alias>Countries</Alias>
+        <Columns isList="true" count="3">
+          <value>CountriesID,System.Decimal</value>
+          <value>Flag,System.String</value>
+          <value>CountryName,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>8f5ffb47b57a4811b6ee4b29495b4996</Key>
+        <Name>Countries</Name>
+        <NameInSource>Demo.Countries</NameInSource>
+      </Countries>
+      <Customers Ref="6" type="DataTableSource" isKey="true">
+        <Alias>Customers</Alias>
+        <Columns isList="true" count="11">
+          <value>CustomerID,System.String</value>
+          <value>CompanyName,System.String</value>
+          <value>ContactName,System.String</value>
+          <value>ContactTitle,System.String</value>
+          <value>Address,System.String</value>
+          <value>City,System.String</value>
+          <value>Region,System.String</value>
+          <value>PostalCode,System.String</value>
+          <value>Country,System.String</value>
+          <value>Phone,System.String</value>
+          <value>Fax,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>bce2d1bea1c44c4b9782d19a3f4d381f</Key>
+        <Name>Customers</Name>
+        <NameInSource>Demo.Customers</NameInSource>
+      </Customers>
+      <Employees Ref="7" type="DataTableSource" isKey="true">
+        <Alias>Employees</Alias>
+        <Columns isList="true" count="17">
+          <value>EmployeeID,System.Decimal</value>
+          <value>LastName,System.String</value>
+          <value>FirstName,System.String</value>
+          <value>Title,System.String</value>
+          <value>TitleOfCourtesy,System.String</value>
+          <value>BirthDate,System.DateTime</value>
+          <value>HireDate,System.DateTime</value>
+          <value>Address,System.String</value>
+          <value>City,System.String</value>
+          <value>Region,System.String</value>
+          <value>PostalCode,System.String</value>
+          <value>Country,System.String</value>
+          <value>HomePhone,System.String</value>
+          <value>Extension,System.String</value>
+          <value>Photo,System.String</value>
+          <value>Notes,System.String</value>
+          <value>ReportsTo,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>5eebf689725f426ca6d8140d8c1d3b47</Key>
+        <Name>Employees</Name>
+        <NameInSource>Demo.Employees</NameInSource>
+      </Employees>
+      <GlobalGrowth Ref="8" type="DataTableSource" isKey="true">
+        <Alias>GlobalGrowth</Alias>
+        <Columns isList="true" count="5">
+          <value>Region,System.String</value>
+          <value>Year2006,System.Decimal</value>
+          <value>Year2007,System.Decimal</value>
+          <value>Year2008,System.Decimal</value>
+          <value>Year2009,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>c4914178f89442c4a8e624f095ea7ad6</Key>
+        <Name>GlobalGrowth</Name>
+        <NameInSource>Demo.GlobalGrowth</NameInSource>
+      </GlobalGrowth>
+      <Opec Ref="9" type="DataTableSource" isKey="true">
+        <Alias>Opec</Alias>
+        <Columns isList="true" count="9">
+          <value>Year,System.Decimal</value>
+          <value>Iran,System.Decimal</value>
+          <value>Iraq,System.Decimal</value>
+          <value>Kuwait,System.Decimal</value>
+          <value>Saudi_x0020_Arabia,System.Decimal</value>
+          <value>UAE,System.Decimal</value>
+          <value>Venezuela,System.Decimal</value>
+          <value>Libya,System.Decimal</value>
+          <value>Nigeria,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>71e3057617444a0f89183779a515a19d</Key>
+        <Name>Opec</Name>
+        <NameInSource>Demo.Opec</NameInSource>
+      </Opec>
+      <Order_x0020_Details Ref="10" type="DataTableSource" isKey="true">
+        <Alias>Order Details</Alias>
+        <Columns isList="true" count="5">
+          <value>OrderID,System.Decimal</value>
+          <value>ProductID,System.Decimal</value>
+          <value>UnitPrice,System.Decimal</value>
+          <value>Quantity,System.Decimal</value>
+          <value>Discount,System.Decimal</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>83ce91c91cc341fb8ae088298ba6dadf</Key>
+        <Name>Order Details</Name>
+        <NameInSource>Demo.Order Details</NameInSource>
+      </Order_x0020_Details>
+      <Orders Ref="11" type="DataTableSource" isKey="true">
+        <Alias>Orders</Alias>
+        <Columns isList="true" count="14">
+          <value>OrderID,System.Decimal</value>
+          <value>CustomerID,System.String</value>
+          <value>EmployeeID,System.Decimal</value>
+          <value>OrderDate,System.DateTime</value>
+          <value>RequiredDate,System.DateTime</value>
+          <value>ShippedDate,System.DateTime</value>
+          <value>ShipVia,System.Decimal</value>
+          <value>Freight,System.Decimal</value>
+          <value>ShipName,System.String</value>
+          <value>ShipAddress,System.String</value>
+          <value>ShipCity,System.String</value>
+          <value>ShipRegion,System.String</value>
+          <value>ShipPostalCode,System.String</value>
+          <value>ShipCountry,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>8c1d6bbbb4514cdea56ffe745b965e1a</Key>
+        <Name>Orders</Name>
+        <NameInSource>Demo.Orders</NameInSource>
+      </Orders>
+      <Products Ref="12" type="DataTableSource" isKey="true">
+        <Alias>Products</Alias>
+        <Columns isList="true" count="10">
+          <value>ProductID,System.Decimal</value>
+          <value>ProductName,System.String</value>
+          <value>SupplierID,System.Decimal</value>
+          <value>CategoryID,System.Decimal</value>
+          <value>QuantityPerUnit,System.String</value>
+          <value>UnitPrice,System.Decimal</value>
+          <value>UnitsInStock,System.Decimal</value>
+          <value>UnitsOnOrder,System.Decimal</value>
+          <value>ReorderLevel,System.Decimal</value>
+          <value>Discontinued,System.Boolean</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>70bf6f74d05e4c27b7fe7b2b8e346171</Key>
+        <Name>Products</Name>
+        <NameInSource>Demo.Products</NameInSource>
+      </Products>
+      <Shippers Ref="13" type="DataTableSource" isKey="true">
+        <Alias>Shippers</Alias>
+        <Columns isList="true" count="3">
+          <value>ShipperID,System.Decimal</value>
+          <value>CompanyName,System.String</value>
+          <value>Phone,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>2ec66999cdec4058a12cfea9419464f5</Key>
+        <Name>Shippers</Name>
+        <NameInSource>Demo.Shippers</NameInSource>
+      </Shippers>
+      <States Ref="14" type="DataTableSource" isKey="true">
+        <Alias>States</Alias>
+        <Columns isList="true" count="4">
+          <value>Name,System.String</value>
+          <value>USPS,System.String</value>
+          <value>Population,System.Decimal</value>
+          <value>Capital,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>95158649ab9c4dd8a01d451296e5abd8</Key>
+        <Name>States</Name>
+        <NameInSource>Demo.States</NameInSource>
+      </States>
+      <Suppliers Ref="15" type="DataTableSource" isKey="true">
+        <Alias>Suppliers</Alias>
+        <Columns isList="true" count="12">
+          <value>SupplierID,System.Decimal</value>
+          <value>CompanyName,System.String</value>
+          <value>ContactName,System.String</value>
+          <value>ContactTitle,System.String</value>
+          <value>Address,System.String</value>
+          <value>City,System.String</value>
+          <value>Region,System.String</value>
+          <value>PostalCode,System.String</value>
+          <value>Country,System.String</value>
+          <value>Phone,System.String</value>
+          <value>Fax,System.String</value>
+          <value>HomePage,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>640731772cd44d87b293fdaa9d34724e</Key>
+        <Name>Suppliers</Name>
+        <NameInSource>Demo.Suppliers</NameInSource>
+      </Suppliers>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>e4b2d5ed67a64789a5942f75e840ed9a</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="16" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <TableCustomers Ref="17" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,0.2,7.72,0.3</ClientRectangle>
+          <ColumnCount>11</ColumnCount>
+          <Components isList="true" count="11">
+            <TableCustomers_Cell1 Ref="18" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>0</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell1</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.CustomerID}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell1>
+            <TableCustomers_Cell2 Ref="19" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>0.7,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>1</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell2</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.CompanyName}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell2>
+            <TableCustomers_Cell3 Ref="20" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>1.4,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>2</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell3</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.ContactName}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell3>
+            <TableCustomers_Cell4 Ref="21" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>2.1,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>3</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell4</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.ContactTitle}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell4>
+            <TableCustomers_Cell5 Ref="22" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>2.8,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>4</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell5</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.Address}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell5>
+            <TableCustomers_Cell6 Ref="23" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>3.5,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>5</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell6</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.City}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell6>
+            <TableCustomers_Cell7 Ref="24" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>4.2,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>6</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell7</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.Region}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell7>
+            <TableCustomers_Cell8 Ref="25" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>4.9,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>7</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell8</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.PostalCode}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell8>
+            <TableCustomers_Cell9 Ref="26" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>5.6,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>8</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell9</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.Country}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell9>
+            <TableCustomers_Cell10 Ref="27" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>6.3,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>9</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell10</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.Phone}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell10>
+            <TableCustomers_Cell11 Ref="28" type="TableCell" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>7,0,0.72,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>10</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableCustomers_Cell11</Name>
+              <Page isRef="16" />
+              <Parent isRef="17" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Customers.Fax}</Text>
+              <TextBrush>Black</TextBrush>
+            </TableCustomers_Cell11>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>Customers</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <MinHeight>0.1</MinHeight>
+          <Name>TableCustomers</Name>
+          <NumberID>11</NumberID>
+          <Page isRef="16" />
+          <Parent isRef="16" />
+          <RowCount>1</RowCount>
+          <Sort isList="true" count="0" />
+        </TableCustomers>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>3b11d9da541b45a8b30b46a623c77ac6</Guid>
+      <Margins>0.39,0.39,0.39,0.39</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11</PageHeight>
+      <PageWidth>8.5</PageWidth>
+      <PaperSize>Letter</PaperSize>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>10/11/2021 11:36:06 PM</ReportChanged>
+  <ReportCreated>10/11/2021 10:56:34 PM</ReportCreated>
+  <ReportFile>C:\Users\Administrator\Desktop\clone\Samples-JS\React\02. Working with report viewer\reports\Report.mrt</ReportFile>
+  <ReportGuid>04d5ffd7094a4aec931b3787fa23f89d</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2021.4.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

@@ -115,13 +115,20 @@ export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
         return;
       }
 
-      //check trùng câu hỏi(nội dung)
-      const listCauHoiDaCheck = checkTrungCauhoi_DB(listCauHoi, dsch);
-
-      console.log(listCauHoiDaCheck);
       setIsLoaded(true);
+
+      //check trùng câu hỏi(nội dung)
+      const result = checkTrungCauhoi_DB(listCauHoi, dsch);
+      if (!result.isValid) {
+        setIsLoaded(false);
+        setVisible(true);
+        setMess('File excel không hợp lệ! Vui lòng kiểm tra lại.(Tất cả câu hỏi đã tồn tại)');
+      }
+
+      console.log(result.listCauHoiDaCheck);
+
       /* Update state */
-      setData(listCauHoiDaCheck);
+      setData(result.listCauHoiDaCheck);
     };
     reader.readAsArrayBuffer(file);
   }
@@ -240,13 +247,15 @@ const getListCauHoi = (data, t) => {
 }
 
 function checkTrungCauhoi_DB(listCauHoi, dsch) {
+  let isValid = false;
   const values = [...listCauHoi];
   const arr = values.map((val) => {
     const trung = dsch.some((d) => d === val.NOIDUNG);
+    if (!trung) isValid = true;
     return {
       ...val,
       trung: trung,
     }
   })
-  return arr;
+  return { listCauHoiDaCheck: arr, isValid: isValid };
 }

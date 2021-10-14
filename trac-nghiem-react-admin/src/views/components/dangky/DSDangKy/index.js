@@ -2,7 +2,7 @@ import { CCard, CCardBody, CCardHeader, CCol, CTable, CTableBody, CTableDataCell
 import React, { useEffect, useState } from 'react'
 import dangKyApi from 'src/api/dangKyApi';
 import { Link } from "react-router-dom";
-import { cilDelete, cilPenAlt } from '@coreui/icons';
+import { cilDelete, cilPenAlt, cilPrint } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
@@ -112,9 +112,15 @@ export default function index() {
                     <CTableDataCell>{dk.SCT}</CTableDataCell>
                     <CTableDataCell>{dk.THOIGIANTHI}</CTableDataCell>
                     <CTableDataCell>
+                      <CTooltip content="Danh sách ký tên" placement="left" className='me-3'>
+                        <Link to={`/report/ds-kyten/${dk.IDLMH}`} target='_blank'>
+                          <CIcon icon={cilPrint} size='lg' />
+                        </Link>
+                      </CTooltip>
+                      <span>   </span>
                       {dk.MAGVDK.trim() === InfoUserLogin()?.MAGV &&
                         <span>
-                          <CTooltip content="Sửa" placement="left">
+                          <CTooltip content="Sửa" placement="top">
                             <Link to={`/dangky/sua-dangky/${dk.IDLMH}`}>
                               <CIcon icon={cilPenAlt} size='lg' />
                             </Link>

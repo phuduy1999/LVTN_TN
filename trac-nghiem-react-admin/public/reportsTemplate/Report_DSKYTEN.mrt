@@ -1,0 +1,881 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <DS_KYTEN Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>response</Alias>
+        <Key />
+        <Name>DS_KYTEN</Name>
+        <PathData>C:\Users\Administrator\Desktop\response.json</PathData>
+      </DS_KYTEN>
+    </Databases>
+    <DataSources isList="true" count="2">
+      <LOPMONHOC Ref="3" type="DataTableSource" isKey="true">
+        <Alias>LOPMONHOC</Alias>
+        <Columns isList="true" count="9">
+          <value>NIENKHOA,System.String</value>
+          <value>HOCKY,System.Decimal</value>
+          <value>NHOM,System.Decimal</value>
+          <value>TENMH,System.String</value>
+          <value>NGAYTHI,System.String</value>
+          <value>THOIGIANTHI,System.Decimal</value>
+          <value>TENKH,System.String</value>
+          <value>TRINHDODK,System.String</value>
+          <value>HOTENGV,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>f41b9b01dbeb4e74a48c2c18861f5cd9</Key>
+        <Name>LOPMONHOC</Name>
+        <NameInSource>DS_KYTEN.LOPMONHOC</NameInSource>
+      </LOPMONHOC>
+      <SINHVIEN Ref="4" type="DataTableSource" isKey="true">
+        <Alias>SINHVIEN</Alias>
+        <Columns isList="true" count="6">
+          <value>MASV,System.String</value>
+          <value>HO,System.String</value>
+          <value>TEN,System.String</value>
+          <value>NGAYSINH,System.String</value>
+          <value>DIACHI,System.String</value>
+          <value>EMAIL,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Key>9cdf47eaead94e0a817ef0d1d9516f39</Key>
+        <Name>SINHVIEN</Name>
+        <NameInSource>DS_KYTEN.SINHVIEN</NameInSource>
+      </SINHVIEN>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>ea402e3e300c43f5bf3cfba8ba45a689</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="5" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="6">
+        <PageFooterBand1 Ref="6" type="PageFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,9.9,7.7,0.3</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text2 Ref="7" type="Text" isKey="true">
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,7.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="5" />
+              <Parent isRef="6" />
+              <Text>{PageNofM}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>SystemVariables</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text2>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageFooterBand1</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </PageFooterBand1>
+        <ReportTitle Ref="8" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.2,7.7,0.5</ClientRectangle>
+          <Components isList="true" count="1">
+            <ReportTitleText Ref="9" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,7.72,0.5</ClientRectangle>
+              <ComponentStyle>Moray_Report_Title1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,14,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>ReportTitleText</Name>
+              <Page isRef="5" />
+              <Parent isRef="8" />
+              <Text>Danh sách ký tên</Text>
+              <TextBrush>[3:81:103]</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </ReportTitleText>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>ReportTitle</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </ReportTitle>
+        <HeaderLOPMONHOC Ref="10" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,1.1,7.7,0.2</ClientRectangle>
+          <Components isList="true" count="9">
+            <HeaderTextLOPMONHOC1 Ref="11" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC1</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>NIENKHOA</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC1>
+            <HeaderTextLOPMONHOC2 Ref="12" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.9,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC2</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>HOCKY</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC2>
+            <HeaderTextLOPMONHOC3 Ref="13" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1.8,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC3</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>NHOM</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC3>
+            <HeaderTextLOPMONHOC4 Ref="14" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.7,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC4</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>TENMH</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC4>
+            <HeaderTextLOPMONHOC5 Ref="15" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.6,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC5</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>NGAYTHI</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC5>
+            <HeaderTextLOPMONHOC6 Ref="16" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.5,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC6</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>THOIGIANTHI</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC6>
+            <HeaderTextLOPMONHOC7 Ref="17" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.4,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC7</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>TENKH</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC7>
+            <HeaderTextLOPMONHOC8 Ref="18" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.3,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC8</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>TRINHDODK</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC8>
+            <HeaderTextLOPMONHOC9 Ref="19" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7.2,0,0.5,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextLOPMONHOC9</Name>
+              <Page isRef="5" />
+              <Parent isRef="10" />
+              <Text>HOTENGV</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextLOPMONHOC9>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>HeaderLOPMONHOC</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </HeaderLOPMONHOC>
+        <DataLOPMONHOC Ref="20" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,1.7,7.7,0.2</ClientRectangle>
+          <Components isList="true" count="9">
+            <DataTextLOPMONHOC1 Ref="21" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC1</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.NIENKHOA}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC1>
+            <DataTextLOPMONHOC2 Ref="22" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.9,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC2</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.HOCKY}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC2>
+            <DataTextLOPMONHOC3 Ref="23" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1.8,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC3</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.NHOM}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC3>
+            <DataTextLOPMONHOC4 Ref="24" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2.7,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC4</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.TENMH}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC4>
+            <DataTextLOPMONHOC5 Ref="25" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.6,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC5</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.NGAYTHI}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC5>
+            <DataTextLOPMONHOC6 Ref="26" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.5,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC6</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.THOIGIANTHI}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC6>
+            <DataTextLOPMONHOC7 Ref="27" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.4,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC7</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.TENKH}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC7>
+            <DataTextLOPMONHOC8 Ref="28" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.3,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC8</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.TRINHDODK}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC8>
+            <DataTextLOPMONHOC9 Ref="29" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7.2,0,0.9,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Data1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataTextLOPMONHOC9</Name>
+              <Page isRef="5" />
+              <Parent isRef="20" />
+              <Text>{LOPMONHOC.HOTENGV}</Text>
+              <TextBrush>[0:0:0]</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <TextQuality>Wysiwyg</TextQuality>
+              <VertAlignment>Center</VertAlignment>
+            </DataTextLOPMONHOC9>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>LOPMONHOC</DataSourceName>
+          <EvenStyle>Moray_Data1_Even Style</EvenStyle>
+          <Expressions isList="true" count="0" />
+          <FilterMode>Or</FilterMode>
+          <Filters isList="true" count="0" />
+          <Name>DataLOPMONHOC</Name>
+          <OddStyle>Moray_Data1_Odd Style</OddStyle>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <Sort isList="true" count="0" />
+        </DataLOPMONHOC>
+        <HeaderSINHVIEN Ref="30" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,2.3,7.7,0.2</ClientRectangle>
+          <Components isList="true" count="8">
+            <HeaderTextSINHVIEN1 Ref="31" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0.3,0,0.7,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextSINHVIEN1</Name>
+              <Page isRef="5" />
+              <Parent isRef="30" />
+              <Text>MASV</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextSINHVIEN1>
+            <HeaderTextSINHVIEN2 Ref="32" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>1,0,1,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextSINHVIEN2</Name>
+              <Page isRef="5" />
+              <Parent isRef="30" />
+              <Text>HO</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextSINHVIEN2>
+            <HeaderTextSINHVIEN3 Ref="33" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>2,0,1.1,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextSINHVIEN3</Name>
+              <Page isRef="5" />
+              <Parent isRef="30" />
+              <Text>TEN</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextSINHVIEN3>
+            <HeaderTextSINHVIEN4 Ref="34" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.1,0,1.3,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextSINHVIEN4</Name>
+              <Page isRef="5" />
+              <Parent isRef="30" />
+              <Text>NGAYSINH</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextSINHVIEN4>
+            <HeaderTextSINHVIEN5 Ref="35" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>4.4,0,1.3,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextSINHVIEN5</Name>
+              <Page isRef="5" />
+              <Parent isRef="30" />
+              <Text>DIACHI</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextSINHVIEN5>
+            <HeaderTextSINHVIEN6 Ref="36" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>5.7,0,1.3,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>HeaderTextSINHVIEN6</Name>
+              <Page isRef="5" />
+              <Parent isRef="30" />
+              <Text>EMAIL</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </HeaderTextSINHVIEN6>
+            <Text1 Ref="37" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>7,0,0.7,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="5" />
+              <Parent isRef="30" />
+              <Text>Ký tên</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <Text3 Ref="38" type="Text" isKey="true">
+              <Border>None;[0:31:53];1;Solid;False;4;Black;True</Border>
+              <Brush>[3:81:103]</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,0.3,0.2</ClientRectangle>
+              <ComponentStyle>Moray_Header1</ComponentStyle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <GrowToHeight>True</GrowToHeight>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="5" />
+              <Parent isRef="30" />
+              <Text>STT</Text>
+              <TextBrush>White</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text3>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>HeaderSINHVIEN</Name>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+        </HeaderSINHVIEN>
+        <TableSINHVIEN Ref="39" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,2.9,7.7,0.3</ClientRectangle>
+          <ColumnCount>8</ColumnCount>
+          <Components isList="true" count="8">
+            <TableSINHVIEN_Cell1 Ref="40" type="TableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0,0,0.3,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <HorAlignment>Right</HorAlignment>
+              <ID>7</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableSINHVIEN_Cell1</Name>
+              <Page isRef="5" />
+              <Parent isRef="39" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{Line}</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </TableSINHVIEN_Cell1>
+            <TableSINHVIEN_Cell2 Ref="41" type="TableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>0.3,0,0.7,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>0</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableSINHVIEN_Cell2</Name>
+              <Page isRef="5" />
+              <Parent isRef="39" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SINHVIEN.MASV}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </TableSINHVIEN_Cell2>
+            <TableSINHVIEN_Cell3 Ref="42" type="TableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1,0,1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>1</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableSINHVIEN_Cell3</Name>
+              <Page isRef="5" />
+              <Parent isRef="39" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SINHVIEN.HO}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </TableSINHVIEN_Cell3>
+            <TableSINHVIEN_Cell4 Ref="43" type="TableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>2,0,1.1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>2</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableSINHVIEN_Cell4</Name>
+              <Page isRef="5" />
+              <Parent isRef="39" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SINHVIEN.TEN}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </TableSINHVIEN_Cell4>
+            <TableSINHVIEN_Cell5 Ref="44" type="TableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>3.1,0,1.3,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>3</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableSINHVIEN_Cell5</Name>
+              <Page isRef="5" />
+              <Parent isRef="39" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SINHVIEN.NGAYSINH}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </TableSINHVIEN_Cell5>
+            <TableSINHVIEN_Cell6 Ref="45" type="TableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>4.4,0,1.3,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>4</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableSINHVIEN_Cell6</Name>
+              <Page isRef="5" />
+              <Parent isRef="39" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SINHVIEN.DIACHI}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </TableSINHVIEN_Cell6>
+            <TableSINHVIEN_Cell7 Ref="46" type="TableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>5.7,0,1.1,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>5</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableSINHVIEN_Cell7</Name>
+              <Page isRef="5" />
+              <Parent isRef="39" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SINHVIEN.EMAIL}</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </TableSINHVIEN_Cell7>
+            <TableSINHVIEN_Cell8 Ref="47" type="TableCell" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>6.8,0,0.9,0.3</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <ID>6</ID>
+              <JoinCells isList="true" count="0" />
+              <Margins>0,0,0,0</Margins>
+              <Name>TableSINHVIEN_Cell8</Name>
+              <Page isRef="5" />
+              <Parent isRef="39" />
+              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <TextBrush>Black</TextBrush>
+            </TableSINHVIEN_Cell8>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>SINHVIEN</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <MinHeight>0.1</MinHeight>
+          <Name>TableSINHVIEN</Name>
+          <NumberID>8</NumberID>
+          <Page isRef="5" />
+          <Parent isRef="5" />
+          <RowCount>1</RowCount>
+          <Sort isList="true" count="0" />
+        </TableSINHVIEN>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>922fb1dc37d64278bdfcd17848874acf</Guid>
+      <Margins>0.4,0.4,0.4,0.4</Margins>
+      <Name>Page1</Name>
+      <PageHeight>11</PageHeight>
+      <PageWidth>8.5</PageWidth>
+      <PaperSize>Letter</PaperSize>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>10/14/2021 5:38:13 AM</ReportChanged>
+  <ReportCreated>10/13/2021 5:36:00 PM</ReportCreated>
+  <ReportFile>C:\Users\Administrator\Desktop\TOTNGHIEP\trac-nghiem-react-admin\public\reportsTemplate\Report_DSKYTEN.mrt</ReportFile>
+  <ReportGuid>9f6623d993fa4bcfab3c3613274c9904</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Inches</ReportUnit>
+  <ReportVersion>2021.4.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

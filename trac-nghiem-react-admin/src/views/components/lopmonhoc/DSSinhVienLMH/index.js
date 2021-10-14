@@ -1,6 +1,6 @@
-import { CCard, CCardBody, CCardHeader, CCol, CForm, CFormInput, CFormLabel, CFormSelect, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
+import { CButton, CCard, CCardBody, CCardHeader, CCol, CForm, CFormInput, CFormLabel, CFormSelect, CRow, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import sinhVienApi from 'src/api/sinhVienApi';
 import monHocApi from 'src/api/monHocApi';
 import lopMHApi from 'src/api/lopMHApi';
@@ -22,6 +22,11 @@ export default function index() {
         setDSMH(response);
         setMamh(response[0].MAMH);
         console.log(response);
+        const response1 = await lopMHApi.getOne(id);
+        setNienKhoa(response1.NIENKHOA.trim());
+        setHocKy(response1.HOCKY);
+        setNhom(response1.NHOM);
+        setMamh(response1.MAMH);
       } catch (error) {
         console.log(error);
       }
@@ -35,23 +40,6 @@ export default function index() {
       try {
         const response = await sinhVienApi.getSV_LMH(id);
         setDS(response);
-        console.log(response);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchDS();
-  }, [])
-
-  useEffect(() => {
-    const fetchDS = async () => {
-      try {
-        const response = await lopMHApi.getOne(id);
-        setNienKhoa(response.NIENKHOA.trim());
-        setHocKy(response.HOCKY);
-        setNhom(response.NHOM);
-        setMamh(response.MAMH);
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -117,6 +105,8 @@ export default function index() {
                   </CFormSelect>
                 </div>
               </CCol>
+
+
             </CForm>
           </CCardBody>
           <CCardBody>
@@ -154,6 +144,15 @@ export default function index() {
                 }
               </CTableBody>
             </CTable>
+            <div className="d-grid gap-2 col-2 mx-auto mt-4">
+              <Link to={`/report/bangdiem/${id}`} target='_blank'>
+                <CTooltip content="Bảng điểm sinh viên" placement="right" className='me-3'>
+                  <CButton color="secondary" variant="outline">
+                    In bảng điểm
+                  </CButton>
+                </CTooltip>
+              </Link>
+            </div>
           </CCardBody>
         </CCard>
       </CCol>

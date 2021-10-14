@@ -4,7 +4,7 @@ import {
 } from '@coreui/react'
 import React from 'react'
 
-const Page404 = () => {
+const PageWelcome = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row">
       <CContainer>
@@ -20,4 +20,4 @@ const Page404 = () => {
   )
 }
 
-export default Page404
+export default PageWelcome

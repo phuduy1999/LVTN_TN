@@ -1,6 +1,6 @@
 import { cilDelete, cilPenAlt } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
-import { CButton, CCard, CCardBody, CCardHeader, CCol, CLink, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
+import { CCard, CCardBody, CCardHeader, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import khoaApi from 'src/api/khoaApi';

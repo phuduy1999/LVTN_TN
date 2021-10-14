@@ -4,6 +4,8 @@ import loginApi from 'src/api/loginApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import './scss/style.scss';
 import InfoUserLogin from 'src/_infoUser';
+import DSKyTen from './views/components/report/DSKyTen';
+import BangDiem from './views/components/report/BangDiem';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -13,6 +15,7 @@ const loading = (
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
+const ReportLayout = React.lazy(() => import('./layout/ReportLayout'))
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/login/Login'))
@@ -71,12 +74,12 @@ const App = () => {
             path="/change-password"
             name="Change Password"
             render={(props) => {
-              if (isLogin) {
-                return <ChangePassword {...props} />
-              }
-              else {
-                return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
-              }
+              // if (isLogin) {
+              return <ChangePassword {...props} />
+              // }
+              // else {
+              //   return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
+              // }
             }} />
           <Route
             exact
@@ -88,16 +91,26 @@ const App = () => {
             path="/500"
             name="Page 500"
             render={(props) => <Page500 {...props} />} />
+          {/* report route */}
+          <Route
+            path="/report/ds-kyten/:id"
+            name="Report Page"
+            render={(props) => <DSKyTen {...props} />} />
+          <Route
+            path="/report/bangdiem/:id"
+            name="Report Page"
+            render={(props) => <BangDiem {...props} />} />
+          {/* report route */}
           <Route
             path="/"
             name="Home"
             render={(props) => {
-              if (isLogin) {
-                return <DefaultLayout {...props} handleLogout={handleLogout} isLogin={isLogin} />
-              }
-              else {
-                return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
-              }
+              // if (isLogin) {
+              return <DefaultLayout {...props} handleLogout={handleLogout} isLogin={isLogin} />
+              // }
+              // else {
+              //   return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />;
+              // }
             }}
           />
         </Switch>

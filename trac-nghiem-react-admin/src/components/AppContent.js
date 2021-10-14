@@ -30,7 +30,7 @@ const AppContent = (props) => {
                   exact={route.exact}
                   name={route.name}
                   component={route.component}
-                  isAuth={isLogin}
+                  isAuth={true}
                 />
               )
             )
