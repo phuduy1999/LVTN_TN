@@ -1,6 +1,6 @@
 import { cilDelete, cilPenAlt } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
-import { CCard, CCardBody, CCardHeader, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
+import { CCard, CCardBody, CCardHeader, CRow, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import khoaApi from 'src/api/khoaApi';
@@ -20,17 +20,16 @@ export default function index() {
   const [idCanXoa, setIdCanXoa] = useState('');
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response = await khoaApi.getAll();
         setDS(response);
-        console.log(response, response.status);
       } catch (error) {
         console.log(error);
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [reload])
 
   const handleClickXoa = (id) => {
@@ -64,16 +63,8 @@ export default function index() {
       })
   }
 
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
-  const handleSetVisibleCheck = () => {
-    setVisibleCheck(false);
-  }
-
   return (
-    <div className="row">
+    <CRow>
       <CCard className="mb-4">
         <CCardHeader>
           <strong>Danh sách khoa</strong>
@@ -117,11 +108,11 @@ export default function index() {
           </CTable>
         </CCardBody>
       </CCard>
-      <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+      <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
       <AppModalCustomDelete visibleCheck={visibleCheck}
-        handleSetVisibleCheck={handleSetVisibleCheck}
+        handleSetVisibleCheck={() => { setVisibleCheck(false) }}
         mess={messCheck} handleClickAccept={handleClickAccept} />
-    </div>
+    </CRow>
   )
 }

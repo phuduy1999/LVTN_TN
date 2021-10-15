@@ -75,7 +75,7 @@ export default function index() {
   const [dsmh, setDSMH] = useState([]);
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response = await monHocApi.getAll();
         setDSMH(response);
@@ -86,12 +86,8 @@ export default function index() {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [])
-
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
 
   return (
     <CCol xs={12}>
@@ -230,7 +226,7 @@ export default function index() {
                 Thêm...
               </CButton>}
             </CCol>
-            <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+            <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
               mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
           </CForm>
         </CCardBody>

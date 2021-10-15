@@ -120,7 +120,7 @@ export default function index() {
   const [dsmh, setDSMH] = useState([]);
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response1 = await loaiCHApi.getAll();
         const response2 = await monHocApi.getAll();
@@ -132,11 +132,11 @@ export default function index() {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [])
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response = await boDeApi.getOne(id);
         setCH(response);
@@ -161,12 +161,8 @@ export default function index() {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [])
-
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
 
   const demSoLanXuatHien = (str) => {
     let arr = choices.filter(choice => choice === str);
@@ -354,7 +350,7 @@ export default function index() {
                 Sửa...
               </CButton>}
             </CCol>
-            <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+            <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
               mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
           </CForm>
         </CCardBody>

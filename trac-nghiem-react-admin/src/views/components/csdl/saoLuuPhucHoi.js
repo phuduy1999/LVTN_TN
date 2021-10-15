@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import csdlApi from 'src/api/csdlApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
-import _formatDate from 'src/_formatDate';
 
 function saoLuuPhucHoi() {
   const [ds, setDS] = useState([]);
@@ -21,7 +20,7 @@ function saoLuuPhucHoi() {
   const [position, setPosition] = useState('');
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response = await csdlApi.getList();
         setDS(response);
@@ -31,7 +30,7 @@ function saoLuuPhucHoi() {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [reload])
 
   const handleClickPhucHoi = (po) => {
@@ -84,14 +83,6 @@ function saoLuuPhucHoi() {
       })
   }
 
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
-  const handleSetVisibleCheck = () => {
-    setVisibleCheck(false);
-  }
-
   return (
     <CContainer>
       <CCard>
@@ -129,7 +120,7 @@ function saoLuuPhucHoi() {
                     <CTableHeaderCell className='text-center'>{bk.position}</CTableHeaderCell>
                     <CTableDataCell className='text-center'>{bk.name}</CTableDataCell>
                     <CTableDataCell className='text-center'>
-                      {_formatDate(bk.backup_start_date, true)}
+                      {bk.backup_start_date}
                     </CTableDataCell>
                     <CTableDataCell className='text-center'>
                       <CTooltip content="Phục hồi" placement="right" className='me-3'>
@@ -149,10 +140,10 @@ function saoLuuPhucHoi() {
           </CRow>
         </CCardBody>
       </CCard>
-      <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+      <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
       <AppModalCustomDelete visibleCheck={visibleCheck}
-        handleSetVisibleCheck={handleSetVisibleCheck}
+        handleSetVisibleCheck={() => { setVisibleCheck(false) }}
         mess={messCheck} handleClickAccept={handleClickAccept} />
     </CContainer>
   )

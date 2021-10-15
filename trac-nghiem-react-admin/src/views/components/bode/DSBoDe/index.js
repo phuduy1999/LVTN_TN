@@ -21,7 +21,7 @@ export default function index() {
   const [idCanXoa, setIdCanXoa] = useState('');
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response = await boDeApi.getAll();
         setDS(response);
@@ -31,7 +31,7 @@ export default function index() {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [reload])
 
   const handleClickXoa = (id) => {
@@ -63,14 +63,6 @@ export default function index() {
         setIsSuccess(false);
         setMess('Lỗi: ' + error.response.data.err)
       })
-  }
-
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
-  const handleSetVisibleCheck = () => {
-    setVisibleCheck(false);
   }
 
   return (
@@ -133,10 +125,10 @@ export default function index() {
             </CTable>
           </CCardBody>
         </CCard>
-        <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+        <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
           mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
         <AppModalCustomDelete visibleCheck={visibleCheck}
-          handleSetVisibleCheck={handleSetVisibleCheck}
+          handleSetVisibleCheck={() => { setVisibleCheck(false) }}
           mess={messCheck} handleClickAccept={handleClickAccept} />
       </CCol>
     </div>

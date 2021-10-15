@@ -6,7 +6,7 @@ export default function index() {
   const [ds, setDS] = useState([]);
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response = await loaiCHApi.getAll();
         setDS(response);
@@ -16,7 +16,7 @@ export default function index() {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [])
 
   return (

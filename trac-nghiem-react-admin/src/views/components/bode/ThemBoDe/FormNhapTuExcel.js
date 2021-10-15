@@ -68,7 +68,7 @@ export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
   }
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response = await monHocApi.getAll();
         const response1 = await boDeApi.getAll();
@@ -80,7 +80,7 @@ export default function FormNhapTuExcel({ setVisible, setIsSuccess, setMess }) {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [])
 
   const handleFile = (file) => {

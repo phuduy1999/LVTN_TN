@@ -76,10 +76,6 @@ const Login = (props) => {
     setValidated(true)
   }
 
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -142,7 +138,7 @@ const Login = (props) => {
                 </CCardBody>
               </CCard>
             </CCardGroup>
-            <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+            <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
               mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
           </CCol>
         </CRow>

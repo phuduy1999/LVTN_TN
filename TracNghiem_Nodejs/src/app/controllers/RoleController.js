@@ -7,7 +7,8 @@ class RoleController {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('sv', sql.NChar(15), 'SV')
-                .query('select * from NHOMQUYEN where MANQ<>@sv')
+                .input('admin', sql.NChar(15), 'admin')
+                .query('select * from NHOMQUYEN where MANQ<>@sv and MANQ<>@admin')
         })
             .then(result => {
                 const arrRecord = result.recordset;

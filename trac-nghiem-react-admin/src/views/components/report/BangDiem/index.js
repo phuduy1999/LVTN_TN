@@ -9,7 +9,7 @@ export default function index() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response = await reportApi.getBangDiem(id);
         setData(response);
@@ -19,7 +19,7 @@ export default function index() {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, []);
 
   return (

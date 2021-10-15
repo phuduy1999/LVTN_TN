@@ -23,17 +23,6 @@ export default function FormNhapBoDe({ setVisible, setIsSuccess, setMess }) {
   const [isPending, setIsPending] = useState(false);
   const [isDK, setIsDK] = useState(true);
 
-  const checkLuaChonPhanBietNhau = (choices) => {
-    const values = [...choices];
-    let arrSort = values.sort((a, b) => a > b ? 1 : -1);
-    for (let i = 0; i < arrSort.length - 1; i++) {
-      if (arrSort[i] === arrSort[i + 1]) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   const arrToJsonChoices = (choices) => {
     return choices.map((choice, idx) => {
       return {
@@ -89,7 +78,7 @@ export default function FormNhapBoDe({ setVisible, setIsSuccess, setMess }) {
   const [dsmh, setDSMH] = useState([]);
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response1 = await loaiCHApi.getAll();
         const response2 = await monHocApi.getAll();
@@ -103,7 +92,7 @@ export default function FormNhapBoDe({ setVisible, setIsSuccess, setMess }) {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [])
 
   const handleLoaiCauHoi = (e) => {
@@ -296,4 +285,15 @@ export default function FormNhapBoDe({ setVisible, setIsSuccess, setMess }) {
       </CCol>
     </CForm>
   )
+}
+
+const checkLuaChonPhanBietNhau = (choices) => {
+  const values = [...choices];
+  let arrSort = values.sort((a, b) => a > b ? 1 : -1);
+  for (let i = 0; i < arrSort.length - 1; i++) {
+    if (arrSort[i] === arrSort[i + 1]) {
+      return false;
+    }
+  }
+  return true;
 }

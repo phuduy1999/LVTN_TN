@@ -10,10 +10,6 @@ export default function index() {
   const [mess, setMess] = useState(false)
   const pageRedirect = '/bode/ds-bode';
 
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
   return (
     <CCol xs={12}>
       <CCard className="mb-4">
@@ -49,7 +45,7 @@ export default function index() {
           </CAccordion>
         </CCardBody>
       </CCard>
-      <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+      <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
     </CCol >
   )

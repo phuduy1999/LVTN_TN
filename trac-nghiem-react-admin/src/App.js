@@ -56,10 +56,6 @@ const App = () => {
       });
   }
 
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
   return (
     <BrowserRouter>
       <React.Suspense fallback={loading}>
@@ -115,7 +111,7 @@ const App = () => {
           />
         </Switch>
       </React.Suspense>
-      <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+      <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
     </BrowserRouter>
   )

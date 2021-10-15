@@ -35,10 +35,10 @@ class RecoveryController {
 
     //[POST] /restore/:position
     restoreByPosition(req, res) {
-        const strLenh = 'ALTER DATABASE CHUNGKHOAN SET SINGLE_USER WITH ROLLBACK IMMEDIATE; '
+        const strLenh = 'ALTER DATABASE TN_TTTN SET SINGLE_USER WITH ROLLBACK IMMEDIATE; '
             + 'USE tempdb '
-            + 'RESTORE DATABASE CHUNGKHOAN FROM DEV_CHUNGKHOAN WITH FILE= @position, REPLACE '
-            + 'ALTER DATABASE CHUNGKHOAN SET MULTI_USER; '
+            + 'RESTORE DATABASE TN_TTTN FROM DEV_TN_TTTN WITH FILE= @position, REPLACE '
+            + 'ALTER DATABASE TN_TTTN SET MULTI_USER; '
             + 'USE TN_TTTN'
         sqlConnect.then(pool => {
             return pool.request()

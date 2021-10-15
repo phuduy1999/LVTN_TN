@@ -63,7 +63,7 @@ export default function index() {
   const [dsgv, setDSGV] = useState([]);
 
   useEffect(() => {
-    const fetchDS = async () => {
+    const fetchData = async () => {
       try {
         const response1 = await khoaApi.getAll();
         const response2 = await monHocApi.getAll();
@@ -80,12 +80,8 @@ export default function index() {
       }
     }
 
-    fetchDS();
+    fetchData();
   }, [])
-
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
 
   return (
     <CCol xs={12}>
@@ -204,7 +200,7 @@ export default function index() {
                 Thêm...
               </CButton>}
             </CCol>
-            <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+            <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
               mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
           </CForm>
         </CCardBody>
