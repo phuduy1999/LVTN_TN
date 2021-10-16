@@ -1,8 +1,8 @@
 import { CButton, CCard, CCardBody, CCardHeader, CCol, CForm, CFormFeedback, CFormInput, CFormLabel, CFormSelect } from '@coreui/react';
-import React, { useEffect, useState } from 'react'
-import _chuanHoaChuoi from 'src/_chuanHoaChuoi.js';
+import React, { useEffect, useState } from 'react';
 import khoaApi from 'src/api/khoaApi';
 import nhomQuyenApi from 'src/api/nhomQuyenApi';
+import _chuanHoaChuoi from 'src/_chuanHoaChuoi.js';
 
 export default function index(props) {
   const {

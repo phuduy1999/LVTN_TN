@@ -261,9 +261,6 @@ class QuestionController {
       MAMH: Joi.string()
         .max(15)
         .required(),
-      MAGV: Joi.string()
-        .max(15)
-        .required(),
       CAC_LUA_CHON: Joi.array()
         .items(Joi.object({
           STT: Joi.string()
@@ -289,10 +286,9 @@ class QuestionController {
         .input('noidung', sql.NVarChar(sql.MAX), req.body.NOIDUNG)
         .input('dap_an', sql.NVarChar(30), req.body.DAP_AN)
         .input('mamh', sql.NChar(15), req.body.MAMH)
-        .input('magv', sql.NChar(15), req.body.MAGV)
         .input('idch', sql.Int, req.params.id)
         .input('cacluachonJson', sql.NVarChar(1000), json)
-        .execute('SP_SUA_BODE2')
+        .execute('SP_SUA_BODE')
     })
       .then(result => {
         if (result.rowsAffected[0] === 1) {
