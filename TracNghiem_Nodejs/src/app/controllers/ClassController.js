@@ -175,6 +175,45 @@ class ClassController {
                 else res.status(400).send({ err: err.message });
             })
     }
+
+    //[GET] /:id/check
+    checkFK(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('idlmh', sql.Int, req.params.id)
+                .execute('SP_CHECK_LOPMONHOC')
+        })
+            .then(result => {
+                res.status(200).send({ result: 1 });
+            }).catch(err => {
+                console.log(err)
+                if (err.message.includes('FK_DANGKY_LOPMONHOC')) {
+                    res.status(400).send({ err: 'Lớp môn học đã được sinh viên đăng ký!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
+
+    //[GET] /:id/check-before-edit
+    checkBeforeEdit(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('idlmh', sql.Int, req.params.id)
+                .execute('SP_CHECK_LOPMONHOC_TRUOC_SUA')
+        })
+            .then(result => {
+                res.status(200).send({ result: 1 });
+            }).catch(err => {
+                console.log(err)
+                if (err.message.includes('daduocdkthi')) {
+                    res.status(400).send({ err: 'Lớp môn học đã được đăng ký thi!' });
+                }
+                else if (err.message.includes('svdadklopmonhoc')) {
+                    res.status(400).send({ err: 'Sinh viên đã đăng ký lớp môn học!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
 }
 
 module.exports = new ClassController();

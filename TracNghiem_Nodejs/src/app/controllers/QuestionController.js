@@ -295,7 +295,7 @@ class QuestionController {
           res.send(req.body);
         }
       }).catch(err => {
-        res.status(400).send({ err: 'Lỗi thêm bộ đề!' });
+        res.status(400).send({ err: 'Lỗi sửa bộ đề!' });
       })
   }
 
@@ -309,6 +309,24 @@ class QuestionController {
       .then(result => {
         const arrRecord = result.recordset;
         res.status(200).send({ result: result.rowsAffected[0] });
+      }).catch(err => {
+        console.log(err)
+        if (err.message.includes('FK_CTBT_BODE')) {
+          res.status(400).send({ err: 'Câu hỏi đã được thi!' });
+        }
+        else res.status(400).send({ err: err.message });
+      })
+  }
+
+  //[GET] /:id/check
+  checkFK(req, res) {
+    sqlConnect.then(pool => {
+      return pool.request()
+        .input('idch', sql.Int, req.params.id)
+        .execute('SP_CHECK_BODE')
+    })
+      .then(result => {
+        res.status(200).send({ result: 1 });
       }).catch(err => {
         console.log(err)
         if (err.message.includes('FK_CTBT_BODE')) {

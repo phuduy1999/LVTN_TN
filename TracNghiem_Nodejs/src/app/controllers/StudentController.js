@@ -173,6 +173,24 @@ class StudentController {
             })
     }
 
+    //[GET] /:id/check
+    checkFK(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('masv', sql.NChar(15), req.params.id)
+                .execute('SP_CHECK_SINHVIEN')
+        })
+            .then(result => {
+                res.status(200).send({ result: 1 });
+            }).catch(err => {
+                console.log(err)
+                if (err.message.includes('FK_DANGKY_SINHVIEN')) {
+                    res.status(400).send({ err: 'Sinh viên đã đăng ký lớp môn học!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
+
     //[GET] /:id/class
     getStudentsInClass(req, res) {
         sqlConnect.then(pool => {

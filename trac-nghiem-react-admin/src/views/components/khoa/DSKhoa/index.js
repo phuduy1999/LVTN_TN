@@ -33,9 +33,19 @@ export default function index() {
   }, [reload])
 
   const handleClickXoa = (id) => {
-    setVisibleCheck(!visibleCheck);
-    setMessCheck(`xóa khoa có mã là ${id}`);
-    setIdCanXoa(id);
+    khoaApi.checkFK(id)
+      .then(response => {
+        setVisibleCheck(!visibleCheck);
+        setMessCheck(`xóa khoa có mã là ${id}`);
+        setIdCanXoa(id);
+      })
+      .catch(error => {
+        console.log(error.response);
+
+        setVisible(!visible);
+        setIsSuccess(false);
+        setMess('Lỗi: ' + error.response.data.err)
+      })
   }
 
   const handleClickAccept = () => {

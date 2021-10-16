@@ -8,6 +8,8 @@ router.post('/check-register', registerController.checkRegister);
 router.post('/get-questions', registerController.getQuestions);
 router.post('/', roleTeacher, registerController.addOne);
 router.delete('/:id', roleTeacher, registerController.deleteOne);
+router.get('/:id/check', roleTeacher, registerController.checkFK);
+router.get('/:id/check-before-edit', roleTeacher, registerController.checkBeforeEdit);
 router.put('/:id/edit', roleTeacher, registerController.updateOne)
 router.get('/:id', registerController.getOne);
 router.get('/', roleTeacher, registerController.getAll);

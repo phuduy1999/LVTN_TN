@@ -31,6 +31,11 @@ const monHocApi = {
     return axiosClient.delete(url);
   },
 
+  checkFK: (id) => {
+    const url = `/subjects/${id}/check`;
+    return axiosClient.get(url);
+  },
+
 }
 
 export default monHocApi;

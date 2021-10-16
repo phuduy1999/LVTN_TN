@@ -10,6 +10,7 @@ router.get('/:id/email', studentController.getOneByEmail);
 router.get('/:id/class', roleTeacher, studentController.getStudentsInClass);
 router.put('/:id/edit', roleTeacher_PGV, studentController.updateOne);
 router.delete('/:id', roleTeacher_PGV, studentController.deleteOne);
+router.get('/:id/check', roleTeacher_PGV, studentController.checkFK);
 router.get('/:id', roleTeacher_PGV, studentController.getOne);
 router.get('/', roleTeacher_PGV, studentController.getAll);
 

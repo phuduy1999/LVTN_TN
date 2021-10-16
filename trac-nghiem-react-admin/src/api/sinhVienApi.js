@@ -26,6 +26,11 @@ const sinhVienApi = {
     return axiosClient.delete(url);
   },
 
+  checkFK: (id) => {
+    const url = `/students/${id}/check`;
+    return axiosClient.get(url);
+  },
+
   getSV_LMH: (id) => {
     const url = `/students/${id}/class`;
     return axiosClient.get(url);

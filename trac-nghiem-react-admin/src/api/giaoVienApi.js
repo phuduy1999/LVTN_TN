@@ -30,6 +30,11 @@ const giaoVienApi = {
     const url = `/teachers/${id}`;
     return axiosClient.delete(url);
   },
+
+  checkFK: (id) => {
+    const url = `/teachers/${id}/check`;
+    return axiosClient.get(url);
+  },
 }
 
 export default giaoVienApi;

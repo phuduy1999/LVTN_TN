@@ -34,9 +34,17 @@ export default function index() {
   }, [reload])
 
   const handleClickXoa = (id) => {
-    setVisibleCheck(!visibleCheck);
-    setMessCheck(`xóa giáo viên có mã là ${id}`);
-    setIdCanXoa(id);
+    giaoVienApi.checkFK(id)
+      .then(response => {
+        setVisibleCheck(!visibleCheck);
+        setMessCheck(`xóa giáo viên có mã là ${id}`);
+        setIdCanXoa(id);
+      })
+      .catch(error => {
+        setVisible(!visible);
+        setIsSuccess(false);
+        setMess('Lỗi: ' + error.response.data.err)
+      })
   }
 
   const handleClickAccept = () => {

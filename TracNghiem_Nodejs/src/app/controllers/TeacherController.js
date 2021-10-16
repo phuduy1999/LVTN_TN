@@ -183,6 +183,29 @@ class TeacherController {
                 else res.status(400).send({ err: err.message });
             })
     }
+
+    //[GET] /:id/check
+    checkFK(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('magv', sql.NChar(15), req.params.id)
+                .execute('SP_CHECK_GIAOVIEN')
+        })
+            .then(result => {
+                res.status(200).send({ result: 1 });
+            }).catch(err => {
+                if (err.message.includes('FK_BODE_GIAOVIEN')) {
+                    res.status(400).send({ err: 'Giáo viên đã soạn câu hỏi thi!' });
+                }
+                else if (err.message.includes('FK_LOPMONHOC_GIAOVIEN')) {
+                    res.status(400).send({ err: 'Giáo viên có dạy lớp môn học!' });
+                }
+                else if (err.message.includes('FK_LOPMONHOC_GIAOVIEN1')) {
+                    res.status(400).send({ err: 'Giáo viên có đăng ký thi!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
 }
 
 module.exports = new TeacherController();

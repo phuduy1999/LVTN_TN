@@ -36,6 +36,11 @@ const boDeApi = {
     return axiosClient.delete(url);
   },
 
+  checkFK: (id) => {
+    const url = `/questions/${id}/check`;
+    return axiosClient.get(url);
+  },
+
 }
 
 export default boDeApi;

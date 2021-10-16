@@ -169,6 +169,24 @@ class RegisterController {
             })
     }
 
+    //[GET] /:id/check
+    checkFK(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('idlmh', sql.Int, req.params.id)
+                .execute('SP_CHECK_DANGKY_HUY')
+        })
+            .then(result => {
+                res.status(200).send({ result: 1 });
+            }).catch(err => {
+                console.log(err)
+                if (err.message.includes('dacosvthi')) {
+                    res.status(400).send({ err: 'Đã có sinh viên thi!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
+
     //[PUT] /:id/edit
     updateOne(req, res) {
         const schema = Joi.object({
@@ -212,6 +230,24 @@ class RegisterController {
                     res.status(400).send({ err: 'Ngày thi mới ở quá khứ!' });
                 }
                 else if (err.message.includes('svdathi')) {
+                    res.status(400).send({ err: 'Đã có sinh viên thi!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
+
+    //[GET] /:id/check-before-edit
+    checkBeforeEdit(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('idlmh', sql.Int, req.params.id)
+                .execute('SP_CHECK_DANGKY_TRUOC_SUA')
+        })
+            .then(result => {
+                res.status(200).send({ result: 1 });
+            }).catch(err => {
+                // console.log(err)
+                if (err.message.includes('svdathi')) {
                     res.status(400).send({ err: 'Đã có sinh viên thi!' });
                 }
                 else res.status(400).send({ err: err.message });

@@ -1,8 +1,8 @@
-import { cibEyeem, cilDelete, cilEyedropper, cilList, cilPenAlt } from '@coreui/icons';
+import { cilDelete, cilList, cilPenAlt } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import { CCard, CCardBody, CCardHeader, CCol, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
-import React, { useEffect, useState } from 'react'
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from "react-router-dom";
 import lopMHApi from 'src/api/lopMHApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
@@ -17,6 +17,7 @@ export default function index() {
   const [mess, setMess] = useState('')
   const [messCheck, setMessCheck] = useState('')
   const pageRedirect = '/lopmonhoc/ds-lopmonhoc';
+  const history = useHistory();
 
   const [idCanXoa, setIdCanXoa] = useState('');
 
@@ -35,9 +36,17 @@ export default function index() {
   }, [reload])
 
   const handleClickXoa = (id) => {
-    setVisibleCheck(!visibleCheck);
-    setMessCheck(`xóa lớp môn học có id là ${id}`);
-    setIdCanXoa(id);
+    lopMHApi.checkFK(id)
+      .then(response => {
+        setVisibleCheck(!visibleCheck);
+        setMessCheck(`xóa lớp môn học có id là ${id}`);
+        setIdCanXoa(id);
+      })
+      .catch(error => {
+        setVisible(!visible);
+        setIsSuccess(false);
+        setMess('Lỗi: ' + error.response.data.err)
+      })
   }
 
   const handleClickAccept = () => {
@@ -62,6 +71,19 @@ export default function index() {
         setVisible(!visible);
         setIsSuccess(false);
         setMess('Lỗi: ' + error.response.data.err)
+      })
+  }
+
+  const handleClickLinkSua = (e, pathname, id) => {
+    e.preventDefault();
+    lopMHApi.checkBeforeEdit(id)
+      .then(response => {
+        history.push(pathname);
+      })
+      .catch(error => {
+        setVisible(!visible);
+        setIsSuccess(false);
+        setMess('Lỗi: ' + error.response.data.err);
       })
   }
 
@@ -110,7 +132,10 @@ export default function index() {
                       {InfoUserLogin()?.MANQ === 'PGV' &&
                         <span>
                           <CTooltip content="Sửa" placement="top" className='me-3'>
-                            <Link to={`/lopmonhoc/sua-lopmonhoc/${lmh.IDLMH}`}>
+                            <Link
+                              to={`/lopmonhoc/sua-lopmonhoc/${lmh.IDLMH}`}
+                              onClick={(e) => handleClickLinkSua(e, `/lopmonhoc/sua-lopmonhoc/${lmh.IDLMH}`, lmh.IDLMH)}
+                            >
                               <CIcon icon={cilPenAlt} size='lg' />
                             </Link>
                           </CTooltip>

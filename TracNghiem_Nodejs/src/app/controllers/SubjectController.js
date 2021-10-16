@@ -145,6 +145,27 @@ class SubjectController {
                 else res.status(400).send({ err: err.message });
             })
     }
+
+    //[GET] /:id/check
+    checkFK(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('mamh', sql.NChar(15), req.params.id)
+                .execute('SP_CHECK_MONHOC')
+        })
+            .then(result => {
+                res.status(200).send({ result: 1 });
+            }).catch(err => {
+                console.log(err)
+                if (err.message.includes('FK_LOPMONHOC_MONHOC')) {
+                    res.status(400).send({ err: 'Môn học đã được mở lớp!' });
+                }
+                else if (err.message.includes('FK_BODE_MONHOC')) {
+                    res.status(400).send({ err: 'Môn học đã được soạn câu hỏi thi!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
 }
 
 module.exports = new SubjectController();

@@ -26,6 +26,16 @@ const lopMHApi = {
     return axiosClient.delete(url);
   },
 
+  checkFK: (id) => {
+    const url = `/classes/${id}/check`;
+    return axiosClient.get(url);
+  },
+
+  checkBeforeEdit: (id) => {
+    const url = `/classes/${id}/check-before-edit`;
+    return axiosClient.get(url);
+  },
+
 }
 
 export default lopMHApi;

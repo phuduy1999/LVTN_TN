@@ -34,9 +34,17 @@ export default function index() {
   }, [reload])
 
   const handleClickXoa = (id) => {
-    setVisibleCheck(!visibleCheck);
-    setMessCheck(`xóa môn học có mã là ${id}`);
-    setIdCanXoa(id);
+    monHocApi.checkFK(id)
+      .then(response => {
+        setVisibleCheck(!visibleCheck);
+        setMessCheck(`xóa môn học có mã là ${id}`);
+        setIdCanXoa(id);
+      })
+      .catch(error => {
+        setVisible(!visible);
+        setIsSuccess(false);
+        setMess('Lỗi: ' + error.response.data.err)
+      })
   }
 
   const handleClickAccept = () => {

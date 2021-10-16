@@ -1,9 +1,9 @@
-import { CCard, CCardBody, CCardHeader, CCol, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
-import React, { useEffect, useState } from 'react'
-import dangKyApi from 'src/api/dangKyApi';
-import { Link } from "react-router-dom";
 import { cilDelete, cilPenAlt, cilPrint } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
+import { CCard, CCardBody, CCardHeader, CCol, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from "react-router-dom";
+import dangKyApi from 'src/api/dangKyApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
 import _formatDate from 'src/_formatDate';
@@ -18,6 +18,7 @@ export default function index() {
   const [mess, setMess] = useState('')
   const [messCheck, setMessCheck] = useState('')
   const pageRedirect = '/dangky/ds-dangky';
+  const history = useHistory();
 
   const [idCanXoa, setIdCanXoa] = useState('');
 
@@ -36,9 +37,17 @@ export default function index() {
   }, [reload])
 
   const handleClickXoa = (id) => {
-    setVisibleCheck(!visibleCheck);
-    setMessCheck(`hủy đăng ký id ${id}`);
-    setIdCanXoa(id);
+    dangKyApi.checkFK(id)
+      .then(response => {
+        setVisibleCheck(!visibleCheck);
+        setMessCheck(`hủy đăng ký id ${id}`);
+        setIdCanXoa(id);
+      })
+      .catch(error => {
+        setVisible(!visible);
+        setIsSuccess(false);
+        setMess('Lỗi: ' + error.response.data.err)
+      })
   }
 
   const handleClickAccept = () => {
@@ -63,6 +72,19 @@ export default function index() {
         setVisible(!visible);
         setIsSuccess(false);
         setMess('Lỗi: ' + error.response.data.err)
+      })
+  }
+
+  const handleClickLinkSua = (e, pathname, id) => {
+    e.preventDefault();
+    dangKyApi.checkBeforeEdit(id)
+      .then(response => {
+        history.push(pathname);
+      })
+      .catch(error => {
+        setVisible(!visible);
+        setIsSuccess(false);
+        setMess('Lỗi: ' + error.response.data.err);
       })
   }
 
@@ -113,7 +135,10 @@ export default function index() {
                       {dk.MAGVDK.trim() === InfoUserLogin()?.MAGV &&
                         <span>
                           <CTooltip content="Sửa" placement="top">
-                            <Link to={`/dangky/sua-dangky/${dk.IDLMH}`}>
+                            <Link
+                              to={`/dangky/sua-dangky/${dk.IDLMH}`}
+                              onClick={(e) => handleClickLinkSua(e, `/dangky/sua-dangky/${dk.IDLMH}`, dk.IDLMH)}
+                            >
                               <CIcon icon={cilPenAlt} size='lg' />
                             </Link>
                           </CTooltip>

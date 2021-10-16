@@ -26,6 +26,11 @@ const khoaApi = {
     return axiosClient.delete(url);
   },
 
+  checkFK: (id) => {
+    const url = `/faculties/${id}/check`;
+    return axiosClient.get(url);
+  },
+
 }
 
 export default khoaApi;

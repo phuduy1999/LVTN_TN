@@ -21,9 +21,19 @@ const dangKyApi = {
     return axiosClient.delete(url);
   },
 
+  checkFK: (id) => {
+    const url = `/registers/${id}/check`;
+    return axiosClient.get(url);
+  },
+
   updateOne: (id, data) => {
     const url = `/registers/${id}/edit`;
     return axiosClient.put(url, data);
+  },
+
+  checkBeforeEdit: (id) => {
+    const url = `/registers/${id}/check-before-edit`;
+    return axiosClient.get(url);
   },
 
 }
