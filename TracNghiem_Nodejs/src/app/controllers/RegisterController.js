@@ -6,7 +6,7 @@ class RegisterController {
     getAll(req, res, next) {
         sqlConnect.then(pool => {
             return pool.request()
-                .query('select IDLMH, NIENKHOA, HOCKY, NHOM, TENMH, MAGVDK, HO, TEN, TRINHDODK, NGAYTHI, SCT, THOIGIANTHI from LOPMONHOC, MONHOC, GIAOVIEN where LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGVDK=GIAOVIEN.MAGV order by GIAOVIEN.MAGV')
+                .query('select IDLMH, NIENKHOA, HOCKY, NHOM, TENMH, MAGVDK, HO, TEN, TRINHDODK, NGAYTHI, SCT, THOIGIANTHI from LOPMONHOC, MONHOC, GIAOVIEN where LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGVDK=GIAOVIEN.MAGV and TRANGTHAI=1 order by GIAOVIEN.MAGV')
         })
             .then(result => {
                 const arrRecord = result.recordset;
@@ -63,7 +63,7 @@ class RegisterController {
                 .input('nienkhoa', sql.NVarChar(10), req.body.NIENKHOA)
                 .input('mamh', sql.NChar(15), req.body.MAMH)
                 .input('masv', sql.NChar(15), req.body.MASV)
-                .query('exec SP_CHECK_DANGKY @nienkhoa, @mamh, @hk, @nhom, @masv')
+                .query('exec SP_CHECK_DANGKY_LOPMH_SV @nienkhoa, @mamh, @hk, @nhom, @masv')
         })
             .then(result => {
                 const arrRecord = result.recordset;
@@ -72,7 +72,7 @@ class RegisterController {
             }).catch(err => {
                 console.log(err)
                 if (err.message.includes('kotontai')) {
-                    res.status(400).send({ err: 'Không tồn tại thông tin đăng ký thi!' });
+                    res.status(400).send({ err: 'Không tồn tại thông tin đăng ký thi hoặc lớp môn học đã bị hủy!' });
                 }
                 else if (err.message.includes('dathi')) {
                     res.status(400).send({ err: 'Bạn đã thi môn này!' });
@@ -138,7 +138,7 @@ class RegisterController {
         })
             .then(result => {
                 if (result.rowsAffected[0] === 0) {
-                    throw Error('Đăng ký thi không thành công!. Lớp môn học không tồn tại hoặc đã được đăng ký thi trước đó!');
+                    throw Error('Đăng ký thi không thành công!. Lớp môn học không tồn tại, bị hủy hoặc đã được đăng ký thi trước đó!');
                 }
                 res.send(req.body);
             }).catch(err => {
@@ -218,7 +218,7 @@ class RegisterController {
         })
             .then(result => {
                 if (result.rowsAffected[0] === 0) {
-                    throw Error('Sửa đăng ký thi không thành công!');
+                    throw Error('Sửa đăng ký thi không thành công! Lớp môn học đã bị hủy!');
                 }
                 res.send(req.body);
             }).catch(err => {

@@ -7,7 +7,7 @@ class RegisterClassController {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('masv', sql.NChar(15), req.params.id)
-                .query('select * from LOPMONHOC, MONHOC where LOPMONHOC.MAMH=MONHOC.MAMH and IDLMH in (select IDLMH from DANGKY where MASV=@masv) order by NGAYTHI desc');
+                .query('select * from LOPMONHOC, MONHOC where LOPMONHOC.MAMH=MONHOC.MAMH and IDLMH in (select IDLMH from DANGKY where MASV=@masv) and TRANGTHAI=1 order by NGAYTHI desc');
         })
             .then(result => {
                 const arrRecord = result.recordset;
@@ -57,7 +57,7 @@ class RegisterClassController {
             }).catch(err => {
                 console.log(err)
                 if (err.message.includes('kotontai')) {
-                    res.status(400).send({ err: 'Không tồn tại thông tin lớp môn học!' });
+                    res.status(400).send({ err: 'Không tồn tại thông tin lớp môn học hoặc lớp môn học đã bị hủy!' });
                 }
                 else if (err.message.includes('dathi')) {
                     res.status(400).send({ err: 'Lớp môn học đã được thi!' });

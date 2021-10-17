@@ -11,6 +11,11 @@ class ReportController {
         })
             .then(result => {
                 const arrRecord = result.recordset;
+                result.recordsets[1][0].MAMH = result.recordsets[1][0].MAMH.trim();
+                result.recordsets[0].forEach((r) => {
+                    r.MASV = r.MASV.trim();
+                    r.EMAIL = r.EMAIL.trim();
+                })
                 const tables = {
                     SINHVIEN: result.recordsets[0],
                     LOPMONHOC: result.recordsets[1],
@@ -30,6 +35,11 @@ class ReportController {
         })
             .then(result => {
                 const arrRecord = result.recordset;
+                result.recordsets[1][0].MAMH = result.recordsets[1][0].MAMH.trim();
+                result.recordsets[0].forEach((r) => {
+                    r.MASV = r.MASV.trim();
+                    r.EMAIL = r.EMAIL.trim();
+                })
                 const tables = {
                     SINHVIEN: result.recordsets[0],
                     LOPMONHOC: result.recordsets[1],

@@ -6,7 +6,21 @@ class ClassController {
     getAll(req, res, next) {
         sqlConnect.then(pool => {
             return pool.request()
-                .query('select IDLMH, NIENKHOA, HOCKY, NHOM, SOSVTT, TENKH, TENMH, GIAOVIEN.MAGV, HO, TEN from LOPMONHOC, KHOA, MONHOC, GIAOVIEN where LOPMONHOC.MAKH=KHOA.MAKH and LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGV=GIAOVIEN.MAGV')
+                .query('select IDLMH, NIENKHOA, HOCKY, NHOM, SOSVTT, TENKH, TENMH, GIAOVIEN.MAGV, HO, TEN from LOPMONHOC, KHOA, MONHOC, GIAOVIEN where LOPMONHOC.MAKH=KHOA.MAKH and LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGV=GIAOVIEN.MAGV and TRANGTHAI=1')
+        })
+            .then(result => {
+                const arrRecord = result.recordset;
+                res.status(200).send(arrRecord);
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
+    //[GET] /cancel
+    getAllCancel(req, res, next) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .query('select IDLMH, NIENKHOA, HOCKY, NHOM, SOSVTT, TENKH, TENMH, GIAOVIEN.MAGV, HO, TEN from LOPMONHOC, KHOA, MONHOC, GIAOVIEN where LOPMONHOC.MAKH=KHOA.MAKH and LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGV=GIAOVIEN.MAGV and TRANGTHAI=0')
         })
             .then(result => {
                 const arrRecord = result.recordset;
@@ -72,7 +86,7 @@ class ClassController {
                 .input('mamh', sql.NChar(15), req.body.MAMH)
                 .input('magv', sql.NChar(15), req.body.MAGV)
                 .input('tddk', sql.NChar(1), '#')
-                .query('insert into LOPMONHOC(NIENKHOA, HOCKY, NHOM, SOSVTT, MAKH, MAMH, MAGV, TRINHDODK) values (@nienkhoa, @hocky, @nhom, @sosvtt, @makh, @mamh, @magv, @tddk)');
+                .query('insert into LOPMONHOC(NIENKHOA, HOCKY, NHOM, SOSVTT, MAKH, MAMH, MAGV, TRINHDODK, TRANGTHAI) values (@nienkhoa, @hocky, @nhom, @sosvtt, @makh, @mamh, @magv, @tddk, 1)');
         })
             .then(result => {
                 if (result.rowsAffected[0] === 1) {
@@ -212,6 +226,63 @@ class ClassController {
                     res.status(400).send({ err: 'Sinh viên đã đăng ký lớp môn học!' });
                 }
                 else res.status(400).send({ err: err.message });
+            })
+    }
+
+    //[GET] /:id/check-before-cancel
+    checkBeforeCancel(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('idlmh', sql.Int, req.params.id)
+                .execute('SP_CHECK_DANGKY_HUY') //mượn sp
+        })
+            .then(result => {
+                res.status(200).send({ result: 1 });
+            }).catch(err => {
+                console.log(err)
+                if (err.message.includes('dacosvthi')) {
+                    res.status(400).send({ err: 'Lớp môn học đã thi!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
+
+    cancelOne(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('idlmh', sql.Int, req.params.id)
+                .execute('SP_CANCEL_LOPMONHOC')
+        })
+            .then(result => {
+                if (result.rowsAffected[0] === 1) {
+                    res.send({ result: 1 });
+                } else {
+                    throw Error('Hủy lớp môn học không thành công!')
+                }
+            }).catch(err => {
+                console.log(err)
+                if (err.message.includes('dacosvthi')) {
+                    res.status(400).send({ err: 'Lớp môn học đã thi!' });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
+
+    restoreOne(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('idlmh', sql.Int, req.params.id)
+                .query('update LOPMONHOC set TRANGTHAI=1 where IDLMH=@idlmh')
+        })
+            .then(result => {
+                if (result.rowsAffected[0] === 1) {
+                    res.send({ result: 1 });
+                } else {
+                    throw Error('Khôi phục lớp môn học không thành công!')
+                }
+            }).catch(err => {
+                console.log(err)
+                res.status(400).send({ err: err.message });
             })
     }
 }

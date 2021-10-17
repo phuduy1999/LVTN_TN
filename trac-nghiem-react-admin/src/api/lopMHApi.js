@@ -6,6 +6,11 @@ const lopMHApi = {
     return axiosClient.get(url, { params });
   },
 
+  getAllCancel: (params) => {
+    const url = '/classes/cancel';
+    return axiosClient.get(url, { params });
+  },
+
   addOne: (data) => {
     const url = '/classes';
     return axiosClient.post(url, data);
@@ -34,6 +39,21 @@ const lopMHApi = {
   checkBeforeEdit: (id) => {
     const url = `/classes/${id}/check-before-edit`;
     return axiosClient.get(url);
+  },
+
+  checkBeforeCancel: (id) => {
+    const url = `/classes/${id}/check-before-cancel`;
+    return axiosClient.get(url);
+  },
+
+  cancelOne: (id) => {
+    const url = `/classes/${id}/cancel`;
+    return axiosClient.put(url);
+  },
+
+  restoreOne: (id) => {
+    const url = `/classes/${id}/restore`;
+    return axiosClient.put(url);
   },
 
 }

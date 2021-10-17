@@ -4,11 +4,12 @@
   <Dictionary Ref="1" type="Dictionary" isKey="true">
     <BusinessObjects isList="true" count="0" />
     <Databases isList="true" count="1">
-      <response1 Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
-        <Alias>response1</Alias>
-        <Name>response1</Name>
-        <PathData>C:\Users\Administrator\Desktop\response1.json</PathData>
-      </response1>
+      <response Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>response</Alias>
+        <Key />
+        <Name>response</Name>
+        <PathData>C:\Users\Administrator\Desktop\response.json</PathData>
+      </response>
     </Databases>
     <DataSources isList="true" count="2">
       <LOPMONHOC Ref="3" type="DataTableSource" isKey="true">
@@ -26,26 +27,24 @@
           <value>HOTENGV,System.String</value>
         </Columns>
         <Dictionary isRef="1" />
-        <Key>2e4a85520e514b778463337c3ff91dd2</Key>
+        <Key>21f2f5277af54628b61bf3195e8ec72a</Key>
         <Name>LOPMONHOC</Name>
-        <NameInSource>response1.LOPMONHOC</NameInSource>
+        <NameInSource>response.LOPMONHOC</NameInSource>
       </LOPMONHOC>
       <SINHVIEN Ref="4" type="DataTableSource" isKey="true">
         <Alias>SINHVIEN</Alias>
-        <Columns isList="true" count="8">
+        <Columns isList="true" count="6">
           <value>MASV,System.String</value>
           <value>HO,System.String</value>
           <value>TEN,System.String</value>
           <value>NGAYSINH,System.String</value>
           <value>DIACHI,System.String</value>
           <value>EMAIL,System.String</value>
-          <value>DIEM,System.Decimal</value>
-          <value>DIEMCHU,System.String</value>
         </Columns>
         <Dictionary isRef="1" />
-        <Key>78f84be3282640a6bbb9459a82843b3c</Key>
+        <Key>b5534e124eb64092989e808025e31816</Key>
         <Name>SINHVIEN</Name>
-        <NameInSource>response1.SINHVIEN</NameInSource>
+        <NameInSource>response.SINHVIEN</NameInSource>
       </SINHVIEN>
     </DataSources>
     <Relations isList="true" count="0" />
@@ -91,7 +90,7 @@ CƠ SỞ TẠI THÀNH PHỐ HỒ CHÍ MINH</Text>
             <Text2 Ref="8" type="Text" isKey="true">
               <Border>None;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>10.8,0.4,8.2,1</ClientRectangle>
+              <ClientRectangle>10,0.4,9,1</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,11,Bold</Font>
@@ -101,7 +100,7 @@ CƠ SỞ TẠI THÀNH PHỐ HỒ CHÍ MINH</Text>
               <Name>Text2</Name>
               <Page isRef="5" />
               <Parent isRef="6" />
-              <Text>BẢNG ĐIỂM THI KẾT THÚC HỌC PHẦN</Text>
+              <Text>DANH SÁCH KÝ TÊN THI KẾT THÚC HỌC PHẦN</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -166,8 +165,8 @@ ____________________</Text>
         </HeaderBand1>
         <HeaderBand2 Ref="12" type="HeaderBand" isKey="true">
           <Brush>Transparent</Brush>
-          <ClientRectangle>0,6.2,19.01,1</ClientRectangle>
-          <Components isList="true" count="11">
+          <ClientRectangle>0,6.2,19.01,0.8</ClientRectangle>
+          <Components isList="true" count="7">
             <Text6 Ref="13" type="Text" isKey="true">
               <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
@@ -188,7 +187,7 @@ ____________________</Text>
             <Text7 Ref="14" type="Text" isKey="true">
               <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>1,0,3.6,1</ClientRectangle>
+              <ClientRectangle>1,0,4,1</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,10,Bold</Font>
@@ -205,7 +204,7 @@ ____________________</Text>
             <Text8 Ref="15" type="Text" isKey="true">
               <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>4.6,0,2,1</ClientRectangle>
+              <ClientRectangle>5,0,2.6,1</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,10,Bold</Font>
@@ -222,7 +221,7 @@ ____________________</Text>
             <Text9 Ref="16" type="Text" isKey="true">
               <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>6.6,0,1.8,1</ClientRectangle>
+              <ClientRectangle>7.6,0,2.8,1</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,10,Bold</Font>
@@ -239,7 +238,7 @@ ____________________</Text>
             <Text10 Ref="17" type="Text" isKey="true">
               <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>8.4,0,1.4,1</ClientRectangle>
+              <ClientRectangle>10.4,0,2.8,1</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,10,Bold</Font>
@@ -248,7 +247,7 @@ ____________________</Text>
               <Name>Text10</Name>
               <Page isRef="5" />
               <Parent isRef="12" />
-              <Text>Số tờ giấy thi</Text>
+              <Text>Địa chỉ</Text>
               <TextBrush>[0:0:0]</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
@@ -257,7 +256,7 @@ ____________________</Text>
             <Text11 Ref="18" type="Text" isKey="true">
               <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>9.8,0,1.6,1</ClientRectangle>
+              <ClientRectangle>16.6,0,2.4,1</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,10,Bold</Font>
@@ -274,7 +273,7 @@ ____________________</Text>
             <Text12 Ref="19" type="Text" isKey="true">
               <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>11.4,0,1.2,1</ClientRectangle>
+              <ClientRectangle>13.2,0,3.4,1</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,10,Bold</Font>
@@ -283,81 +282,12 @@ ____________________</Text>
               <Name>Text12</Name>
               <Page isRef="5" />
               <Parent isRef="12" />
-              <Text>Số phách</Text>
+              <Text>Email</Text>
               <TextBrush>[0:0:0]</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </Text12>
-            <Text13 Ref="20" type="Text" isKey="true">
-              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>12.6,0,5.2,0.6</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Expressions isList="true" count="0" />
-              <Font>Times New Roman,10,Bold</Font>
-              <HorAlignment>Center</HorAlignment>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text13</Name>
-              <Page isRef="5" />
-              <Parent isRef="12" />
-              <Text>Điểm thi</Text>
-              <TextBrush>[0:0:0]</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Text13>
-            <Text14 Ref="21" type="Text" isKey="true">
-              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>12.6,0.6,1.4,0.4</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Expressions isList="true" count="0" />
-              <Font>Times New Roman,10,Bold</Font>
-              <HorAlignment>Center</HorAlignment>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text14</Name>
-              <Page isRef="5" />
-              <Parent isRef="12" />
-              <Text>Đ.Số</Text>
-              <TextBrush>[0:0:0]</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Text14>
-            <Text15 Ref="22" type="Text" isKey="true">
-              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>14,0.6,3.8,0.4</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Expressions isList="true" count="0" />
-              <Font>Times New Roman,10,Bold</Font>
-              <HorAlignment>Center</HorAlignment>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text15</Name>
-              <Page isRef="5" />
-              <Parent isRef="12" />
-              <Text>Đ.Chữ</Text>
-              <TextBrush>[0:0:0]</TextBrush>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Text15>
-            <Text16 Ref="23" type="Text" isKey="true">
-              <Border>All;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
-              <Brush>Transparent</Brush>
-              <ClientRectangle>17.8,0,1.2,1</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Expressions isList="true" count="0" />
-              <Font>Times New Roman,10,Bold</Font>
-              <HorAlignment>Center</HorAlignment>
-              <Margins>0,0,0,0</Margins>
-              <Name>Text16</Name>
-              <Page isRef="5" />
-              <Parent isRef="12" />
-              <Text>Ghi chú</Text>
-              <TextBrush>[0:0:0]</TextBrush>
-              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
-              <Type>Expression</Type>
-              <VertAlignment>Center</VertAlignment>
-            </Text16>
           </Components>
           <Conditions isList="true" count="0" />
           <Expressions isList="true" count="0" />
@@ -365,13 +295,13 @@ ____________________</Text>
           <Page isRef="5" />
           <Parent isRef="5" />
         </HeaderBand2>
-        <TableSINHVIEN Ref="24" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
+        <TableSINHVIEN Ref="20" type="Stimulsoft.Report.Components.Table.StiTable" isKey="true">
           <Brush>Transparent</Brush>
           <BusinessObjectGuid isNull="true" />
-          <ClientRectangle>0,8,19.01,0.8</ClientRectangle>
-          <ColumnCount>11</ColumnCount>
-          <Components isList="true" count="11">
-            <TableSINHVIEN_Cell1 Ref="25" type="TableCell" isKey="true">
+          <ClientRectangle>0,7.8,19.01,0.8</ClientRectangle>
+          <ColumnCount>8</ColumnCount>
+          <Components isList="true" count="8">
+            <TableSINHVIEN_Cell1 Ref="21" type="TableCell" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>White</Brush>
               <ClientRectangle>0,0,1,0.8</ClientRectangle>
@@ -379,22 +309,22 @@ ____________________</Text>
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
               <HorAlignment>Center</HorAlignment>
-              <ID>8</ID>
+              <ID>6</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
               <Name>TableSINHVIEN_Cell1</Name>
               <Page isRef="5" />
-              <Parent isRef="24" />
+              <Parent isRef="20" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
               <Text>{Line}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </TableSINHVIEN_Cell1>
-            <TableSINHVIEN_Cell2 Ref="26" type="TableCell" isKey="true">
+            <TableSINHVIEN_Cell2 Ref="22" type="TableCell" isKey="true">
               <Border>Top, Left, Bottom;Black;1;Solid;False;4;Black</Border>
               <Brush>White</Brush>
-              <ClientRectangle>1,0,2.4,0.8</ClientRectangle>
+              <ClientRectangle>1,0,2.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
@@ -403,17 +333,17 @@ ____________________</Text>
               <Margins>0,0,0,0</Margins>
               <Name>TableSINHVIEN_Cell2</Name>
               <Page isRef="5" />
-              <Parent isRef="24" />
+              <Parent isRef="20" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
               <Text>{SINHVIEN.HO}</Text>
               <TextBrush>Black</TextBrush>
               <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </TableSINHVIEN_Cell2>
-            <TableSINHVIEN_Cell3 Ref="27" type="TableCell" isKey="true">
+            <TableSINHVIEN_Cell3 Ref="23" type="TableCell" isKey="true">
               <Border>Top, Right, Bottom;Black;1;Solid;False;4;Black</Border>
               <Brush>White</Brush>
-              <ClientRectangle>3.4,0,1.2,0.8</ClientRectangle>
+              <ClientRectangle>3.6,0,1.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
@@ -422,17 +352,17 @@ ____________________</Text>
               <Margins>0,0,0,0</Margins>
               <Name>TableSINHVIEN_Cell3</Name>
               <Page isRef="5" />
-              <Parent isRef="24" />
+              <Parent isRef="20" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
               <Text>{SINHVIEN.TEN}</Text>
               <TextBrush>Black</TextBrush>
               <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </TableSINHVIEN_Cell3>
-            <TableSINHVIEN_Cell4 Ref="28" type="TableCell" isKey="true">
+            <TableSINHVIEN_Cell4 Ref="24" type="TableCell" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>White</Brush>
-              <ClientRectangle>4.6,0,2,0.8</ClientRectangle>
+              <ClientRectangle>5,0,2.6,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
@@ -442,17 +372,17 @@ ____________________</Text>
               <Margins>0,0,0,0</Margins>
               <Name>TableSINHVIEN_Cell4</Name>
               <Page isRef="5" />
-              <Parent isRef="24" />
+              <Parent isRef="20" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
               <Text>{SINHVIEN.MASV}</Text>
               <TextBrush>Black</TextBrush>
               <Type>DataColumn</Type>
               <VertAlignment>Center</VertAlignment>
             </TableSINHVIEN_Cell4>
-            <TableSINHVIEN_Cell5 Ref="29" type="TableCell" isKey="true">
+            <TableSINHVIEN_Cell5 Ref="25" type="TableCell" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>White</Brush>
-              <ClientRectangle>6.6,0,1.8,0.8</ClientRectangle>
+              <ClientRectangle>7.6,0,2.8,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
@@ -462,16 +392,16 @@ ____________________</Text>
               <Margins>0,0,0,0</Margins>
               <Name>TableSINHVIEN_Cell5</Name>
               <Page isRef="5" />
-              <Parent isRef="24" />
+              <Parent isRef="20" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
               <Text>{SINHVIEN.NGAYSINH}</Text>
               <TextBrush>Black</TextBrush>
               <VertAlignment>Center</VertAlignment>
             </TableSINHVIEN_Cell5>
-            <TableSINHVIEN_Cell6 Ref="30" type="TableCell" isKey="true">
+            <TableSINHVIEN_Cell6 Ref="26" type="TableCell" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>White</Brush>
-              <ClientRectangle>8.4,0,1.4,0.8</ClientRectangle>
+              <ClientRectangle>10.4,0,2.8,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
@@ -481,16 +411,16 @@ ____________________</Text>
               <Margins>0,0,0,0</Margins>
               <Name>TableSINHVIEN_Cell6</Name>
               <Page isRef="5" />
-              <Parent isRef="24" />
+              <Parent isRef="20" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SINHVIEN.DIACHI}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </TableSINHVIEN_Cell6>
-            <TableSINHVIEN_Cell7 Ref="31" type="TableCell" isKey="true">
+            <TableSINHVIEN_Cell7 Ref="27" type="TableCell" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>White</Brush>
-              <ClientRectangle>9.8,0,1.6,0.8</ClientRectangle>
+              <ClientRectangle>13.2,0,3.4,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
@@ -500,86 +430,30 @@ ____________________</Text>
               <Margins>0,0,0,0</Margins>
               <Name>TableSINHVIEN_Cell7</Name>
               <Page isRef="5" />
-              <Parent isRef="24" />
+              <Parent isRef="20" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
+              <Text>{SINHVIEN.EMAIL}</Text>
               <TextBrush>Black</TextBrush>
-              <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
             </TableSINHVIEN_Cell7>
-            <TableSINHVIEN_Cell8 Ref="32" type="TableCell" isKey="true">
+            <TableSINHVIEN_Cell8 Ref="28" type="TableCell" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>White</Brush>
-              <ClientRectangle>11.4,0,1.2,0.8</ClientRectangle>
+              <ClientRectangle>16.6,0,2.41,0.8</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
-              <Font>Times New Roman,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>9</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>TableSINHVIEN_Cell8</Name>
-              <Page isRef="5" />
-              <Parent isRef="24" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </TableSINHVIEN_Cell8>
-            <TableSINHVIEN_Cell9 Ref="33" type="TableCell" isKey="true">
-              <Border>All;Black;1;Solid;False;4;Black</Border>
-              <Brush>White</Brush>
-              <ClientRectangle>12.6,0,1.4,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Expressions isList="true" count="0" />
-              <Font>Times New Roman,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>6</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>TableSINHVIEN_Cell9</Name>
-              <Page isRef="5" />
-              <Parent isRef="24" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{SINHVIEN.DIEM}</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </TableSINHVIEN_Cell9>
-            <TableSINHVIEN_Cell10 Ref="34" type="TableCell" isKey="true">
-              <Border>All;Black;1;Solid;False;4;Black</Border>
-              <Brush>White</Brush>
-              <ClientRectangle>14,0,3.8,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Expressions isList="true" count="0" />
-              <Font>Times New Roman,9</Font>
+              <Font>Arial,9</Font>
               <HorAlignment>Center</HorAlignment>
               <ID>7</ID>
               <JoinCells isList="true" count="0" />
               <Margins>0,0,0,0</Margins>
-              <Name>TableSINHVIEN_Cell10</Name>
+              <Name>TableSINHVIEN_Cell8</Name>
               <Page isRef="5" />
-              <Parent isRef="24" />
-              <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
-              <Text>{SINHVIEN.DIEMCHU}</Text>
-              <TextBrush>Black</TextBrush>
-              <VertAlignment>Center</VertAlignment>
-            </TableSINHVIEN_Cell10>
-            <TableSINHVIEN_Cell11 Ref="35" type="TableCell" isKey="true">
-              <Border>All;Black;1;Solid;False;4;Black</Border>
-              <Brush>White</Brush>
-              <ClientRectangle>17.8,0,1.21,0.8</ClientRectangle>
-              <Conditions isList="true" count="0" />
-              <Expressions isList="true" count="0" />
-              <Font>Times New Roman,9</Font>
-              <HorAlignment>Center</HorAlignment>
-              <ID>10</ID>
-              <JoinCells isList="true" count="0" />
-              <Margins>0,0,0,0</Margins>
-              <Name>TableSINHVIEN_Cell11</Name>
-              <Page isRef="5" />
-              <Parent isRef="24" />
+              <Parent isRef="20" />
               <Restrictions>AllowMove, AllowSelect, AllowChange</Restrictions>
               <TextBrush>Black</TextBrush>
               <VertAlignment>Center</VertAlignment>
-            </TableSINHVIEN_Cell11>
+            </TableSINHVIEN_Cell8>
           </Components>
           <Conditions isList="true" count="0" />
           <DataSourceName>SINHVIEN</DataSourceName>
@@ -587,7 +461,7 @@ ____________________</Text>
           <Filters isList="true" count="0" />
           <MinHeight>0.2</MinHeight>
           <Name>TableSINHVIEN</Name>
-          <NumberID>11</NumberID>
+          <NumberID>8</NumberID>
           <Page isRef="5" />
           <Parent isRef="5" />
           <RowCount>1</RowCount>
@@ -616,10 +490,10 @@ ____________________</Text>
   </ReferencedAssemblies>
   <ReportAlias>Report2</ReportAlias>
   <ReportAuthor>Phu Duy</ReportAuthor>
-  <ReportChanged>10/17/2021 8:17:27 PM</ReportChanged>
+  <ReportChanged>10/17/2021 8:17:51 PM</ReportChanged>
   <ReportCreated>10/17/2021 3:20:14 AM</ReportCreated>
-  <ReportFile>C:\Users\Administrator\Desktop\TOTNGHIEP\trac-nghiem-react-admin\public\reportsTemplate\Report_BANGDIEM.mrt</ReportFile>
-  <ReportGuid>69c3524e7a2a442995fe15f51b687ab0</ReportGuid>
+  <ReportFile>C:\Users\Administrator\Desktop\TOTNGHIEP\trac-nghiem-react-admin\public\reportsTemplate\Report_DSKYTEN_NEW.mrt</ReportFile>
+  <ReportGuid>c9963129663944fe94fc57514ea64896</ReportGuid>
   <ReportName>Report2</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
   <ReportVersion>2021.4.1.0</ReportVersion>

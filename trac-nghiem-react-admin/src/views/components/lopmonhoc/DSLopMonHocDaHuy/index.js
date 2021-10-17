@@ -1,8 +1,8 @@
-import { cilArrowRight, cilBan, cilDelete, cilList, cilPenAlt } from '@coreui/icons';
+import { cilArrowLeft, cilDelete, cilHistory, cilList } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
 import { CCard, CCardBody, CCardHeader, CCol, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import lopMHApi from 'src/api/lopMHApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
@@ -13,19 +13,18 @@ export default function index() {
   const [visible, setVisible] = useState(false)
   const [visibleCheck, setVisibleCheck] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [isDelete, setIsDelete] = useState(true)
   const [reload, setReload] = useState(false)
   const [mess, setMess] = useState('')
   const [messCheck, setMessCheck] = useState('')
-  const [isDelete, setIsDelete] = useState(true)
-  const pageRedirect = '/lopmonhoc/ds-lopmonhoc';
-  const history = useHistory();
+  const pageRedirect = '/lopmonhoc/ds-lopmonhoc-dahuy';
 
   const [idCanXoa, setIdCanXoa] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await lopMHApi.getAll();
+        const response = await lopMHApi.getAllCancel();
         setDS(response);
         console.log(response);
       } catch (error) {
@@ -51,19 +50,11 @@ export default function index() {
       })
   }
 
-  const handleClickHuy = (id) => {
-    lopMHApi.checkBeforeCancel(id)
-      .then(response => {
-        setVisibleCheck(!visibleCheck);
-        setMessCheck(`hủy lớp môn học có id là ${id}`);
-        setIdCanXoa(id);
-        setIsDelete(false);
-      })
-      .catch(error => {
-        setVisible(!visible);
-        setIsSuccess(false);
-        setMess('Lỗi: ' + error.response.data.err)
-      })
+  const handleClickKhoiPhuc = (id) => {
+    setVisibleCheck(!visibleCheck);
+    setMessCheck(`khôi phục lớp môn học có id là ${id}`);
+    setIdCanXoa(id);
+    setIsDelete(false);
   }
 
   const handleClickAccept = () => {
@@ -92,17 +83,17 @@ export default function index() {
         })
     }
     else {
-      lopMHApi.cancelOne(idCanXoa)
+      lopMHApi.restoreOne(idCanXoa)
         .then(response => {
           console.log(response);
           if (response.result === 0) {
-            throw Error('không hủy được!');
+            throw Error('không khôi phục được!');
           }
 
           setVisible(!visible);
           setIsSuccess(true);
           setReload(!reload);
-          setMess('Hủy lớp môn học thành công!')
+          setMess('Khôi phục lớp môn học thành công!')
         })
         .catch(error => {
           console.log(error.response);
@@ -114,30 +105,17 @@ export default function index() {
     }
   }
 
-  const handleClickLinkSua = (e, pathname, id) => {
-    e.preventDefault();
-    lopMHApi.checkBeforeEdit(id)
-      .then(response => {
-        history.push(pathname);
-      })
-      .catch(error => {
-        setVisible(!visible);
-        setIsSuccess(false);
-        setMess('Lỗi: ' + error.response.data.err);
-      })
-  }
-
   return (
     <CCol xs={12}>
       <CCard className="mb-4">
         <CCardHeader>
-          <strong>Danh sách lớp môn học</strong>
+          <strong>Danh sách lớp môn học đã hủy</strong>
         </CCardHeader>
         <CCardBody>
-          <CCol xs={12} className="text-end">
-            <Link to="/lopmonhoc/ds-lopmonhoc-dahuy" >
-              <span>Danh sách lớp môn học đã hủy   </span>
-              <CIcon icon={cilArrowRight} />
+          <CCol xs={12} className="text-start">
+            <Link to="/lopmonhoc/ds-lopmonhoc" >
+              <CIcon icon={cilArrowLeft} />
+              <span>   Quay lại</span>
             </Link>
           </CCol>
           <CTable striped hover className="mt-3">
@@ -176,23 +154,14 @@ export default function index() {
                     <span>   </span>
                     {InfoUserLogin()?.MANQ === 'PGV' &&
                       <span>
-                        <CTooltip content="Sửa" placement="top" className='me-3'>
-                          <Link
-                            to={`/lopmonhoc/sua-lopmonhoc/${lmh.IDLMH}`}
-                            onClick={(e) => handleClickLinkSua(e, `/lopmonhoc/sua-lopmonhoc/${lmh.IDLMH}`, lmh.IDLMH)}
-                          >
-                            <CIcon icon={cilPenAlt} size='lg' />
-                          </Link>
-                        </CTooltip>
-                        <span>   </span>
                         <CTooltip content="Xóa" placement="top" className='me-3'>
                           <CIcon onClick={() => handleClickXoa(lmh.IDLMH)}
                             icon={cilDelete} size='lg' />
                         </CTooltip>
                         <span>   </span>
-                        <CTooltip content="Hủy" placement="right" className='me-3'>
-                          <CIcon onClick={() => handleClickHuy(lmh.IDLMH)}
-                            icon={cilBan} size='lg' />
+                        <CTooltip content="Khôi phục" placement="right" className='me-3'>
+                          <CIcon onClick={() => handleClickKhoiPhuc(lmh.IDLMH)}
+                            icon={cilHistory} size='lg' />
                         </CTooltip>
                       </span>
                     }

@@ -5,7 +5,7 @@ import reportApi from 'src/api/reportApi';
 
 export default function index() {
   const { id } = useParams();
-  const reportTemplate = 'Report_DSKYTEN.mrt';
+  const reportTemplate = 'Report_DSKYTEN_NEW.mrt';
   const [data, setData] = useState({});
 
   useEffect(() => {

@@ -236,7 +236,7 @@ const getListCauHoi = (data, t) => {
     })
 
     let vt = t.cot + headers.length;
-    for (let j = vt; j < data[i].length; j++) {
+    for (let j = vt; j < vt + 4; j++) {
       cauhoi[String.fromCharCode(65 + j - vt)] = _chuanHoaChuoi(data[i][j].toString());
     }
 

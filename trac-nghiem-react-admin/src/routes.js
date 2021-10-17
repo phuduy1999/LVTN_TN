@@ -14,6 +14,7 @@ const ThemMonHoc = React.lazy(() => import('./views/components/monhoc/ThemMonHoc
 const SuaMonHoc = React.lazy(() => import('./views/components/monhoc/SuaMonHoc'))
 
 const DSLopMonHoc = React.lazy(() => import('./views/components/lopmonhoc/DSLopMonHoc'))
+const DSLopMonHocDaHuy = React.lazy(() => import('./views/components/lopmonhoc/DSLopMonHocDaHuy'))
 const ThemLopMonHoc = React.lazy(() => import('./views/components/lopmonhoc/ThemLopMonHoc'))
 const SuaLopMonHoc = React.lazy(() => import('./views/components/lopmonhoc/SuaLopMonHoc'))
 const DSSinhVienLMH = React.lazy(() => import('./views/components/lopmonhoc/DSSinhVienLMH'))
@@ -59,6 +60,7 @@ const routes = [
   //LOPMONHOC
   { path: '/lopmonhoc', name: 'Lớp môn học', component: DSLopMonHoc, exact: true },
   { path: '/lopmonhoc/ds-lopmonhoc', name: 'Danh sách lớp môn học', component: DSLopMonHoc },
+  { path: '/lopmonhoc/ds-lopmonhoc-dahuy', name: 'Danh sách lớp môn học đã hủy', component: DSLopMonHocDaHuy },
   { path: '/lopmonhoc/them-lopmonhoc', name: 'Thêm mới lớp môn học', component: ThemLopMonHoc },
   { path: '/lopmonhoc/sua-lopmonhoc/:id', name: 'Sửa lớp môn học', component: SuaLopMonHoc },
   { path: '/lopmonhoc/ds-sinhvien/:id', name: 'Danh sách sinh viên lớp môn học', component: DSSinhVienLMH },

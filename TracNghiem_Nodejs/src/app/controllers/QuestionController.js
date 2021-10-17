@@ -47,7 +47,7 @@ const getListCauHoi = (data, t) => {
     cauhoi.CAC_LUA_CHON = [];
     if (cauhoi.MALOAICH === 'NLC') {
       let vt = t.cot + headers.length;
-      for (let j = vt; j < data[i].length; j++) {
+      for (let j = vt; j < vt + 4; j++) {
         if (data[i][j] === '') break;
 
         cauhoi.CAC_LUA_CHON.push({
