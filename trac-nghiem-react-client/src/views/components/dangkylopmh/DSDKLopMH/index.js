@@ -1,6 +1,7 @@
 import { CCard, CCardBody, CCardFooter, CCardText, CCardTitle, CCol, CRow } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
 import dangKyLopMHApi from 'src/api/dangKyLopMHApi';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [ds, setDS] = useState([]);
@@ -8,7 +9,7 @@ export default function index() {
   useEffect(() => {
     const fetchDS = async () => {
       try {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = InfoUserLogin();
         const response = await dangKyLopMHApi.getLMHdaDK(user.MASV);
         setDS(response);
         console.log(response);

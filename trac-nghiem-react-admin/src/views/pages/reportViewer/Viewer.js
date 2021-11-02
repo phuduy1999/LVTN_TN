@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-export default function Viewer({ data, reportTemplate }) {
+export default function Viewer({ data, reportTemplate, title }) {
 
   useEffect(() => {
     if (data === {}) return;
@@ -25,6 +25,9 @@ export default function Viewer({ data, reportTemplate }) {
     // dataSet.readJsonFile(window.location.origin + "/reportsTemplate/Demo.json");
     console.log("...........", dataSet);
     report.dictionary.databases.clear();
+    if (title) {
+      report.dictionary.variables.getByName("title").valueObject = title;
+    }
     report.regData("Demo", "Demo", dataSet);
 
     console.log(

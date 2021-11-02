@@ -3,23 +3,25 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import dangKyApi from 'src/api/dangKyApi';
-import ghiBaiThiApi from 'src/api/ghiBaiThiApi';
-import sinhVienApi from 'src/api/sinhVienApi';
+import monHocApi from 'src/api/monHocApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import CauHoiDK from '../../cauhoi/DienKhuyet';
 import CauHoiNLC from '../../cauhoi/NhieuLuaChon';
-import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
-  const { id } = useParams();
+  const { td, tg, sct, mamh } = useParams();
   const [visible, setVisible] = useState(false)
   const [visible1, setVisible1] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [mess, setMess] = useState(false)
 
-  const [thongTin, setThongTin] = useState([]);
+  const [thongTin, setThongTin] = useState({
+    TRINHDODK: td,
+    THOIGIANTHI: tg,
+    SCT: sct,
+    MAMH: mamh,
+  });
   const [dsch, setDSCH] = useState([]);
-  const [sv, setSV] = useState({});
   const [dslc, setDSLC] = useState([]);
 
   const [timeTring, setTimeString] = useState('');
@@ -28,7 +30,7 @@ export default function index() {
 
   const pageRedirect = '/lich-su-thi';
 
-  const handleDongYNopBai = async () => {
+  const handleDongYNopBai = () => {
     setVisible(!visible);
     let soCauDung = 0;
     for (let i = 0; i < dsch.length; i++) {
@@ -36,54 +38,31 @@ export default function index() {
         soCauDung++;
       }
     }
-    //ghi điểm
+
     let diem = Math.round(((soCauDung / thongTin.SCT) + Number.EPSILON) * 10 * 100) / 100
 
-    try {
-      const arr = dsch.map((ch, idx) => {
-        return {
-          IDCAUHOI: ch.IDCAUHOI,
-          STT: (idx + 1),
-          LUACHONSV: dslc[idx],
-        }
-      })
-      arr.push({
-        MASV: sv.MASV,
-        IDLMH: id,
-        DIEM: diem,
-      })
-      const response = await ghiBaiThiApi.recordMark(arr)
-      console.log(response);
-
-      setVisible1(!visible1);
-      setIsSuccess(true);
-      let strTimeOut = '';
-      if (isTimeOut) strTimeOut += 'Hết giờ!';
-      setMess(`${strTimeOut} Bạn đã hoàn thành bài thi với số điểm là ${diem} !`);
-    } catch (error) {
-      console.log(error);
-      setVisible1(!visible1);
-      setMess('Lỗi ghi điểm');
-    }
+    setVisible1(!visible1);
+    setIsSuccess(true);
+    let strTimeOut = '';
+    if (isTimeOut) strTimeOut += 'Hết giờ!';
+    setMess(`${strTimeOut} Bạn đã hoàn thành bài thi với số điểm là ${diem} !`);
   }
 
   useEffect(() => {
     const fetchDS = async () => {
       try {
-        const response = await dangKyApi.getOne(id);
-        const response1 = await dangKyApi.getQuestions({
-          TRINHDODK: response.TRINHDODK,
-          SCT: response.SCT,
-          MAMH: response.MAMH,
+        const response1 = await monHocApi.getOne(mamh);
+        setThongTin({ ...thongTin, TENMH: response1.TENMH });
+        const response = await dangKyApi.getQuestions({
+          TRINHDODK: td,
+          SCT: sct,
+          MAMH: mamh,
         });
-        const response2 = await sinhVienApi.getOneByEmail(InfoUserLogin().EMAIL);
         let ds_luaChon = [];
-        for (let i = 0; i < response.SCT; i++) {
+        for (let i = 0; i < sct; i++) {
           ds_luaChon.push('');
         }
-        setThongTin(response);
-        setDSCH(response1);
-        setSV(response2);
+        setDSCH(response);
         setDSLC(ds_luaChon);
       } catch (error) {
         console.log(error);
@@ -133,10 +112,6 @@ export default function index() {
     setVisible(!visible);
   }
 
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
   return (
     <CRow>
       <CCol md={12}>
@@ -148,35 +123,20 @@ export default function index() {
             <CTable bordered>
               <CTableBody>
                 <CTableRow>
-                  <CTableHeaderCell scope="row">Sinh viên:</CTableHeaderCell>
-                  <CTableDataCell>Mã sinh viên: {sv.MASV}</CTableDataCell>
-                  <CTableDataCell>Họ tên: {sv.HO + " " + sv.TEN}</CTableDataCell>
-                  <CTableDataCell>Ngày sinh: {sv.NGAYSINH && sv.NGAYSINH.slice(8, 10) + "/" +
-                    sv.NGAYSINH.slice(5, 7) + "/" + sv.NGAYSINH.slice(0, 4)}</CTableDataCell>
-                </CTableRow>
-                <CTableRow>
-                  <CTableHeaderCell scope="row">Lớp môn học:</CTableHeaderCell>
-                  <CTableDataCell>Niên khóa: {thongTin.NIENKHOA}</CTableDataCell>
-                  <CTableDataCell>Học kỳ: {thongTin.HOCKY}</CTableDataCell>
-                  <CTableDataCell>Nhóm: {thongTin.NHOM}</CTableDataCell>
-                </CTableRow>
-                <CTableRow>
                   <CTableHeaderCell scope="row">Môn thi:</CTableHeaderCell>
-                  <CTableDataCell >{thongTin.TENMH}</CTableDataCell>
-                  <CTableDataCell colSpan="2">Trình độ đăng ký thi: {thongTin.TRINHDODK}</CTableDataCell>
+                  <CTableDataCell>{thongTin.TENMH}</CTableDataCell>
                 </CTableRow>
                 <CTableRow>
-                  <CTableHeaderCell scope="row">Ngày thi:</CTableHeaderCell>
-                  <CTableDataCell colSpan="3">{thongTin.NGAYTHI && thongTin.NGAYTHI.slice(8, 10) + "/" +
-                    thongTin.NGAYTHI.slice(5, 7) + "/" + thongTin.NGAYTHI.slice(0, 4)}</CTableDataCell>
+                  <CTableHeaderCell scope="row">Trình độ đăng ký thi:</CTableHeaderCell>
+                  <CTableDataCell>{thongTin.TRINHDODK}</CTableDataCell>
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell scope="row">Thời gian thi:</CTableHeaderCell>
-                  <CTableDataCell colSpan="3">{thongTin.THOIGIANTHI} phút</CTableDataCell>
+                  <CTableDataCell>{thongTin.THOIGIANTHI} phút</CTableDataCell>
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell scope="row">Số câu thi:</CTableHeaderCell>
-                  <CTableDataCell colSpan="3">{thongTin.SCT}</CTableDataCell>
+                  <CTableDataCell>{thongTin.SCT}</CTableDataCell>
                 </CTableRow>
               </CTableBody>
             </CTable>
@@ -250,7 +210,7 @@ export default function index() {
           <CButton id='dong-y-nop-bai' color="primary" onClick={() => handleDongYNopBai()}>Đồng ý</CButton>
         </CModalFooter>
       </CModal>
-      <AppModalCustom visible={visible1} handleSetVisible={handleSetVisible}
+      <AppModalCustom visible={visible1} handleSetVisible={() => setVisible(false)}
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
     </CRow>
   )

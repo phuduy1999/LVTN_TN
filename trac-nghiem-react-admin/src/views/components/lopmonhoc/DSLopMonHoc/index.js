@@ -1,6 +1,6 @@
 import { cilArrowRight, cilBan, cilDelete, cilList, cilPenAlt } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
-import { CCard, CCardBody, CCardHeader, CCol, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
+import { CButton, CCard, CCardBody, CCardHeader, CCol, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import lopMHApi from 'src/api/lopMHApi';
@@ -206,6 +206,15 @@ export default function index() {
               }
             </CTableBody>
           </CTable>
+          <div className="d-grid gap-2 col-2 mx-auto mt-4">
+            <Link to={`/report/lopmonhoc/1`} target='_blank'>
+              <CTooltip content="Danh sách lớp môn học đã mở" placement="right" className='me-3'>
+                <CButton color="secondary" variant="outline">
+                  In danh sách
+                </CButton>
+              </CTooltip>
+            </Link>
+          </div>
         </CCardBody>
       </CCard>
       <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}

@@ -16,9 +16,10 @@ import {
 import React, { useState } from 'react'
 import AppModalCustom from 'src/components/AppModalCustom'
 import loginApi from 'src/api/loginApi'
+import InfoUserLogin from 'src/_infoUser';
 
 const ChangePassword = () => {
-  const [emailLogin, setEmailLogin] = useState(localStorage.getItem('EMAIL'));
+  const [emailLogin, setEmailLogin] = useState(InfoUserLogin().EMAIL);
   const [oldPass, setOldPass] = useState('');
   const [newPass, setNewPass] = useState('');
   const [newPassRepeat, setNewPassRepeat] = useState('');

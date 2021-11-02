@@ -2,6 +2,7 @@ import { CCard, CCardBody, CCardFooter, CCardText, CCardTitle, CCol, CRow } from
 import React, { useEffect, useState } from 'react';
 import lichSuThiApi from 'src/api/lichSuThiApi';
 import { Link } from 'react-router-dom'
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [ds, setDS] = useState([]);
@@ -9,7 +10,7 @@ export default function index() {
   useEffect(() => {
     const fetchDS = async () => {
       try {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = InfoUserLogin();
         const response = await lichSuThiApi.getLichSuThi({
           MASV: user.MASV,
         });

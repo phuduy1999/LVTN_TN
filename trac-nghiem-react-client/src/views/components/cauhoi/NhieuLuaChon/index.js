@@ -8,7 +8,6 @@ export default function index(props) {
   const [ds, setDS] = useState(cauhoi.LUACHON);//danh sách lựa chọn
   const [isDaChon, setIsDaChon] = useState(false);
 
-
   return (
     <div id={`cau-hoi-${idx + 1}`}>
       <CRow>

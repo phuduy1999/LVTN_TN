@@ -5,6 +5,7 @@ const roleTeacher = require('../app/middlewares/roleTeacher');
 const registerController = require('../app/controllers/RegisterController');
 
 router.post('/check-register', registerController.checkRegister);
+router.post('/check-trial-register', roleTeacher, registerController.checkTrialRegister);
 router.post('/get-questions', registerController.getQuestions);
 router.post('/', roleTeacher, registerController.addOne);
 router.delete('/:id', roleTeacher, registerController.deleteOne);

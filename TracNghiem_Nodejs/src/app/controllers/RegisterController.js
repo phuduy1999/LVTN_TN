@@ -90,6 +90,27 @@ class RegisterController {
             })
     }
 
+    //[GET] /check-trial-register
+    checkTrialRegister(req, res, next) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('sct', sql.Int, req.body.SCT)
+                .input('tg', sql.Int, req.body.THOIGIANTHI)
+                .input('mamh', sql.NChar(15), req.body.MAMH)
+                .input('td', sql.NChar(1), req.body.TRINHDODK)
+                .execute('SP_CHECK_DANGKY_THITHU')
+        })
+            .then(result => {
+                res.status(200).send(result);
+            }).catch(err => {
+                if (err.message.includes('sctkd')) {
+                    let soCau = err.message.split(' ')[err.message.split(' ').length - 1];
+                    res.status(400).send({ err: 'Không đủ số câu thi cùng trình độ!. Số câu tối đa là ' + soCau });
+                }
+                else res.status(400).send({ err: err.message });
+            })
+    }
+
     //[POST] /
     addOne(req, res, next) {
         const schema = Joi.object({

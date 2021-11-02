@@ -1,10 +1,8 @@
-import React from 'react'
-import { NavLink, useHistory, useLocation } from 'react-router-dom'
-import PropTypes from 'prop-types'
-
-import { CBadge } from '@coreui/react'
-
-import jwt_decode from "jwt-decode";
+import { CBadge } from '@coreui/react';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import InfoUserLogin from 'src/_infoUser';
 
 export const AppSidebarNav = ({ items }) => {
   const location = useLocation()
@@ -60,7 +58,7 @@ export const AppSidebarNav = ({ items }) => {
   let toArr = []; // items
   let idArr = []; // titles
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = InfoUserLogin();
   if (user && user.accessToken) {
     if (user.MANQ === 'PGV' || user.MANQ === 'GV') {
       toArr = ['/thi-thu'];

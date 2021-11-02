@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import monHocApi from 'src/api/monHocApi';
 import dangKyApi from 'src/api/dangKyApi';
 import AppModalCustom from 'src/components/AppModalCustom';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [nienkhoa, setNienKhoa] = useState('');
@@ -31,7 +32,7 @@ export default function index() {
         HOCKY: hocky,
         NHOM: nhom,
         MAMH: mamh,
-        MASV: localStorage.getItem('MASV'),
+        MASV: InfoUserLogin().MASV,
       })
         .then(function (response) {
           console.log(response);

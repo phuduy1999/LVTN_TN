@@ -6,6 +6,7 @@ import './scss/style.scss';
 import InfoUserLogin from 'src/_infoUser';
 import DSKyTen from './views/components/report/DSKyTen';
 import BangDiem from './views/components/report/BangDiem';
+import LopMonHoc from './views/components/report/LopMonHoc';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -31,7 +32,6 @@ const App = () => {
   const pageRedirect = '/login';
 
   const handleLogout = () => {
-
     if (!InfoUserLogin()) return;
     loginApi.logout({
       refreshToken: InfoUserLogin().refreshToken,
@@ -96,6 +96,10 @@ const App = () => {
             path="/report/bangdiem/:id"
             name="Report Page"
             render={(props) => <BangDiem {...props} />} />
+          <Route
+            path="/report/lopmonhoc/:status"
+            name="Report Page"
+            render={(props) => <LopMonHoc {...props} />} />
           {/* report route */}
           <Route
             path="/"

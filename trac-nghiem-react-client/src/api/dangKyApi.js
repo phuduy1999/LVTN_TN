@@ -17,6 +17,11 @@ const dangKyApi = {
     const url = '/registers/check-register';
     return axiosClient.post(url, data);
   },
+
+  checkTrialRegister: (data) => {
+    const url = '/registers/check-trial-register';
+    return axiosClient.post(url, data);
+  },
 }
 
 export default dangKyApi;

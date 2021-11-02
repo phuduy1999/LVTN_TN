@@ -7,6 +7,7 @@ import lichSuThiApi from 'src/api/lichSuThiApi';
 import sinhVienApi from 'src/api/sinhVienApi';
 import CauHoiDK from '../../cauhoi/DienKhuyet';
 import CauHoiNLC from '../../cauhoi/NhieuLuaChon';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const { id, diem } = useParams();
@@ -22,22 +23,21 @@ export default function index() {
     const fetchDS = async () => {
       try {
         const response = await dangKyApi.getOne(id);
-        setThongTin(response);
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = InfoUserLogin();
         const response2 = await sinhVienApi.getOneByEmail(user.EMAIL);
-        setSV(response2);
         const response1 = await lichSuThiApi.getQuestionsHistory({
           IDLMH: id,
           MASV: user.MASV,
         });
-        setDSCH(response1);
-        console.log(response, response1, response2);
         let ds_luaChon = [];
         let ds_dapAn = [];
         for (let i = 0; i < response1.length; i++) {
           ds_luaChon.push(response1[i].LUACHONSV);
           ds_dapAn.push(response1[i].DAP_AN);
         }
+        setThongTin(response);
+        setDSCH(response1);
+        setSV(response2);
         setDSLC(ds_luaChon);
         setDSDA(ds_dapAn);
         console.log(ds_luaChon, ds_dapAn);

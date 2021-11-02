@@ -2,7 +2,9 @@ import React from 'react'
 
 //PHAN MEM THI TRAC NGHIEM
 const ChuanBiThi = React.lazy(() => import('./views/components/thi/ChuanBiThi'))
+const ChuanBiThiThu = React.lazy(() => import('./views/components/thi/ChuanBiThiThu'))
 const BatDauThi = React.lazy(() => import('./views/components/thi/BatDauThi'))
+const BatDauThiThu = React.lazy(() => import('./views/components/thi/BatDauThiThu'))
 const DangKyLopMH = React.lazy(() => import('./views/components/dangkylopmh/DKLopMH'))
 const DSDKLopMH = React.lazy(() => import('./views/components/dangkylopmh/DSDKLopMH'))
 const DSBaiThiDaThi = React.lazy(() => import('./views/components/lichsuthi/DSBaiThiDaThi'))
@@ -16,7 +18,8 @@ const routes = [
 
   // PM THI TRAC NGHIEM
   //THI-THU
-  { path: '/thi-thu', name: 'Thi thử', component: ChuanBiThi, exact: true },
+  { path: '/thi-thu', name: 'Thi thử', component: ChuanBiThiThu, exact: true },
+  { path: '/thi-thu/:td/:tg/:sct/:mamh', name: 'Thi thử TN', component: BatDauThiThu, exact: true },
   //THI
   { path: '/thi', name: 'Chuẩn bị thi', component: ChuanBiThi, exact: true },
   { path: '/thi/:id', name: 'Thi trắc nghiệm', component: BatDauThi, exact: true },

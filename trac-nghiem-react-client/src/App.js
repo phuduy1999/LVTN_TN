@@ -1,8 +1,9 @@
-import React, { Component, useEffect, useState } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import './scss/style.scss'
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import loginApi from 'src/api/loginApi';
-import AppModalCustom from 'src/components/AppModalCustom'
+import AppModalCustom from 'src/components/AppModalCustom';
+import './scss/style.scss';
+import InfoUserLogin from 'src/_infoUser';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -26,10 +27,9 @@ const App = () => {
   const pageRedirect = '/login';
 
   const handleLogout = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) return;
+    if (!InfoUserLogin()) return;
     loginApi.logout({
-      refreshToken: user.refreshToken,
+      refreshToken: InfoUserLogin().refreshToken,
     })
       .then(function (response) {
         localStorage.removeItem("user");

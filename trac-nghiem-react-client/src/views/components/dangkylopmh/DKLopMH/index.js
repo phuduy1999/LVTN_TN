@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import monHocApi from 'src/api/monHocApi';
 import dangKyLopMHApi from 'src/api/dangKyLopMHApi';
 import AppModalCustom from 'src/components/AppModalCustom';
+import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [nienkhoa, setNienKhoa] = useState('');
@@ -26,7 +27,7 @@ export default function index() {
     else {
       setIsPending(true);
 
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = InfoUserLogin();
 
       dangKyLopMHApi.registerClass({
         NIENKHOA: nienkhoa,
