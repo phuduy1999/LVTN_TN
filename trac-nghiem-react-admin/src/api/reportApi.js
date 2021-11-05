@@ -15,6 +15,11 @@ const reportApi = {
     const url = `/reports/list-class-opened/${status}`;
     return axiosClient.get(url);
   },
+
+  getCTBT: (data) => {
+    const url = `/reports/questions-history`;
+    return axiosClient.post(url, data);
+  },
 }
 
 export default reportApi;

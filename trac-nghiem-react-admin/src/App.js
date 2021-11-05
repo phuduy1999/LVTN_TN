@@ -7,6 +7,7 @@ import InfoUserLogin from 'src/_infoUser';
 import DSKyTen from './views/components/report/DSKyTen';
 import BangDiem from './views/components/report/BangDiem';
 import LopMonHoc from './views/components/report/LopMonHoc';
+import CTBT from './views/components/report/CTBT';
 
 const loading = (
   <div className="pt-3 text-center">
@@ -100,6 +101,10 @@ const App = () => {
             path="/report/lopmonhoc/:status"
             name="Report Page"
             render={(props) => <LopMonHoc {...props} />} />
+          <Route
+            path="/report/lopmonhoc-sv/:idlmh/:masv"
+            name="Report Page"
+            render={(props) => <CTBT {...props} />} />
           {/* report route */}
           <Route
             path="/"

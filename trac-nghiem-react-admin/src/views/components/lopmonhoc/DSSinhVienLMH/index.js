@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import sinhVienApi from 'src/api/sinhVienApi';
 import monHocApi from 'src/api/monHocApi';
 import lopMHApi from 'src/api/lopMHApi';
+import { cilPrint } from '@coreui/icons';
+import CIcon from '@coreui/icons-react';
 
 export default function index() {
   const { id } = useParams();
@@ -121,6 +123,7 @@ export default function index() {
                   <CTableHeaderCell scope="col">Địa chỉ</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Email</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Điểm</CTableHeaderCell>
+                  <CTableHeaderCell scope="col" className='text-center'>Chức năng</CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>
@@ -135,6 +138,13 @@ export default function index() {
                     <CTableDataCell>{sv.DIACHI}</CTableDataCell>
                     <CTableDataCell>{sv.EMAIL}</CTableDataCell>
                     <CTableDataCell>{sv.DIEM}</CTableDataCell>
+                    <CTableDataCell className='text-center'>
+                      <CTooltip content="Chi tiết bài thi" placement="right" className='me-3'>
+                        <Link to={`/report/lopmonhoc-sv/${id}/${sv.MASV}`} target='_blank'>
+                          <CIcon icon={cilPrint} size='lg' />
+                        </Link>
+                      </CTooltip>
+                    </CTableDataCell>
                   </CTableRow>
                 )))}
                 {ds.length === 0 &&

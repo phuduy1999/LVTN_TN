@@ -196,7 +196,7 @@ class StudentController {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('idlmh', sql.Int, req.params.id)
-                .query('select SINHVIEN.MASV, HO, TEN, NGAYSINH, DIACHI, EMAIL, DIEM from SINHVIEN, DANGKY where SINHVIEN.MASV=DANGKY.MASV and IDLMH=@idlmh')
+                .query('select SINHVIEN.MASV, HO, TEN, NGAYSINH, DIACHI, EMAIL, ROUND(DIEM * 2, 0) / 2 as DIEM from SINHVIEN, DANGKY where SINHVIEN.MASV=DANGKY.MASV and IDLMH=@idlmh')
         })
             .then(result => {
                 const arrRecord = result.recordset;

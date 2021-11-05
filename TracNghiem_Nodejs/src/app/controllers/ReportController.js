@@ -74,22 +74,20 @@ class ReportController {
             return pool.request()
                 .input('idlmh', sql.Int, req.body.IDLMH)
                 .input('masv', sql.NChar(15), req.body.MASV)
-                .query('exec SP_GET_CAUHOITHI_LICHSU2 @idlmh, @masv');
+                .execute('SP_REPORT_CTBT');
         })
             .then(result => {
                 const arrRecord = result.recordset;
-                //flat json
-                const values = JSON.parse(Object.values(arrRecord[0])[0]);
-                const arr = values.map(v => {
-                    if (!v || !v.IDCAUHOI) return {};
-                    return {
-                        IDCAUHOI: v.IDCAUHOI,
-                        STT: v.STT,
-                        LUACHONSV: v.LUACHONSV,
-                        ...v.BODE[0]
-                    };
+                result.recordsets[1].forEach((r) => {
+                    r.MASV = r.MASV.trim();
+                    r.EMAIL = r.EMAIL.trim();
                 })
-                res.status(200).send({ CAUHOI: arr });
+                const tables = {
+                    LOPMONHOC: result.recordsets[0],
+                    SINHVIEN: result.recordsets[1],
+                    CTBT: result.recordsets[2],
+                }
+                res.status(200).json(tables);
             }).catch(err => {
                 console.log(err)
             })

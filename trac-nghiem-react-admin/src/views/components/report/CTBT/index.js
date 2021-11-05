@@ -4,14 +4,17 @@ import Viewer from 'src/views/pages/reportViewer/Viewer'
 import reportApi from 'src/api/reportApi';
 
 export default function index() {
-  const { id } = useParams();
-  const reportTemplate = 'Report_BANGDIEM.mrt';
+  const { idlmh, masv } = useParams();
+  const reportTemplate = 'Report_CTBT_NEW.mrt';
   const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await reportApi.getDSKyTen(id);
+        const response = await reportApi.getCTBT({
+          IDLMH: idlmh,
+          MASV: masv
+        });
         setData(response);
         console.log(response);
       } catch (error) {
