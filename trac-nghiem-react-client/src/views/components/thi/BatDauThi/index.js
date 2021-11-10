@@ -38,6 +38,7 @@ export default function index() {
     }
     //ghi điểm
     let diem = Math.round(((soCauDung / thongTin.SCT) + Number.EPSILON) * 10 * 100) / 100
+    diem = Math.round(diem * 2) / 2;
 
     try {
       const arr = dsch.map((ch, idx) => {
@@ -85,6 +86,7 @@ export default function index() {
         setDSCH(response1);
         setSV(response2);
         setDSLC(ds_luaChon);
+        console.log(response1);
       } catch (error) {
         console.log(error);
       }
@@ -131,10 +133,6 @@ export default function index() {
 
   const handleClickNopBai = () => {
     setVisible(!visible);
-  }
-
-  const handleSetVisible = () => {
-    setVisible(false);
   }
 
   return (
@@ -250,7 +248,7 @@ export default function index() {
           <CButton id='dong-y-nop-bai' color="primary" onClick={() => handleDongYNopBai()}>Đồng ý</CButton>
         </CModalFooter>
       </CModal>
-      <AppModalCustom visible={visible1} handleSetVisible={handleSetVisible}
+      <AppModalCustom visible={visible1} handleSetVisible={() => setVisible(false)}
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
     </CRow>
   )

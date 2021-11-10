@@ -123,7 +123,7 @@ export default function index() {
                   <CTableHeaderCell scope="col">Địa chỉ</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Email</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Điểm</CTableHeaderCell>
-                  <CTableHeaderCell scope="col" className='text-center'>Chức năng</CTableHeaderCell>
+                  <CTableHeaderCell scope="col" className='text-center'>Chi tiết bài thi</CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               <CTableBody>

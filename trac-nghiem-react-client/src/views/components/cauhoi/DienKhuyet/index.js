@@ -1,5 +1,6 @@
 import { CAlert, CCard, CCardBody, CCardHeader, CCol, CFormInput, CFormLabel, CRow } from '@coreui/react';
 import { default as React, useEffect, useState } from 'react';
+import _chuanHoaChuoi from 'src/_chuanHoaChuoi.js';
 
 export default function index(props) {
   const { cauhoi, handleSetLuaChon, idx, isDisabled } = props;
@@ -44,9 +45,10 @@ export default function index(props) {
                   value={lc}
                   onChange={(e) => {
                     setLuaChon(e.target.value);
-                    handleSetLuaChon(idx, e.target.value.trim());
-                    setIsDaChon(e.target.value !== '');
+                    handleSetLuaChon(idx, _chuanHoaChuoi(e.target.value));
+                    setIsDaChon(_chuanHoaChuoi(e.target.value) !== '');
                   }}
+                  onBlur={(e) => setLuaChon(_chuanHoaChuoi(e.target.value))}
                 // maxLength={10} //nen de thuoc tinh nay
                 />
               </div>
