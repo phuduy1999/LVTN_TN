@@ -4,12 +4,12 @@
   <Dictionary Ref="1" type="Dictionary" isKey="true">
     <BusinessObjects isList="true" count="0" />
     <Databases isList="true" count="1">
-      <ff Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
-        <Alias>ff</Alias>
+      <ctbt Ref="2" type="Stimulsoft.Report.Dictionary.StiJsonDatabase" isKey="true">
+        <Alias>ctbt</Alias>
         <Key />
-        <Name>ff</Name>
-        <PathData>C:\Users\dn985\Documents\Zalo Received Files\ff.json</PathData>
-      </ff>
+        <Name>ctbt</Name>
+        <PathData>C:\Users\Administrator\Downloads\ctbt.json</PathData>
+      </ctbt>
     </Databases>
     <DataSources isList="true" count="3">
       <CTBT Ref="3" type="DataTableSource" isKey="true">
@@ -20,16 +20,16 @@
           <value>LUACHONSV,System.String</value>
           <value>NOIDUNG,System.String</value>
           <value>DAP_AN,System.String</value>
-          <value>CACLUACHON,System.String</value>
+          <value>TENLOAICH,System.String</value>
         </Columns>
         <Dictionary isRef="1" />
-        <Key>88ba0f7578ae49de9f3df3a5b1dc14ce</Key>
+        <Key>f0cf508eca1b4b669f4f91fb802f6db0</Key>
         <Name>CTBT</Name>
-        <NameInSource>ff.CTBT</NameInSource>
+        <NameInSource>ctbt.CTBT</NameInSource>
       </CTBT>
       <LOPMONHOC Ref="4" type="DataTableSource" isKey="true">
         <Alias>LOPMONHOC</Alias>
-        <Columns isList="true" count="11">
+        <Columns isList="true" count="8">
           <value>IDLMH,System.Decimal</value>
           <value>NIENKHOA,System.String</value>
           <value>HOCKY,System.Decimal</value>
@@ -38,14 +38,11 @@
           <value>TENMH,System.String</value>
           <value>MAGV,System.String</value>
           <value>HOTENGV,System.String</value>
-          <value>NGAY,System.Decimal</value>
-          <value>THANG,System.Decimal</value>
-          <value>NAM,System.Decimal</value>
         </Columns>
         <Dictionary isRef="1" />
-        <Key>7c5dadc940754cdab0eac2815e6fd300</Key>
+        <Key>f3f34baeb2b44d139ab54c44b6fbe104</Key>
         <Name>LOPMONHOC</Name>
-        <NameInSource>ff.LOPMONHOC</NameInSource>
+        <NameInSource>ctbt.LOPMONHOC</NameInSource>
       </LOPMONHOC>
       <SINHVIEN Ref="5" type="DataTableSource" isKey="true">
         <Alias>SINHVIEN</Alias>
@@ -59,9 +56,9 @@
           <value>DIEMCHU,System.String</value>
         </Columns>
         <Dictionary isRef="1" />
-        <Key>9663e0e3fe064d3a87835a6097c21f4f</Key>
+        <Key>235f9bc5efe14da48545c80cce5bd9e5</Key>
         <Name>SINHVIEN</Name>
-        <NameInSource>ff.SINHVIEN</NameInSource>
+        <NameInSource>ctbt.SINHVIEN</NameInSource>
       </SINHVIEN>
     </DataSources>
     <Relations isList="true" count="0" />
@@ -126,7 +123,7 @@ CƠ SỞ TẠI THÀNH PHỐ HỒ CHÍ MINH</Text>
             <Text3 Ref="10" type="Text" isKey="true">
               <Border>None;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>10.6,2.6,4.6,0.6</ClientRectangle>
+              <ClientRectangle>12.4,2.6,2.8,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,10</Font>
@@ -135,7 +132,7 @@ CƠ SỞ TẠI THÀNH PHỐ HỒ CHÍ MINH</Text>
               <Name>Text3</Name>
               <Page isRef="6" />
               <Parent isRef="7" />
-              <Text>Thành Phố Hồ Chí Minh, ngày</Text>
+              <Text>Hồ Chí Minh, ngày</Text>
               <TextBrush>[0:0:0]</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -189,7 +186,7 @@ Ngày sinh: {SINHVIEN.NGAYSINH}
               <Name>Text17</Name>
               <Page isRef="6" />
               <Parent isRef="7" />
-              <Text>{LOPMONHOC.NGAY}</Text>
+              <Text>{Day(Today)}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -221,7 +218,7 @@ Ngày sinh: {SINHVIEN.NGAYSINH}
               <Name>Text19</Name>
               <Page isRef="6" />
               <Parent isRef="7" />
-              <Text>{LOPMONHOC.THANG}</Text>
+              <Text>{Month(Today)}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -253,7 +250,7 @@ Ngày sinh: {SINHVIEN.NGAYSINH}
               <Name>Text21</Name>
               <Page isRef="6" />
               <Parent isRef="7" />
-              <Text>{LOPMONHOC.NAM}</Text>
+              <Text>{Year(Today)}</Text>
               <TextBrush>Black</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -354,7 +351,7 @@ ____________________</Text>
               <Name>Text9</Name>
               <Page isRef="6" />
               <Parent isRef="20" />
-              <Text>Các lựa chọn</Text>
+              <Text>Loại câu hỏi</Text>
               <TextBrush>[255:255:255]</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -433,7 +430,6 @@ ____________________</Text>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
-              <GrowToHeight>True</GrowToHeight>
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataCTBT_IDCAUHOI</Name>
@@ -452,7 +448,6 @@ ____________________</Text>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
-              <GrowToHeight>True</GrowToHeight>
               <Margins>0,0,0,0</Margins>
               <Name>DataCTBT_NOIDUNG</Name>
               <Page isRef="6" />
@@ -462,26 +457,24 @@ ____________________</Text>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
               <VertAlignment>Center</VertAlignment>
             </DataCTBT_NOIDUNG>
-            <DataCTBT_CACLUACHON Ref="30" type="Text" isKey="true">
+            <DataCTBT_TENLOAICH Ref="30" type="Text" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
-              <CanBreak>True</CanBreak>
               <CanGrow>True</CanGrow>
               <ClientRectangle>10.4,0,3,1.4</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
-              <HorAlignment>Left</HorAlignment>
+              <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
-              <Name>DataCTBT_CACLUACHON</Name>
+              <Name>DataCTBT_TENLOAICH</Name>
               <Page isRef="6" />
               <Parent isRef="27" />
-              <Text>{CTBT.CACLUACHON}</Text>
+              <Text>{CTBT.TENLOAICH}</Text>
               <TextBrush>Black</TextBrush>
               <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
-              <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
-            </DataCTBT_CACLUACHON>
+            </DataCTBT_TENLOAICH>
             <DataCTBT_STT Ref="31" type="Text" isKey="true">
               <Border>All;Black;1;Solid;False;4;Black</Border>
               <Brush>Transparent</Brush>
@@ -490,7 +483,6 @@ ____________________</Text>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
-              <GrowToHeight>True</GrowToHeight>
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataCTBT_STT</Name>
@@ -509,7 +501,6 @@ ____________________</Text>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
-              <GrowToHeight>True</GrowToHeight>
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataCTBT_DAP_AN</Name>
@@ -528,7 +519,6 @@ ____________________</Text>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,9</Font>
-              <GrowToHeight>True</GrowToHeight>
               <HorAlignment>Center</HorAlignment>
               <Margins>0,0,0,0</Margins>
               <Name>DataCTBT_LUACHONSV</Name>
@@ -613,13 +603,13 @@ ____________________</Text>
   </ReferencedAssemblies>
   <ReportAlias>Report2</ReportAlias>
   <ReportAuthor>Phu Duy</ReportAuthor>
-  <ReportChanged>11/12/2021 7:14:03 PM</ReportChanged>
+  <ReportChanged>11/5/2021 10:52:48 PM</ReportChanged>
   <ReportCreated>10/17/2021 3:20:14 AM</ReportCreated>
-  <ReportFile>C:\Users\dn985\Documents\Zalo Received Files\Report_CTBT_NEW.mrt</ReportFile>
-  <ReportGuid>59ea60776bc544ef987796c6b64c3275</ReportGuid>
+  <ReportFile>C:\Users\Administrator\Desktop\TOTNGHIEP\trac-nghiem-react-admin\public\reportsTemplate\Report_CTBT_NEW.mrt</ReportFile>
+  <ReportGuid>298234ddbeb74b63af19908cfb3c8e48</ReportGuid>
   <ReportName>Report2</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
-  <ReportVersion>2021.4.3.0</ReportVersion>
+  <ReportVersion>2021.4.1.0</ReportVersion>
   <Script>using System;
 using System.Drawing;
 using System.Windows.Forms;
