@@ -8,8 +8,19 @@ const dangKyApi = {
     return axiosClient.post(url, data);
   },
 
+  getQuestionsForTesting: (data) => {
+    console.log(data);
+    const url = '/registers/get-questions-for-testing';
+    return axiosClient.post(url, data);
+  },
+
   getOne: (id) => {
     const url = `/registers/${id}`;
+    return axiosClient.get(url);
+  },
+
+  getOneByIDDK: (id) => {
+    const url = `/registers/${id}/iddk`;
     return axiosClient.get(url);
   },
 

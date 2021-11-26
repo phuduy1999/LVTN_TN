@@ -37,7 +37,7 @@ export default function index() {
         .then(function (response) {
           console.log(response);
 
-          setPageRedirect(`/thi/${response.IDLMH}`);
+          setPageRedirect(`/thi/${response.IDDK}`);
           setIsPending(false);
           setVisible(!visible);
           setIsSuccess(true);

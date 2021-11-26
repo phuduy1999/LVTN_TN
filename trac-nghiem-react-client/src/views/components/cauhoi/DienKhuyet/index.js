@@ -3,7 +3,7 @@ import { default as React, useEffect, useState } from 'react';
 import _chuanHoaChuoi from 'src/_chuanHoaChuoi.js';
 
 export default function index(props) {
-  const { cauhoi, handleSetLuaChon, idx, isDisabled } = props;
+  const { cauhoi, luachonsv, handleSetLuaChon, idx, isDisabled } = props;
 
   const [lc, setLuaChon] = useState('');
   const [isDaChon, setIsDaChon] = useState(false);
@@ -11,8 +11,10 @@ export default function index(props) {
   useEffect(() => {
     if (isDisabled) {
       setLuaChon(cauhoi.LUACHONSV);
+    } else {
+      setLuaChon(luachonsv);
     }
-  }, [])
+  }, [luachonsv])
 
   return (
     <div id={`cau-hoi-${idx + 1}`}>
@@ -45,10 +47,12 @@ export default function index(props) {
                   value={lc}
                   onChange={(e) => {
                     setLuaChon(e.target.value);
-                    handleSetLuaChon(idx, _chuanHoaChuoi(e.target.value));
                     setIsDaChon(_chuanHoaChuoi(e.target.value) !== '');
                   }}
-                  onBlur={(e) => setLuaChon(_chuanHoaChuoi(e.target.value))}
+                  onBlur={(e) => {
+                    setLuaChon(_chuanHoaChuoi(e.target.value));
+                    handleSetLuaChon(idx, _chuanHoaChuoi(e.target.value));
+                  }}
                 // maxLength={10} //nen de thuoc tinh nay
                 />
               </div>

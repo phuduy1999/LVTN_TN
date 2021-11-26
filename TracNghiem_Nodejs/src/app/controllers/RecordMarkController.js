@@ -5,14 +5,14 @@ class RecordMarkController {
     //[POST] /
     addOne(req, res, next) {
         // console.log(req.body, req.body.length)
-        const info = req.body.pop();
-        // console.log(info, req.body);
+        const info = req.body.INFO;
+        console.log(info, req.body.CTBT);
         //create table
         const ctbt = new sql.Table('CTBTType')
         ctbt.columns.add('IDCAUHOI', sql.Int);
         ctbt.columns.add('STT', sql.Int);
         ctbt.columns.add('LUACHONSV', sql.NVarChar(30));
-        req.body.forEach((ct, idx) => {
+        req.body.CTBT.forEach((ct, idx) => {
             ctbt.rows.add(ct.IDCAUHOI, ct.STT, ct.LUACHONSV);
         })
         // console.log(ctbt);
@@ -21,8 +21,7 @@ class RecordMarkController {
             console.log(ctbt);
             return pool.request()
                 .input('ctbt', sql.TVP, ctbt)
-                .input('masv', sql.NChar(15), info.MASV)
-                .input('id', sql.Int, info.IDLMH)
+                .input('iddk', sql.Int, info.IDDK)
                 .input('diem', sql.Float, info.DIEM)
                 .execute('SP_GHI_DIEM_CTBT');
         })

@@ -2,7 +2,7 @@ import { CAlert, CCard, CCardBody, CCardHeader, CCol, CFormCheck, CListGroup, CL
 import { default as React, useState } from 'react';
 
 export default function index(props) {
-  const { cauhoi, handleSetLuaChon, idx, isDisabled } = props;
+  const { cauhoi, luachonsv, handleSetLuaChon, idx, isDisabled } = props;
 
   const [lc, setLuaChon] = useState('');
   const [ds, setDS] = useState(cauhoi.LUACHON);//danh sách lựa chọn
@@ -33,8 +33,8 @@ export default function index(props) {
               </CAlert>
               <CListGroup>
                 {ds && ds.map((lc) => (
-                  <CListGroupItem component="a" key={"linkTag" + lc.IDLUACHON}>
-                    <CFormCheck key={lc.IDLUACHON} disabled={isDisabled}
+                  <CListGroupItem component="a" key={"linkTag" + lc.STT}>
+                    <CFormCheck key={lc.STT} disabled={isDisabled}
                       type="radio" id={`radio-${idx + 1}-${lc.STT}`}
                       name={idx + 1}
                       label={lc.STT + ": " + lc.NOIDUNG}
@@ -44,7 +44,7 @@ export default function index(props) {
                         handleSetLuaChon(idx, lc.STT);
                         setIsDaChon(e.target.value !== '');
                       }}
-                      checked={isDisabled && lc.STT === cauhoi.LUACHONSV}
+                      checked={lc.STT === cauhoi.LUACHONSV || lc.STT === luachonsv}
                     />
                   </CListGroupItem>
                 ))}

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import dangKyApi from 'src/api/dangKyApi';
 import ghiBaiThiApi from 'src/api/ghiBaiThiApi';
+import thiApi from 'src/api/thiApi';
 import sinhVienApi from 'src/api/sinhVienApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import CauHoiDK from '../../cauhoi/DienKhuyet';
@@ -48,12 +49,14 @@ export default function index() {
           LUACHONSV: dslc[idx],
         }
       })
-      arr.push({
-        MASV: sv.MASV,
-        IDLMH: id,
-        DIEM: diem,
-      })
-      const response = await ghiBaiThiApi.recordMark(arr)
+      const ctbt = {
+        CTBT: arr,
+        INFO: {
+          IDDK: id,
+          DIEM: diem,
+        }
+      }
+      const response = await ghiBaiThiApi.recordMark(ctbt)
       console.log(response);
 
       setVisible1(!visible1);
@@ -71,21 +74,19 @@ export default function index() {
   useEffect(() => {
     const fetchDS = async () => {
       try {
-        const response = await dangKyApi.getOne(id);
+        const response = await dangKyApi.getOneByIDDK(id);
         const response1 = await dangKyApi.getQuestions({
-          TRINHDODK: response.TRINHDODK,
-          SCT: response.SCT,
-          MAMH: response.MAMH,
+          IDDK: id,
         });
         const response2 = await sinhVienApi.getOneByEmail(InfoUserLogin().EMAIL);
-        let ds_luaChon = [];
-        for (let i = 0; i < response.SCT; i++) {
-          ds_luaChon.push('');
-        }
+        // let ds_luaChon = [];
+        // for (let i = 0; i < response.SCT; i++) {
+        //   ds_luaChon.push('');
+        // }
         setThongTin(response);
-        setDSCH(response1);
+        setDSCH(response1.DS_CAUHOI);
         setSV(response2);
-        setDSLC(ds_luaChon);
+        setDSLC(response1.DS_LUACHON);
         console.log(response1);
       } catch (error) {
         console.log(error);
@@ -97,7 +98,7 @@ export default function index() {
 
   useEffect(() => {
     //set thời gian
-    let t = thongTin.THOIGIANTHI * 60;//số giây
+    let t = thongTin.THOIGIANCONLAI_S === null ? thongTin.THOIGIANTHI * 60 : thongTin.THOIGIANCONLAI_S;
     const clockInterval = setInterval(() => {
       if (t === 0) {
         setIsTimeOut(true);
@@ -117,6 +118,17 @@ export default function index() {
       let time = soPhut + ':' + ('0' + t % 60).slice(-2);
       setTimeString(time);
       t = t - 1;
+      if (t % 10 === 0) {
+        try {
+          const response = thiApi.updateTimer({
+            IDDK: id,
+            THOIGIANCONLAI_S: t
+          })
+        }
+        catch (e) {
+          console.log(e);
+        }
+      }
     }, 1000)
 
     return () => {
@@ -128,7 +140,18 @@ export default function index() {
   const handleSetLuaChon = (idx, lc) => { //set danh sách lựa chọn của sv
     const values = [...dslc];
     values[idx] = lc;
-    setDSLC(values);
+    try {
+      const response = thiApi.updateChoice({
+        IDDK: id,
+        STT: idx + 1,
+        LUACHONSV: lc,
+      })
+      setDSLC(values);
+      console.log(values);
+    }
+    catch (e) {
+      console.log(e);
+    }
   }
 
   const handleClickNopBai = () => {
@@ -188,9 +211,9 @@ export default function index() {
             {
               dsch && dsch.map((ch, idx) => {
                 if (ch.MALOAICH.trim() === 'NLC') {
-                  return <CauHoiNLC key={'cau' + (idx + 1)} cauhoi={ch} handleSetLuaChon={handleSetLuaChon} idx={idx} />;
+                  return <CauHoiNLC key={'cau' + (idx + 1)} cauhoi={ch} luachonsv={dslc[idx]} handleSetLuaChon={handleSetLuaChon} idx={idx} />;
                 }
-                else return <CauHoiDK key={'cau' + (idx + 1)} cauhoi={ch} handleSetLuaChon={handleSetLuaChon} idx={idx} />;
+                else return <CauHoiDK key={'cau' + (idx + 1)} cauhoi={ch} luachonsv={dslc[idx]} handleSetLuaChon={handleSetLuaChon} idx={idx} />;
               })
             }
           </CCardBody>

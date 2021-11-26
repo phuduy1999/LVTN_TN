@@ -53,7 +53,7 @@ export default function index() {
       try {
         const response1 = await monHocApi.getOne(mamh);
         setThongTin({ ...thongTin, TENMH: response1.TENMH });
-        const response = await dangKyApi.getQuestions({
+        const response = await dangKyApi.getQuestionsForTesting({
           TRINHDODK: td,
           SCT: sct,
           MAMH: mamh,

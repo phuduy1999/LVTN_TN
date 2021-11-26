@@ -19,13 +19,36 @@ class RegisterController {
 
     //[POST] /get-questions
     getQuestions(req, res, next) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('iddk', sql.Int, req.body.IDDK)
+                .execute('SP_GET_CAUHOITHI2');
+        })
+            .then(result => {
+                const arrRecord = result.recordset;
+                // console.log(result);
+                const response = {
+                    DS_CAUHOI: JSON.parse(Object.values(arrRecord[0])[0]),
+                    DS_LUACHON: result.recordsets[1].map((r) => {
+                        return r.LUACHONSV;
+                    })
+                }
+                res.status(200).send(response);
+            }).catch(err => {
+                console.log(err)
+                res.status(400).send(err);
+            })
+    }
+
+    //[POST] /get-questions-for-testing
+    getQuestionsForTesting(req, res, next) {
         console.log(req.body.SCT, req.body.TRINHDODK, req.body.MAMH);
         sqlConnect.then(pool => {
             return pool.request()
                 .input('sct', sql.Int, req.body.SCT)
                 .input('td', sql.NChar, req.body.TRINHDODK)
                 .input('mamh', sql.NChar(15), req.body.MAMH)
-                .execute('SP_GET_CAUHOITHI2');
+                .execute('SP_GET_CAUHOITHI_THU');
         })
             .then(result => {
                 const arrRecord = result.recordset;
@@ -48,6 +71,27 @@ class RegisterController {
                 const arrRecord = result.recordset;
                 // console.log(arrRecord)
                 res.status(200).send(arrRecord[0]);
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
+    //[GET] /:id/iddk
+    getOneByIDDK(req, res, next) {
+        const id = req.params.id;
+        sqlConnect.then(pool => {
+            return pool.request()
+                .input('iddk', sql.Int, id)
+                .query('select NIENKHOA, HOCKY, NHOM, TRINHDODK, THOIGIANTHI, SCT, NGAYTHI, LOPMONHOC.MAMH, TENMH from LOPMONHOC, MONHOC where IDLMH=(select IDLMH from DANGKY where IDDK=@iddk) and LOPMONHOC.MAMH=MONHOC.MAMH; select THOIGIANCONLAI_S from DANGKY where IDDK=@iddk')
+        })
+            .then(result => {
+                const arrRecord = result.recordset;
+                // console.log(arrRecord)
+                const response = {
+                    ...arrRecord[0],
+                    ...result.recordsets[1][0]
+                }
+                res.status(200).send(response);
             }).catch(err => {
                 console.log(err)
             })
