@@ -60,6 +60,7 @@ export default function index() {
         handleSubmit={handleSubmit}
         cardHeader={'Thêm mới giáo viên'}
         btnTitle={'Thêm'}
+        isEdit={false}
         makh={makh} setMakh={setMakh}
         manq={manq} setManq={setManq}
         magv={magv} setMagv={setMagv}

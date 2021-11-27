@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import csdlApi from 'src/api/csdlApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import AppModalCustomDelete from 'src/components/AppModalCustomDelete';
+import InfoUserLogin from 'src/_infoUser';
 
 function saoLuuPhucHoi() {
   const [ds, setDS] = useState([]);
@@ -63,7 +64,7 @@ function saoLuuPhucHoi() {
 
   const handleClickSaoLuu = () => {
     csdlApi.backup({
-      diengiai: '',
+      diengiai: InfoUserLogin().EMAIL,
       ghide: isOverride ? 1 : 0,
     })
       .then(response => {

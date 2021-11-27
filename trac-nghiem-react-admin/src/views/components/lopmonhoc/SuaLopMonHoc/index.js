@@ -86,6 +86,7 @@ export default function index() {
         handleSubmit={handleSubmit}
         cardHeader={'Sửa lớp môn học'}
         btnTitle={'Sửa'}
+        isEdit={true}
         makh={makh} setMakh={setMakh}
         mamh={mamh} setMamh={setMamh}
         magv={magv} setMagv={setMagv}

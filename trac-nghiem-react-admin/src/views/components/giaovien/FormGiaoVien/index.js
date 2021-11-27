@@ -31,9 +31,11 @@ export default function index(props) {
       try {
         const result = await Promise.all([fetchKhoa, fetchNQ]);
         setDSKH(result[0]);
-        setMakh(result[0][0].MAKH);
         setDSNQ(result[1]);
-        setManq(result[1][0].MANQ);
+        if (isEdit === false) {
+          setMakh(result[0][0].MAKH);
+          setManq(result[1][0].MANQ);
+        }
         console.log(result);
       }
       catch (error) {

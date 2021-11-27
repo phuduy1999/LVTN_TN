@@ -9,6 +9,7 @@ export default function index(props) {
   const {
     handleSubmit,
     validated,
+    isEdit,
     cardHeader,
     btnTitle,
     makh, setMakh,
@@ -32,11 +33,13 @@ export default function index(props) {
       try {
         const result = await Promise.all([fetchKhoa, fetchMH, fetchGV]);
         setDSKH(result[0]);
-        setMakh(result[0][0].MAKH);
         setDSMH(result[1]);
-        setMamh(result[1][0].MAMH);
         setDSGV(result[2]);
-        setMagv(result[2][0].MAGV);
+        if (isEdit === false) {
+          setMakh(result[0][0].MAKH);
+          setMamh(result[1][0].MAMH);
+          setMagv(result[2][0].MAGV);
+        }
         console.log(result);
       }
       catch (error) {
