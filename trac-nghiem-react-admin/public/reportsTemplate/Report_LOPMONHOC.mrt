@@ -95,7 +95,7 @@ CƠ SỞ TẠI THÀNH PHỐ HỒ CHÍ MINH</Text>
             <Text3 Ref="8" type="Text" isKey="true">
               <Border>None;[0:0:0];1;Solid;False;4;[0:0:0]</Border>
               <Brush>Transparent</Brush>
-              <ClientRectangle>12.4,2.4,2.8,0.6</ClientRectangle>
+              <ClientRectangle>10.8,2.4,4.4,0.6</ClientRectangle>
               <Conditions isList="true" count="0" />
               <Expressions isList="true" count="0" />
               <Font>Times New Roman,10</Font>
@@ -104,7 +104,7 @@ CƠ SỞ TẠI THÀNH PHỐ HỒ CHÍ MINH</Text>
               <Name>Text3</Name>
               <Page isRef="4" />
               <Parent isRef="5" />
-              <Text>Hồ Chí Minh, ngày</Text>
+              <Text>Thành phố Hồ Chí Minh, ngày</Text>
               <TextBrush>[0:0:0]</TextBrush>
               <Type>Expression</Type>
               <VertAlignment>Center</VertAlignment>
@@ -636,13 +636,13 @@ ____________________</Text>
   </ReferencedAssemblies>
   <ReportAlias>Report2</ReportAlias>
   <ReportAuthor>Phu Duy</ReportAuthor>
-  <ReportChanged>10/22/2021 3:15:22 PM</ReportChanged>
+  <ReportChanged>11/30/2021 11:22:01 PM</ReportChanged>
   <ReportCreated>10/17/2021 3:20:14 AM</ReportCreated>
-  <ReportFile>C:\Users\Administrator\Desktop\TOTNGHIEP\trac-nghiem-react-admin\public\reportsTemplate\Report_LOPMONHOC.mrt</ReportFile>
-  <ReportGuid>f73ccdf780fa4d5f8c2f1acddec6e996</ReportGuid>
+  <ReportFile>C:\Users\phudu\Desktop\LVTN_TN\trac-nghiem-react-admin\public\reportsTemplate\Report_LOPMONHOC.mrt</ReportFile>
+  <ReportGuid>daff79cfb0224e3294455736bf5fbd27</ReportGuid>
   <ReportName>Report2</ReportName>
   <ReportUnit>Centimeters</ReportUnit>
-  <ReportVersion>2021.4.1.0</ReportVersion>
+  <ReportVersion>2021.4.3.0</ReportVersion>
   <Script>using System;
 using System.Drawing;
 using System.Windows.Forms;

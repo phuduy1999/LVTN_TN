@@ -99,6 +99,7 @@ export default function index() {
                         type="text"
                         required
                         value={nienkhoa}
+                        placeholder="Vd: 2020-2021"
                         onChange={(e) => setNienKhoa(e.target.value)}
                       />
                       <CFormFeedback invalid>Vui lòng nhập niên khóa hợp lệ!</CFormFeedback>
@@ -126,6 +127,7 @@ export default function index() {
                         required
                         min="1"
                         value={nhom}
+                        placeholder="Nhập nhóm..."
                         onChange={(e) => setNhom(e.target.value)}
                       />
                       <CFormFeedback invalid>Vui lòng nhập nhóm hợp lệ!</CFormFeedback>
