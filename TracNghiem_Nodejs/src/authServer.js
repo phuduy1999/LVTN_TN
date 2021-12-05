@@ -142,7 +142,7 @@ app.post('/api/change-password-teacher', authenticateToken, roleTeacher, (req, r
             .input('email', sql.NChar(50), req.body.EMAIL)
             .input('password', sql.NVarChar(50), req.body.PASSWORD)
             .input('password_new', sql.NVarChar(50), req.body.PASSWORD_NEW)
-            .query('exec SP_DOIMATKHAU_GV @email, @password, @password_new');
+            .query('exec SP_DOIMATKHAU @email, @password, @password_new');
     })
         .then(result => {
             res.send(204);
@@ -161,7 +161,7 @@ app.post('/api/change-password-student', authenticateToken, roleStudent, (req, r
             .input('email', sql.NChar(50), req.body.EMAIL)
             .input('password', sql.NVarChar(50), req.body.PASSWORD)
             .input('password_new', sql.NVarChar(50), req.body.PASSWORD_NEW)
-            .query('exec SP_DOIMATKHAU_SV @email, @password, @password_new');
+            .query('exec SP_DOIMATKHAU @email, @password, @password_new');
     })
         .then(result => {
             res.send(204);

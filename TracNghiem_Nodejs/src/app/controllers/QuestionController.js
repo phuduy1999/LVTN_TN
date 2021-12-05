@@ -68,7 +68,7 @@ class QuestionController {
   getAll(req, res, next) {
     sqlConnect.then(pool => {
       return pool.request()
-        .query('select IDCAUHOI, TRINHDO, NOIDUNG, DAP_AN, TENMH, TENLOAICH, GIAOVIEN.MAGV, HO, TEN from BODE, MONHOC, LOAICAUHOI, GIAOVIEN where BODE.MAMH = MONHOC.MAMH and BODE.MALOAICH=LOAICAUHOI.MALOAICH and BODE.MAGV=GIAOVIEN.MAGV order by GIAOVIEN.MAGV')
+        .query('select IDCAUHOI, TRINHDO, NOIDUNG, DAP_AN, TENMH, TENLOAICH, GIAOVIEN.MAGV, HO, TEN from BODE, MONHOC, LOAICAUHOI, GIAOVIEN where BODE.MAMH = MONHOC.MAMH and BODE.MALOAICH=LOAICAUHOI.MALOAICH and BODE.MAGV=GIAOVIEN.MAGV order by GIAOVIEN.MAGV, TENMH ASC')
     })
       .then(result => {
         const arrRecord = result.recordset;

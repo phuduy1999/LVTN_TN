@@ -6,7 +6,7 @@ class TeacherController {
     getAll(req, res, next) {
         sqlConnect.then(pool => {
             return pool.request()
-                .query('select MAGV, HO, TEN, DIACHI, SDT, EMAIL, TENKH from GIAOVIEN, KHOA where GIAOVIEN.MAKH=KHOA.MAKH')
+                .query('select MAGV, HO, TEN, DIACHI, SDT, EMAIL, TENKH from GIAOVIEN, KHOA where GIAOVIEN.MAKH=KHOA.MAKH order by TEN, TENKH ASC')
         })
             .then(result => {
                 const arrRecord = result.recordset;

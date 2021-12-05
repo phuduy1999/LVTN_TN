@@ -195,7 +195,7 @@ export default function index(props) {
                     }}
                   />
                 }
-                {idx === choices.length - 1 && idx < 25 &&
+                {idx === choices.length - 1 && idx < 5 &&
                   < CIcon
                     icon={cilPlus}
                     size='xl'
