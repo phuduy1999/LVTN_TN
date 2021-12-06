@@ -37,8 +37,9 @@ export default function index() {
   const handleClickXoa = (id) => {
     sinhVienApi.checkFK(id)
       .then(response => {
+        const current = ds.find(kh => kh.MASV === id);
         setVisibleCheck(!visibleCheck);
-        setMessCheck(`xóa sinh viên có mã là ${id}`);
+        setMessCheck(`xóa sinh viên ${current.HO} ${current.TEN}, có mã sinh viên là ${id}`);
         setIdCanXoa(id);
       })
       .catch(error => {

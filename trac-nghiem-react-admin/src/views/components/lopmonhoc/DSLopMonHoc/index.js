@@ -39,8 +39,9 @@ export default function index() {
   const handleClickXoa = (id) => {
     lopMHApi.checkFK(id)
       .then(response => {
+        const lmhCurrent = ds.find(lmh => lmh.IDLMH === id);
         setVisibleCheck(!visibleCheck);
-        setMessCheck(`xóa lớp môn học có id là ${id}`);
+        setMessCheck(`xóa lớp môn học ${lmhCurrent.TENMH} nhóm ${lmhCurrent.NHOM} thuộc học kỳ ${lmhCurrent.HOCKY} của niên khóa ${lmhCurrent.NIENKHOA}`);
         setIdCanXoa(id);
         setIsDelete(true);
       })
@@ -54,8 +55,9 @@ export default function index() {
   const handleClickHuy = (id) => {
     lopMHApi.checkBeforeCancel(id)
       .then(response => {
+        const lmhCurrent = ds.find(lmh => lmh.IDLMH === id);
         setVisibleCheck(!visibleCheck);
-        setMessCheck(`hủy lớp môn học có id là ${id}`);
+        setMessCheck(`hủy lớp môn học ${lmhCurrent.TENMH} nhóm ${lmhCurrent.NHOM} thuộc học kỳ ${lmhCurrent.HOCKY} của niên khóa ${lmhCurrent.NIENKHOA}`);
         setIdCanXoa(id);
         setIsDelete(false);
       })

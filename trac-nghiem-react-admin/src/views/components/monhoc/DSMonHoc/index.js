@@ -36,8 +36,9 @@ export default function index() {
   const handleClickXoa = (id) => {
     monHocApi.checkFK(id)
       .then(response => {
+        const current = ds.find(kh => kh.MAMH === id);
         setVisibleCheck(!visibleCheck);
-        setMessCheck(`xóa môn học có mã là ${id}`);
+        setMessCheck(`xóa môn học ${current.TENMH}`);
         setIdCanXoa(id);
       })
       .catch(error => {

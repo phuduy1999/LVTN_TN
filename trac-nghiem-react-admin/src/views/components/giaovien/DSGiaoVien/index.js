@@ -36,14 +36,15 @@ export default function index() {
   const handleClickXoa = (id) => {
     giaoVienApi.checkFK(id)
       .then(response => {
+        const current = ds.find(kh => kh.MAGV === id);
         setVisibleCheck(!visibleCheck);
-        setMessCheck(`xóa giáo viên có mã là ${id}`);
+        setMessCheck(`xóa giáo viên ${current.HO} ${current.TEN}, có mã giáo viên là ${id}`);
         setIdCanXoa(id);
       })
       .catch(error => {
         setVisible(!visible);
         setIsSuccess(false);
-        setMess('Lỗi: ' + error.response.data.err)
+        setMess('Lỗi: ' + error)
       })
   }
 

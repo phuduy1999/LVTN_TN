@@ -35,8 +35,9 @@ export default function index() {
   const handleClickXoa = (id) => {
     khoaApi.checkFK(id)
       .then(response => {
+        const current = ds.find(kh => kh.MAKH === id);
         setVisibleCheck(!visibleCheck);
-        setMessCheck(`xóa khoa có mã là ${id}`);
+        setMessCheck(`xóa khoa ${current.TENKH}`);
         setIdCanXoa(id);
       })
       .catch(error => {

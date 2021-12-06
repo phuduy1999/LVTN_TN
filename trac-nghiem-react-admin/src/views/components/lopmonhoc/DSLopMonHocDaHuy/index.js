@@ -38,8 +38,9 @@ export default function index() {
   const handleClickXoa = (id) => {
     lopMHApi.checkFK(id)
       .then(response => {
+        const lmhCurrent = ds.find(lmh => lmh.IDLMH === id);
         setVisibleCheck(!visibleCheck);
-        setMessCheck(`xóa lớp môn học có id là ${id}`);
+        setMessCheck(`xóa lớp môn học ${lmhCurrent.TENMH} nhóm ${lmhCurrent.NHOM} thuộc học kỳ ${lmhCurrent.HOCKY} của niên khóa ${lmhCurrent.NIENKHOA}`);
         setIdCanXoa(id);
         setIsDelete(true);
       })
@@ -52,7 +53,8 @@ export default function index() {
 
   const handleClickKhoiPhuc = (id) => {
     setVisibleCheck(!visibleCheck);
-    setMessCheck(`khôi phục lớp môn học có id là ${id}`);
+    const lmhCurrent = ds.find(lmh => lmh.IDLMH === id);
+    setMessCheck(`khôi phục lớp môn học ${lmhCurrent.TENMH} nhóm ${lmhCurrent.NHOM} thuộc học kỳ ${lmhCurrent.HOCKY} của niên khóa ${lmhCurrent.NIENKHOA}`);
     setIdCanXoa(id);
     setIsDelete(false);
   }

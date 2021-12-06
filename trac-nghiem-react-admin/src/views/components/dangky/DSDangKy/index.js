@@ -39,8 +39,9 @@ export default function index() {
   const handleClickXoa = (id) => {
     dangKyApi.checkFK(id)
       .then(response => {
+        const lmhCurrent = ds.find(lmh => lmh.IDLMH === id);
         setVisibleCheck(!visibleCheck);
-        setMessCheck(`hủy đăng ký id ${id}`);
+        setMessCheck(`hủy đăng ký thi cho lớp môn học ${lmhCurrent.TENMH} nhóm ${lmhCurrent.NHOM} thuộc học kỳ ${lmhCurrent.HOCKY} của niên khóa ${lmhCurrent.NIENKHOA}`);
         setIdCanXoa(id);
       })
       .catch(error => {
