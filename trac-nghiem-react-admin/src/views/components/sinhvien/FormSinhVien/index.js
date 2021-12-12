@@ -38,8 +38,7 @@ export default function index(props) {
                   required
                   placeholder="Nhập mã sinh viên..."
                   value={masv}
-                  onChange={(e) => setMasv(e.target.value)}
-                  onBlur={(e) => setMasv(_chuanHoaChuoi(e.target.value))}
+                  onChange={(e) => setMasv(_chuanHoaChuoi(e.target.value).toUpperCase())}
                 />
                 <CFormFeedback invalid>Vui lòng nhập mã sinh viên!</CFormFeedback>
               </div>
@@ -98,8 +97,7 @@ export default function index(props) {
                   placeholder="name@example.com"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onBlur={(e) => setEmail(_chuanHoaChuoi(e.target.value))}
+                  onChange={(e) => setEmail(_chuanHoaChuoi(e.target.value))}
                   disabled={isEdit}
                 />
                 <CFormFeedback invalid>Vui lòng nhập Email hợp lệ!</CFormFeedback>

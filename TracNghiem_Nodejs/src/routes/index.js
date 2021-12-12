@@ -36,7 +36,7 @@ function route(app) {
     app.use('/api/history-test', authenticateToken, roleStudent, historyTestRouter);
     app.use('/api/roles', authenticateToken, roleTeacher_PGV, roleRouter);
     app.use('/api/recovery', authenticateToken, roleAdmin, recoveryRouter);
-    app.use('/api/reports', /*authenticateToken, roleTeacher,*/ reportRouter);
+    app.use('/api/reports', authenticateToken, roleTeacher, reportRouter);
     app.use('/api/testing', authenticateToken, roleStudent, testingRouter);
     app.use('/', siteRouter);
 }

@@ -32,8 +32,7 @@ export default function index(props) {
                 required
                 placeholder="Nhập mã môn học..."
                 value={mamh}
-                onChange={(e) => setMamh(e.target.value)}
-                onBlur={(e) => setMamh(_chuanHoaChuoi(e.target.value))}
+                onChange={(e) => setMamh(_chuanHoaChuoi(e.target.value).toUpperCase())}
               />
               <CFormFeedback invalid>Vui lòng nhập mã môn học!</CFormFeedback>
             </div>

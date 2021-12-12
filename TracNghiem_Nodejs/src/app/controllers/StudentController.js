@@ -1,10 +1,8 @@
-const { DateTime } = require('mssql');
 const { sqlConnect, sql } = require('../config/db')
-const Joi = require('joi');
 
 class StudentController {
     //[GET] /
-    getAll(req, res, next) {
+    getAll(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .query('select * from SINHVIEN')
@@ -18,11 +16,10 @@ class StudentController {
     }
 
     //[GET] /:id
-    getOne(req, res, next) {
-        const ma = req.params.id;
+    getOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('masv', sql.NChar(15), ma)
+                .input('masv', sql.NChar(15), req.params.id)
                 .query('select * from SINHVIEN where MASV=@masv')
         })
             .then(result => {
@@ -33,12 +30,11 @@ class StudentController {
             })
     }
 
-    //[GET] /:id/email
-    getOneByEmail(req, res, next) {
-        const ma = req.params.id;
+    //[GET] /:email/email
+    getOneByEmail(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('email', sql.NVarChar, ma)
+                .input('email', sql.NVarChar, req.params.email)
                 .query('select * from SINHVIEN where EMAIL=@email')
         })
             .then(result => {
@@ -50,34 +46,7 @@ class StudentController {
     }
 
     //[POST] /
-    addOne(req, res, next) {
-        const schema = Joi.object({
-            MASV: Joi.string()
-                .max(15)
-                .required(),
-            HO: Joi.string()
-                .max(50)
-                .required(),
-            TEN: Joi.string()
-                .max(15)
-                .required(),
-            DIACHI: Joi.string()
-                .max(200)
-                .required(),
-            EMAIL: Joi.string()
-                .max(50)
-                .required(),
-            NGAYSINH: Joi.date()
-                .less('now')
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
+    addOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('masv', sql.NChar(15), req.body.MASV)
@@ -103,32 +72,8 @@ class StudentController {
             })
     }
 
-    //[PUT] /:id/edit
+    //[PUT] /:id
     updateOne(req, res) {
-        const schema = Joi.object({
-            MASV: Joi.string()
-                .max(15)
-                .required(),
-            HO: Joi.string()
-                .max(50)
-                .required(),
-            TEN: Joi.string()
-                .max(15)
-                .required(),
-            DIACHI: Joi.string()
-                .max(200)
-                .required(),
-            NGAYSINH: Joi.date()
-                .less('now')
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
         sqlConnect.then(pool => {
             return pool.request()
                 .input('masv', sql.NChar(15), req.body.MASV)
@@ -162,7 +107,6 @@ class StudentController {
                 .query('exec SP_XOASV_TAIKHOAN @masv')
         })
             .then(result => {
-                const arrRecord = result.recordset;
                 res.status(200).send({ result: result.rowsAffected[0] });
             }).catch(err => {
                 console.log(err)

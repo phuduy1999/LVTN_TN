@@ -4,9 +4,10 @@ const roleTeacher = require('../app/middlewares/roleTeacher');
 const roleTeacher_PGV = require('../app/middlewares/roleTeacher_PGV');
 
 const subjectController = require('../app/controllers/SubjectController');
+const validate = require('../app/validation/subjectValidation')
 
-router.post('/', roleTeacher_PGV, subjectController.addOne)
-router.put('/:id/edit', roleTeacher_PGV, subjectController.updateOne)
+router.post('/', roleTeacher_PGV, validate.validateSubject, subjectController.addOne)
+router.put('/:id', roleTeacher_PGV, validate.validateSubject, subjectController.updateOne)
 router.delete('/:id', roleTeacher_PGV, subjectController.deleteOne);
 router.get('/:id/check', roleTeacher_PGV, subjectController.checkFK);
 router.get('/:id', roleTeacher_PGV, subjectController.getOne);

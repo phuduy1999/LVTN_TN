@@ -29,7 +29,7 @@ export default function index() {
         HO: ho,
         TEN: ten,
         DIACHI: diachi,
-        EMAIL: email,
+        EMAIL: email.trim(),
         NGAYSINH: ngaysinh
       })
         .then(function (response) {

@@ -12,7 +12,7 @@ const sinhVienApi = {
   },
 
   updateOne: (id, data) => {
-    const url = `/students/${id}/edit`;
+    const url = `/students/${id}`;
     return axiosClient.put(url, data);
   },
 

@@ -84,7 +84,7 @@ export default function index() {
         cardHeader={'Sửa sinh viên'}
         btnTitle={'Sửa'}
         isEdit={true}
-        masv={masv} setMagv={setMasv}
+        masv={masv} setMasv={setMasv}
         ho={ho} setHo={setHo}
         ten={ten} setTen={setTen}
         diachi={diachi} setDiaChi={setDiaChi}

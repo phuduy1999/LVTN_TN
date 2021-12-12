@@ -67,8 +67,7 @@ export default function index(props) {
                   required
                   placeholder="Nhập mã giáo viên..."
                   value={magv}
-                  onChange={(e) => setMagv(e.target.value)}
-                  onBlur={(e) => setMagv(_chuanHoaChuoi(e.target.value))}
+                  onChange={(e) => setMagv(_chuanHoaChuoi(e.target.value).toUpperCase())}
                   disabled={isEdit}
                 />
                 <CFormFeedback invalid>Vui lòng nhập mã giáo viên!</CFormFeedback>
@@ -129,7 +128,6 @@ export default function index(props) {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  onBlur={(e) => setEmail(_chuanHoaChuoi(e.target.value))}
                   disabled={isEdit}
                 />
                 <CFormFeedback invalid>Vui lòng nhập Email hợp lệ!</CFormFeedback>
@@ -144,8 +142,8 @@ export default function index(props) {
                   required
                   placeholder="Nhập số điện thoại..."
                   value={sdt}
-                  onChange={(e) => setSDT(e.target.value)}
-                  onBlur={(e) => setSDT(_chuanHoaChuoi(e.target.value))}
+                  onChange={(e) => setSDT(_chuanHoaChuoi(e.target.value))}
+                  pattern='(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b'
                 />
                 <CFormFeedback invalid>Vui lòng nhập số điện thoại hợp lệ!</CFormFeedback>
               </div>

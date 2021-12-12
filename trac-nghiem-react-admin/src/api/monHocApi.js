@@ -22,7 +22,7 @@ const monHocApi = {
   },
 
   updateOne: (id, data) => {
-    const url = `/subjects/${id}/edit`;
+    const url = `/subjects/${id}`;
     return axiosClient.put(url, data);
   },
 

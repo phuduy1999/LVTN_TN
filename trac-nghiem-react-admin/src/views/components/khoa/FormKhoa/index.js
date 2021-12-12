@@ -32,8 +32,7 @@ export default function index(props) {
                 required
                 placeholder="Nhập mã khoa..."
                 value={makh}
-                onChange={(e) => setMakh(e.target.value)}
-                onBlur={(e) => setMakh(_chuanHoaChuoi(e.target.value))}
+                onChange={(e) => setMakh(_chuanHoaChuoi(e.target.value).toUpperCase())}
               />
               <CFormFeedback invalid>Vui lòng nhập mã khoa!</CFormFeedback>
             </div>

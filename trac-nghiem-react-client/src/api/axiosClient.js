@@ -54,7 +54,11 @@ axiosClient.interceptors.response.use((response) => {
   // Handle errors
   const originalConfig = error.config;
 
-  if (originalConfig.url !== "/api/login" && error.response) {
+  if (originalConfig.url === "/api/login") {
+    return Promise.reject(error);
+  }
+
+  if (error.response) {
     // Access Token was expired
     if (error.response.status === 401 && !originalConfig._retry) {
       originalConfig._retry = true;

@@ -68,7 +68,7 @@ const Login = () => {
       }).catch(error => {
         console.log(error);
         setVisible(!visible);
-        setMess('Đăng nhập không thành công!. Vui lòng kiểm tra lại Email và mật khẩu. ' + error)
+        setMess('Đăng nhập không thành công!. Vui lòng kiểm tra lại Email và mật khẩu.')
       })
     }
     setValidated(true)

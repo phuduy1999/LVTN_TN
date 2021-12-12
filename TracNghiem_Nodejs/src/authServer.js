@@ -7,6 +7,7 @@ const roleTeacher = require('./app/middlewares/roleTeacher')
 const roleStudent = require('./app/middlewares/roleStudent')
 
 const { sqlConnect, sql } = require('./app/config/db') //ket noi db
+const validate = require('./app/validation/authenticationValidation')
 
 const app = express();
 const port = 4000;
@@ -56,7 +57,7 @@ const updateRefreshToken = (email, refreshToken) => {
         })
 }
 
-app.post('/api/login', (req, res) => {
+app.post('/api/login', validate.validateLogin, (req, res) => {
     sqlConnect.then(pool => {
         return pool.request()
             .input('email', sql.NChar(50), req.body.EMAIL)
@@ -80,10 +81,8 @@ app.post('/api/login', (req, res) => {
         })
 })
 
-app.post('/api/refreshToken', (req, res) => {
-    const refreshToken = req.body.refreshToken;
-    if (!refreshToken) return res.status(403).json({ message: "Refresh Token is required!" });
-
+app.post('/api/refreshToken', validate.validateRefreshToken, (req, res) => {
+    refreshToken = req.body.refreshToken;
     sqlConnect.then(pool => {
         return pool.request()
             .input('refresh_token', sql.NVarChar(sql.MAX), refreshToken)
@@ -136,7 +135,7 @@ app.post('/api/logout', authenticateToken, (req, res) => {
         })
 })
 
-app.post('/api/change-password-teacher', authenticateToken, roleTeacher, (req, res) => {
+const changePassword = (req, res) => {
     sqlConnect.then(pool => {
         return pool.request()
             .input('email', sql.NChar(50), req.body.EMAIL)
@@ -153,26 +152,13 @@ app.post('/api/change-password-teacher', authenticateToken, roleTeacher, (req, r
             }
             else res.status(400).send({ err: err.message });
         })
-})
+}
 
-app.post('/api/change-password-student', authenticateToken, roleStudent, (req, res) => {
-    sqlConnect.then(pool => {
-        return pool.request()
-            .input('email', sql.NChar(50), req.body.EMAIL)
-            .input('password', sql.NVarChar(50), req.body.PASSWORD)
-            .input('password_new', sql.NVarChar(50), req.body.PASSWORD_NEW)
-            .query('exec SP_DOIMATKHAU @email, @password, @password_new');
-    })
-        .then(result => {
-            res.send(204);
-        }).catch(err => {
-            console.log(err);
-            if (err.message.includes('mkcusai')) {
-                res.status(400).send({ err: 'Mật khẩu cũ không chính xác!' });
-            }
-            else res.status(400).send({ err: err.message });
-        })
-})
+app.post('/api/change-password-teacher', authenticateToken, roleTeacher,
+    validate.validateChangePassword, changePassword)
+
+app.post('/api/change-password-student', authenticateToken, roleStudent,
+    validate.validateChangePassword, changePassword)
 
 app.listen(port, () => {
     console.log(`App auth server listening at http://localhost:${port}`);

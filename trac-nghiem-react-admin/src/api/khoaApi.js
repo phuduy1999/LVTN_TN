@@ -17,7 +17,7 @@ const khoaApi = {
   },
 
   updateOne: (id, data) => {
-    const url = `/faculties/${id}/edit`;
+    const url = `/faculties/${id}`;
     return axiosClient.put(url, data);
   },
 

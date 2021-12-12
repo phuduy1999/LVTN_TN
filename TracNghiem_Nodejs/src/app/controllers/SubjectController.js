@@ -1,9 +1,8 @@
 const { sqlConnect, sql } = require('../config/db')
-const Joi = require('joi');
 
 class SubjectController {
     //[GET] /
-    getAll(req, res, next) {
+    getAll(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .query('select * from MONHOC')
@@ -17,7 +16,7 @@ class SubjectController {
     }
 
     //[GET] /:id
-    getOne(req, res, next) {
+    getOne(req, res) {
         const ma = req.params.id;
         sqlConnect.then(pool => {
             return pool.request()
@@ -33,7 +32,7 @@ class SubjectController {
     }
 
     //[GET] /:name/name
-    getOneByName(req, res, next) {
+    getOneByName(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('tenmh', sql.NVarChar, req.params.name)
@@ -48,22 +47,7 @@ class SubjectController {
     }
 
     //[POST] /
-    addOne(req, res, next) {
-        const schema = Joi.object({
-            MAMH: Joi.string()
-                .max(15)
-                .required(),
-            TENMH: Joi.string()
-                .max(50)
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
+    addOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('mamh', sql.NChar(15), req.body.MAMH)
@@ -86,22 +70,7 @@ class SubjectController {
     }
 
     //[PUT] /:id/edit
-    updateOne(req, res, next) {
-        const schema = Joi.object({
-            MAMH: Joi.string()
-                .max(15)
-                .required(),
-            TENMH: Joi.string()
-                .max(50)
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
+    updateOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('id', sql.NChar(15), req.params.id)

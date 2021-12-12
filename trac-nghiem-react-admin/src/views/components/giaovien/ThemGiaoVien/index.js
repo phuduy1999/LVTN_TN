@@ -31,7 +31,7 @@ export default function index() {
         HO: ho,
         TEN: ten,
         DIACHI: diachi,
-        EMAIL: email,
+        EMAIL: email.trim(),
         SDT: sdt,
         MAKH: makh,
         MANQ: manq,

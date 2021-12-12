@@ -1,9 +1,8 @@
 const { sqlConnect, sql } = require('../config/db')
-const Joi = require('joi');
 
 class TeacherController {
     //[GET] /
-    getAll(req, res, next) {
+    getAll(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .query('select MAGV, HO, TEN, DIACHI, SDT, EMAIL, TENKH from GIAOVIEN, KHOA where GIAOVIEN.MAKH=KHOA.MAKH order by TEN, TENKH ASC')
@@ -17,11 +16,10 @@ class TeacherController {
     }
 
     //[GET] /:id
-    getOne(req, res, next) {
-        const ma = req.params.id;
+    getOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('magv', sql.NVarChar, ma)
+                .input('magv', sql.NVarChar, req.params.id)
                 .query('select MAGV, HO, TEN, DIACHI, SDT, GIAOVIEN.EMAIL, MAKH, MANQ from GIAOVIEN, TAIKHOAN where MAGV=@magv and GIAOVIEN.EMAIL=TAIKHOAN.EMAIL')
         })
             .then(result => {
@@ -32,12 +30,11 @@ class TeacherController {
             })
     }
 
-    //[GET] /:id/email
-    getOneByEmail(req, res, next) {
-        const ma = req.params.id;
+    //[GET] /:email/email
+    getOneByEmail(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('email', sql.NVarChar, ma)
+                .input('email', sql.NVarChar, req.params.email)
                 .query('select * from GIAOVIEN where EMAIL=@email')
         })
             .then(result => {
@@ -49,39 +46,7 @@ class TeacherController {
     }
 
     //[POST] /
-    addOne(req, res, next) {
-        const schema = Joi.object({
-            MAGV: Joi.string()
-                .max(15)
-                .required(),
-            MANQ: Joi.string()
-                .max(15)
-                .required(),
-            HO: Joi.string()
-                .max(50)
-                .required(),
-            TEN: Joi.string()
-                .max(15)
-                .required(),
-            DIACHI: Joi.string()
-                .max(200)
-                .required(),
-            SDT: Joi.string()
-                .max(12)
-                .required(),
-            EMAIL: Joi.string()
-                .max(50)
-                .required(),
-            MAKH: Joi.string()
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
+    addOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('magv', sql.NChar(15), req.body.MAGV)
@@ -109,31 +74,8 @@ class TeacherController {
             })
     }
 
-    //[PUT] /:id/edit
-    updateOne(req, res, next) {
-        const schema = Joi.object({
-            HO: Joi.string()
-                .max(50)
-                .required(),
-            TEN: Joi.string()
-                .max(15)
-                .required(),
-            DIACHI: Joi.string()
-                .max(200)
-                .required(),
-            SDT: Joi.string()
-                .max(12)
-                .required(),
-            MAKH: Joi.string()
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
+    //[PUT] /:id
+    updateOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('magv', sql.NChar(15), req.params.id) // id=magv
@@ -167,7 +109,6 @@ class TeacherController {
                 .query('exec SP_XOAGV_TAIKHOAN @magv')
         })
             .then(result => {
-                const arrRecord = result.recordset;
                 res.status(200).send({ result: result.rowsAffected[0] });
             }).catch(err => {
                 console.log(err)

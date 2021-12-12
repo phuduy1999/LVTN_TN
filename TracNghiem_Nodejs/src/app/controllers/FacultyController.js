@@ -1,9 +1,8 @@
 const { sqlConnect, sql } = require('../config/db')
-const Joi = require('joi');
 
 class FacultyController {
   //[GET] /
-  getAll(req, res, next) {
+  getAll(req, res) {
     sqlConnect.then(pool => {
       return pool.request()
         .query('select * from KHOA')
@@ -17,11 +16,10 @@ class FacultyController {
   }
 
   //[GET] /:id
-  getOne(req, res, next) {
-    const ma = req.params.id;
+  getOne(req, res) {
     sqlConnect.then(pool => {
       return pool.request()
-        .input('makh', sql.NVarChar, ma)
+        .input('makh', sql.NVarChar, req.params.id)
         .query('select * from KHOA where MAKH=@makh')
     })
       .then(result => {
@@ -33,22 +31,7 @@ class FacultyController {
   }
 
   //[POST] /
-  addOne(req, res, next) {
-    const schema = Joi.object({
-      MAKH: Joi.string()
-        .max(15)
-        .required(),
-      TENKH: Joi.string()
-        .max(50)
-        .required(),
-    })
-
-    const result = schema.validate(req.body);
-    if (result.error) {
-      res.status(400).send({ err: result.error.details[0].message });
-      return;
-    }
-
+  addOne(req, res) {
     sqlConnect.then(pool => {
       return pool.request()
         .input('makh', sql.NChar(15), req.body.MAKH)
@@ -70,23 +53,8 @@ class FacultyController {
       })
   }
 
-  //[PUT] /:id/edit
+  //[PUT] /:id
   updateOne(req, res) {
-    const schema = Joi.object({
-      MAKH: Joi.string()
-        .max(15)
-        .required(),
-      TENKH: Joi.string()
-        .max(50)
-        .required(),
-    })
-
-    const result = schema.validate(req.body);
-    if (result.error) {
-      res.status(400).send({ err: result.error.details[0].message });
-      return;
-    }
-
     sqlConnect.then(pool => {
       return pool.request()
         .input('id', sql.NChar(15), req.params.id)
@@ -118,7 +86,6 @@ class FacultyController {
         .query('delete from KHOA where MAKH=@makh')
     })
       .then(result => {
-        const arrRecord = result.recordset;
         res.status(200).send({ result: result.rowsAffected[0] });
       }).catch(err => {
         console.log(err)

@@ -22,7 +22,7 @@ const giaoVienApi = {
   },
 
   updateOne: (id, data) => {
-    const url = `/teachers/${id}/edit`;
+    const url = `/teachers/${id}`;
     return axiosClient.put(url, data);
   },
 
