@@ -18,7 +18,7 @@ class RegisterClassController {
     }
 
     //[POST] /
-    addRegisterClass(req, res, next) {
+    addRegisterClass(req, res) {
         const schema = Joi.object({
             NIENKHOA: Joi.string()
                 .max(10)
@@ -30,8 +30,10 @@ class RegisterClassController {
             NHOM: Joi.number()
                 .required(),
             MAMH: Joi.string()
+                .max(15)
                 .required(),
             MASV: Joi.string()
+                .max(15)
                 .required(),
         })
 

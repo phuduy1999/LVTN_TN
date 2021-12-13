@@ -71,8 +71,7 @@ export default function index(props) {
                   required
                   placeholder="Vd: 2020-2021"
                   value={nienkhoa}
-                  onChange={(e) => setNienKhoa(e.target.value)}
-                  onBlur={(e) => setNienKhoa(_chuanHoaChuoi(e.target.value))}
+                  onChange={(e) => setNienKhoa(_chuanHoaChuoi(e.target.value))}
                 />
                 <CFormFeedback invalid>Vui lòng nhập niên khóa hợp lệ!</CFormFeedback>
               </div>

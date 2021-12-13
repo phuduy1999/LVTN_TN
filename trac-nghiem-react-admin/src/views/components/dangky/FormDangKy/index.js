@@ -60,8 +60,7 @@ export default function index(props) {
                   placeholder="Vd: 2020-2021"
                   disabled={isEdit}
                   value={nienkhoa}
-                  onChange={(e) => setNienKhoa(e.target.value)}
-                  onBlur={(e) => setNienKhoa(_chuanHoaChuoi(e.target.value))}
+                  onChange={(e) => setNienKhoa(_chuanHoaChuoi(e.target.value))}
                 />
                 <CFormFeedback invalid>Vui lòng nhập niên khóa hợp lệ!</CFormFeedback>
               </div>
@@ -128,22 +127,36 @@ export default function index(props) {
               </div>
             </CCol>
 
-            <CCol md={6}>
-              <div className="mb-3">
-                <CFormLabel>Ngày thi</CFormLabel>
-                <CFormInput
-                  type="date"
-                  min={getToDay()}
-                  required
-                  value={ngaythi}
-                  onChange={(e) => {
-                    setNgayThi(e.target.value)
-                    console.log(e.target.value);
-                  }}
-                />
-                <CFormFeedback invalid>Vui lòng nhập ngày thi hợp lệ!</CFormFeedback>
-              </div>
-            </CCol>
+            {!isEdit &&
+              <CCol md={6}>
+                <div className="mb-3">
+                  <CFormLabel>Ngày thi</CFormLabel>
+                  <CFormInput
+                    type="date"
+                    min={getToDay()}
+                    required
+                    value={ngaythi}
+                    onChange={(e) => { setNgayThi(e.target.value) }}
+                  />
+                  <CFormFeedback invalid>Vui lòng nhập ngày thi hợp lệ!</CFormFeedback>
+                </div>
+              </CCol>
+            }
+
+            {isEdit &&
+              <CCol md={6}>
+                <div className="mb-3">
+                  <CFormLabel>Ngày thi</CFormLabel>
+                  <CFormInput
+                    type="date"
+                    required
+                    value={ngaythi}
+                    onChange={(e) => { setNgayThi(e.target.value) }}
+                  />
+                  <CFormFeedback invalid>Vui lòng nhập ngày thi hợp lệ!</CFormFeedback>
+                </div>
+              </CCol>
+            }
 
             <CCol md={6}>
               <div className="mb-3">

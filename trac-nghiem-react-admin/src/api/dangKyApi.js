@@ -27,7 +27,7 @@ const dangKyApi = {
   },
 
   updateOne: (id, data) => {
-    const url = `/registers/${id}/edit`;
+    const url = `/registers/${id}`;
     return axiosClient.put(url, data);
   },
 

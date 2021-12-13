@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 class TypeController {
     //[GET] /
-    getAll(req, res, next) {
+    getAll(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .query('select * from LOAICAUHOI')
@@ -17,11 +17,10 @@ class TypeController {
     }
 
     //[GET] /:id
-    getOne(req, res, next) {
-        const ma = req.params.id;
+    getOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('malch', sql.NVarChar, ma)
+                .input('malch', sql.NVarChar, req.params.id)
                 .query('select * from LOAICAUHOI where MALOAICH=@malch')
         })
             .then(result => {

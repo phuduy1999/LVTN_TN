@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 class RegisterController {
     //[GET] /
-    getAll(req, res, next) {
+    getAll(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .query('select IDLMH, NIENKHOA, HOCKY, NHOM, TENMH, MAGVDK, HO, TEN, TRINHDODK, NGAYTHI, SCT, THOIGIANTHI from LOPMONHOC, MONHOC, GIAOVIEN where LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGVDK=GIAOVIEN.MAGV and TRANGTHAI=1 order by GIAOVIEN.MAGV')
@@ -18,7 +18,7 @@ class RegisterController {
     }
 
     //[POST] /get-questions
-    getQuestions(req, res, next) {
+    getQuestions(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('iddk', sql.Int, req.body.IDDK)
@@ -41,7 +41,7 @@ class RegisterController {
     }
 
     //[POST] /get-questions-for-testing
-    getQuestionsForTesting(req, res, next) {
+    getQuestionsForTesting(req, res) {
         console.log(req.body.SCT, req.body.TRINHDODK, req.body.MAMH);
         sqlConnect.then(pool => {
             return pool.request()
@@ -60,11 +60,10 @@ class RegisterController {
     }
 
     //[GET] /:id
-    getOne(req, res, next) {
-        const id = req.params.id;
+    getOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('idlmh', sql.Int, id)
+                .input('idlmh', sql.Int, req.params.id)
                 .query('select NIENKHOA, HOCKY, NHOM, TRINHDODK, THOIGIANTHI, SCT, NGAYTHI, LOPMONHOC.MAMH, TENMH from LOPMONHOC, MONHOC where IDLMH=@idlmh and LOPMONHOC.MAMH=MONHOC.MAMH')
         })
             .then(result => {
@@ -77,11 +76,10 @@ class RegisterController {
     }
 
     //[GET] /:id/iddk
-    getOneByIDDK(req, res, next) {
-        const id = req.params.id;
+    getOneByIDDK(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('iddk', sql.Int, id)
+                .input('iddk', sql.Int, req.params.id)
                 .query('select NIENKHOA, HOCKY, NHOM, TRINHDODK, THOIGIANTHI, SCT, NGAYTHI, LOPMONHOC.MAMH, TENMH from LOPMONHOC, MONHOC where IDLMH=(select IDLMH from DANGKY where IDDK=@iddk) and LOPMONHOC.MAMH=MONHOC.MAMH; select THOIGIANCONLAI_S from DANGKY where IDDK=@iddk')
         })
             .then(result => {
@@ -97,8 +95,8 @@ class RegisterController {
             })
     }
 
-    //[GET] /check-register
-    checkRegister(req, res, next) {
+    //[POST] /check-register
+    checkRegister(req, res) {
         console.log(req.body.NIENKHOA + req.body.HOCKY + req.body.NHOM + req.body.MAMH)
         sqlConnect.then(pool => {
             return pool.request()
@@ -134,8 +132,8 @@ class RegisterController {
             })
     }
 
-    //[GET] /check-trial-register
-    checkTrialRegister(req, res, next) {
+    //[POST] /check-trial-register
+    checkTrialRegister(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('sct', sql.Int, req.body.SCT)
@@ -156,38 +154,7 @@ class RegisterController {
     }
 
     //[POST] /
-    addOne(req, res, next) {
-        const schema = Joi.object({
-            NIENKHOA: Joi.string()
-                .max(10)
-                .required(),
-            HOCKY: Joi.number()
-                .min(1)
-                .max(2)
-                .required(),
-            NHOM: Joi.number()
-                .required(),
-            MAMH: Joi.string()
-                .required(),
-            MAGVDK: Joi.string()
-                .required(),
-            TRINHDODK: Joi.string()
-                .required(),
-            NGAYTHI: Joi.date()
-                // .min('now')
-                .required(),
-            SCT: Joi.number()
-                .required(),
-            THOIGIANTHI: Joi.number()
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
+    addOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('nienkhoa', sql.NVarChar(10), req.body.NIENKHOA)
@@ -223,7 +190,6 @@ class RegisterController {
                 .query('exec SP_HUY_DANGKY @id')
         })
             .then(result => {
-                const arrRecord = result.recordset;
                 res.status(200).send({ result: result.rowsAffected[0] });
             }).catch(err => {
                 console.log(err)
@@ -252,26 +218,8 @@ class RegisterController {
             })
     }
 
-    //[PUT] /:id/edit
+    //[PUT] /:id
     updateOne(req, res) {
-        const schema = Joi.object({
-            TRINHDODK: Joi.string()
-                .required(),
-            NGAYTHI: Joi.date()
-                // .min('now')
-                .required(),
-            SCT: Joi.number()
-                .required(),
-            THOIGIANTHI: Joi.number()
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
         sqlConnect.then(pool => {
             return pool.request()
                 .input('td', sql.NChar(1), req.body.TRINHDODK)

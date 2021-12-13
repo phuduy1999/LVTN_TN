@@ -25,6 +25,10 @@ export default function index() {
     if (form.checkValidity() === false) {
       event.stopPropagation()
     }
+    else if (!validateNienKhoa(nienkhoa)) {
+      setVisible(!visible);
+      setMess('Niên khóa không hợp lệ');
+    }
     else {
       dangKyApi.addOne({
         MAGVDK: InfoUserLogin()?.MAGV,
@@ -72,4 +76,20 @@ export default function index() {
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
     </Fragment>
   )
+}
+
+const validateNienKhoa = (nienkhoa) => {
+  if (nienkhoa) {
+    const years = nienkhoa.split('-');
+    if (years.length === 2) {
+      const yearStart = parseInt(years[0]);
+      const yearEnd = parseInt(years[1]);
+      if (yearStart !== NaN && yearEnd !== NaN) {
+        if (yearEnd - yearStart === 1 && yearStart >= 1900 && yearEnd <= 2999) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 }

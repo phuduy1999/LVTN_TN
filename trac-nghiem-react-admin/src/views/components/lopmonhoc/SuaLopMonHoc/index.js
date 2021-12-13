@@ -32,6 +32,10 @@ export default function index() {
       setVisible(!visible);
       setMess('Bạn chưa sửa gì hết!')
     }
+    else if (!validateNienKhoa(nienkhoa)) {
+      setVisible(!visible);
+      setMess('Niên khóa không hợp lệ');
+    }
     else {
       lopMHApi.updateOne(id, {
         MAGV: magv,
@@ -99,4 +103,20 @@ export default function index() {
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
     </Fragment>
   )
+}
+
+const validateNienKhoa = (nienkhoa) => {
+  if (nienkhoa) {
+    const years = nienkhoa.split('-');
+    if (years.length === 2) {
+      const yearStart = parseInt(years[0]);
+      const yearEnd = parseInt(years[1]);
+      if (yearStart !== NaN && yearEnd !== NaN) {
+        if (yearEnd - yearStart === 1 && yearStart >= 1900 && yearEnd <= 2999) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 }

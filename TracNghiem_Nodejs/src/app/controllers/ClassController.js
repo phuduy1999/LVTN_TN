@@ -1,9 +1,8 @@
 const { sqlConnect, sql } = require('../config/db')
-const Joi = require('joi');
 
 class ClassController {
     //[GET] /
-    getAll(req, res, next) {
+    getAll(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .query('select IDLMH, NIENKHOA, HOCKY, NHOM, SOSVTT, TENKH, TENMH, GIAOVIEN.MAGV, HO, TEN from LOPMONHOC, KHOA, MONHOC, GIAOVIEN where LOPMONHOC.MAKH=KHOA.MAKH and LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGV=GIAOVIEN.MAGV and TRANGTHAI=1')
@@ -17,7 +16,7 @@ class ClassController {
     }
 
     //[GET] /cancel
-    getAllCancel(req, res, next) {
+    getAllCancel(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .query('select IDLMH, NIENKHOA, HOCKY, NHOM, SOSVTT, TENKH, TENMH, GIAOVIEN.MAGV, HO, TEN from LOPMONHOC, KHOA, MONHOC, GIAOVIEN where LOPMONHOC.MAKH=KHOA.MAKH and LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGV=GIAOVIEN.MAGV and TRANGTHAI=0')
@@ -31,11 +30,10 @@ class ClassController {
     }
 
     //[GET] /:id
-    getOne(req, res, next) {
-        const id = req.params.id;
+    getOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('idlmh', sql.Int, id)
+                .input('idlmh', sql.Int, req.params.id)
                 .query('select * from LOPMONHOC where IDLMH=@idlmh')
         })
             .then(result => {
@@ -47,35 +45,7 @@ class ClassController {
     }
 
     //[POST] /
-    addOne(req, res, next) {
-        const schema = Joi.object({
-            NIENKHOA: Joi.string()
-                .max(10)
-                .required(),
-            HOCKY: Joi.number()
-                .min(1)
-                .max(2)
-                .required(),
-            NHOM: Joi.number()
-                .min(1)
-                .required(),
-            SOSVTT: Joi.number()
-                .min(1)
-                .required(),
-            MAKH: Joi.string()
-                .required(),
-            MAMH: Joi.string()
-                .required(),
-            MAGV: Joi.string()
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
+    addOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('nienkhoa', sql.NVarChar(10), req.body.NIENKHOA)
@@ -103,38 +73,8 @@ class ClassController {
             })
     }
 
-    //[PUT] /:id/edit
+    //[PUT] /:id
     updateOne(req, res) {
-        const schema = Joi.object({
-            NIENKHOA: Joi.string()
-                .max(10)
-                .required(),
-            HOCKY: Joi.number()
-                .min(1)
-                .max(2)
-                .required(),
-            NHOM: Joi.number()
-                .min(1)
-                .required(),
-            SOSVTT: Joi.number()
-                .min(1)
-                .required(),
-            MAKH: Joi.string()
-                .required(),
-            MAMH: Joi.string()
-                .required(),
-            MAGV: Joi.string()
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
-        console.log(req.params, req.body)
-
         sqlConnect.then(pool => {
             return pool.request()
                 .input('nienkhoa', sql.NVarChar(10), req.body.NIENKHOA)
@@ -247,6 +187,7 @@ class ClassController {
             })
     }
 
+    //[PUT] /:id/cancel
     cancelOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
@@ -268,6 +209,7 @@ class ClassController {
             })
     }
 
+    //[PUT] /:id/restore
     restoreOne(req, res) {
         sqlConnect.then(pool => {
             return pool.request()

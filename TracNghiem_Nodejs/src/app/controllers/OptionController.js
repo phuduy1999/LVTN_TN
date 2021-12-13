@@ -4,11 +4,10 @@ const Joi = require('joi');
 class OptionController {
 
     //[GET] /:id
-    getOptionsOfQuestion(req, res, next) {
-        const ma = req.params.id;
+    getOptionsOfQuestion(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .input('id', sql.Int, ma)
+                .input('id', sql.Int, req.params.id)
                 .query('select * from LUACHON where IDCAUHOI=@id')
         })
             .then(result => {

@@ -4,13 +4,13 @@ import monHocApi from 'src/api/monHocApi';
 import dangKyLopMHApi from 'src/api/dangKyLopMHApi';
 import AppModalCustom from 'src/components/AppModalCustom';
 import InfoUserLogin from 'src/_infoUser';
+import _chuanHoaChuoi from 'src/_chuanHoaChuoi.js';
 
 export default function index() {
   const [nienkhoa, setNienKhoa] = useState('');
   const [hocky, setHocKy] = useState(1);
   const [nhom, setNhom] = useState('');
   const [mamh, setMamh] = useState('');
-  const [isPending, setIsPending] = useState(false);
   const [visible, setVisible] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [mess, setMess] = useState(false)
@@ -24,8 +24,11 @@ export default function index() {
     if (form.checkValidity() === false) {
       event.stopPropagation()
     }
+    else if (!validateNienKhoa(nienkhoa)) {
+      setVisible(!visible);
+      setMess('Niên khóa không hợp lệ');
+    }
     else {
-      setIsPending(true);
 
       const user = InfoUserLogin();
 
@@ -39,14 +42,12 @@ export default function index() {
         .then(function (response) {
           console.log(response);
 
-          setIsPending(false);
           setVisible(!visible);
           setIsSuccess(true);
           setMess('Bạn đã đăng ký lớp môn học thành công!')
         })
         .catch(function (error) {
           console.log(error.response);
-          setIsPending(false);
           setIsSuccess(false);
           setVisible(!visible);
           setMess('Lỗi: ' + error.response.data.err)
@@ -72,10 +73,6 @@ export default function index() {
     fetchDS();
   }, [])
 
-  const handleSetVisible = () => {
-    setVisible(false);
-  }
-
   return (
     <div >
       <CContainer>
@@ -100,7 +97,7 @@ export default function index() {
                         required
                         value={nienkhoa}
                         placeholder="Vd: 2020-2021"
-                        onChange={(e) => setNienKhoa(e.target.value)}
+                        onChange={(e) => setNienKhoa(_chuanHoaChuoi(e.target.value))}
                       />
                       <CFormFeedback invalid>Vui lòng nhập niên khóa hợp lệ!</CFormFeedback>
                     </div>
@@ -150,14 +147,11 @@ export default function index() {
                   </CCol>
 
                   <CCol xs={12}>
-                    {!isPending && <CButton color="primary" type="submit">
+                    <CButton color="primary" type="submit">
                       Đăng ký
-                    </CButton>}
-                    {isPending && <CButton disabled color="primary">
-                      Đăng ký...
-                    </CButton>}
+                    </CButton>
                   </CCol>
-                  <AppModalCustom visible={visible} handleSetVisible={handleSetVisible}
+                  <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false); }}
                     mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
                 </CForm>
               </CCardBody>
@@ -167,4 +161,20 @@ export default function index() {
       </CContainer>
     </div>
   )
+}
+
+const validateNienKhoa = (nienkhoa) => {
+  if (nienkhoa) {
+    const years = nienkhoa.split('-');
+    if (years.length === 2) {
+      const yearStart = parseInt(years[0]);
+      const yearEnd = parseInt(years[1]);
+      if (yearStart !== NaN && yearEnd !== NaN) {
+        if (yearEnd - yearStart === 1 && yearStart >= 1900 && yearEnd <= 2999) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
 }

@@ -1,5 +1,4 @@
 const { sqlConnect, sql } = require('../config/db')
-const Joi = require('joi');
 const XLSX = require('xlsx');
 const _chuanHoaChuoi = require('../../_chuanHoaChuoi')
 
@@ -62,10 +61,9 @@ const getListCauHoi = (data, t) => {
 
   return listCauHoi;
 }
-
 class QuestionController {
   //[GET] /
-  getAll(req, res, next) {
+  getAll(req, res) {
     sqlConnect.then(pool => {
       return pool.request()
         .query('select IDCAUHOI, TRINHDO, NOIDUNG, DAP_AN, TENMH, TENLOAICH, GIAOVIEN.MAGV, HO, TEN from BODE, MONHOC, LOAICAUHOI, GIAOVIEN where BODE.MAMH = MONHOC.MAMH and BODE.MALOAICH=LOAICAUHOI.MALOAICH and BODE.MAGV=GIAOVIEN.MAGV order by GIAOVIEN.MAGV, TENMH ASC')
@@ -79,11 +77,10 @@ class QuestionController {
   }
 
   //[GET] /:id
-  getOne(req, res, next) {
-    const ma = req.params.id;
+  getOne(req, res) {
     sqlConnect.then(pool => {
       return pool.request()
-        .input('id', sql.NVarChar, ma)
+        .input('id', sql.NVarChar, req.params.id)
         .query('select * from BODE where IDCAUHOI=@id; select * from LUACHON where IDCAUHOI=@id')
     })
       .then(result => {
@@ -95,23 +92,8 @@ class QuestionController {
       })
   }
 
-  getOne2(req, res, next) {
-    const ma = req.params.id;
-    sqlConnect.then(pool => {
-      return pool.request()
-        .input('id', sql.NVarChar, ma)
-        .query('select * from BODE where IDCAUHOI=@id')
-    })
-      .then(result => {
-        const arrRecord = result.recordset;
-        res.status(200).send(arrRecord[0]);
-      }).catch(err => {
-        console.log(err)
-      })
-  }
-
-  //[GET] /:id
-  getMultipleChoice(req, res, next) {
+  //[GET] /:id/choices
+  getMultipleChoice(req, res) {
     sqlConnect.then(pool => {
       return pool.request()
         .input('id', sql.Int, req.params.id)
@@ -126,41 +108,7 @@ class QuestionController {
   }
 
   //[POST] /
-  addOne(req, res, next) {
-    const schema = Joi.object({
-      TRINHDO: Joi.string()
-        .required(),
-      NOIDUNG: Joi.string()
-        .required(),
-      DAP_AN: Joi.string()
-        .max(30)
-        .required(),
-      MAMH: Joi.string()
-        .max(15)
-        .required(),
-      MALOAICH: Joi.string()
-        .max(15)
-        .required(),
-      MAGV: Joi.string()
-        .max(15)
-        .required(),
-      CAC_LUA_CHON: Joi.array()
-        .items(Joi.object({
-          STT: Joi.string()
-            .max(1)
-            .required(),
-          NOIDUNG: Joi.string()
-            .max(200)
-            .required(),
-        })),
-    })
-
-    const result = schema.validate(req.body);
-    if (result.error) {
-      res.status(400).send({ err: result.error.details[0].message });
-      return;
-    }
-
+  addOne(req, res) {
     // const cacLuaChon = new sql.Table('LuaChonType')
     // cacLuaChon.columns.add('STT', sql.NChar(1));
     // cacLuaChon.columns.add('NOIDUNG', sql.NVarChar(200));
@@ -193,8 +141,12 @@ class QuestionController {
   }
 
   //[POST] /excel
-  addByExcel(req, res, next) {
+  addByExcel(req, res) {
     console.log(req.file);
+
+    if (!req.file) {
+      res.status(400).send({ err: "File excel không tồn tại!" });
+    }
 
     const data = readFileExcel(req.file.path);
 
@@ -248,36 +200,8 @@ class QuestionController {
       })
   }
 
-  //[POST] /:id/edit
-  updateOne(req, res, next) {
-    const schema = Joi.object({
-      TRINHDO: Joi.string()
-        .required(),
-      NOIDUNG: Joi.string()
-        .required(),
-      DAP_AN: Joi.string()
-        .max(30)
-        .required(),
-      MAMH: Joi.string()
-        .max(15)
-        .required(),
-      CAC_LUA_CHON: Joi.array()
-        .items(Joi.object({
-          STT: Joi.string()
-            .max(1)
-            .required(),
-          NOIDUNG: Joi.string()
-            .max(200)
-            .required(),
-        })),
-    })
-
-    const result = schema.validate(req.body);
-    if (result.error) {
-      res.status(400).send({ err: result.error.details[0].message });
-      return;
-    }
-
+  //[PUT] /:id
+  updateOne(req, res) {
     const json = JSON.stringify(req.body.CAC_LUA_CHON);
 
     sqlConnect.then(pool => {

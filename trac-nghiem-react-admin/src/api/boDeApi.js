@@ -17,7 +17,7 @@ const boDeApi = {
   },
 
   updateOne: (id, data) => {
-    const url = `/questions/${id}/edit`;
+    const url = `/questions/${id}`;
     return axiosClient.put(url, data);
   },
 

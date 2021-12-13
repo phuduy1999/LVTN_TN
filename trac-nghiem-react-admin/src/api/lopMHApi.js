@@ -22,7 +22,7 @@ const lopMHApi = {
   },
 
   updateOne: (id, data) => {
-    const url = `/classes/${id}/edit`;
+    const url = `/classes/${id}`;
     return axiosClient.put(url, data);
   },
 
