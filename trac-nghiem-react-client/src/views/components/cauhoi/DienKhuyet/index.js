@@ -13,6 +13,7 @@ export default function index(props) {
       setLuaChon(cauhoi.LUACHONSV);
     } else {
       setLuaChon(luachonsv);
+      setIsDaChon(luachonsv !== '');
     }
   }, [luachonsv])
 

@@ -6,6 +6,11 @@ const lopMHApi = {
     return axiosClient.get(url, { params });
   },
 
+  getSchoolYear: (params) => {
+    const url = '/classes/school-year';
+    return axiosClient.get(url, { params });
+  },
+
   getAllCancel: (params) => {
     const url = '/classes/cancel';
     return axiosClient.get(url, { params });

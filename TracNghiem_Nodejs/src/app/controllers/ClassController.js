@@ -5,7 +5,23 @@ class ClassController {
     getAll(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
-                .query('select IDLMH, NIENKHOA, HOCKY, NHOM, SOSVTT, TENKH, TENMH, GIAOVIEN.MAGV, HO, TEN from LOPMONHOC, KHOA, MONHOC, GIAOVIEN where LOPMONHOC.MAKH=KHOA.MAKH and LOPMONHOC.MAMH=MONHOC.MAMH and LOPMONHOC.MAGV=GIAOVIEN.MAGV and TRANGTHAI=1')
+                .input('nienkhoa', sql.NVarChar(10), req.query.nienkhoa)
+                .input('hocky', sql.SmallInt, req.query.hocky)
+                .execute("SP_GET_LMH_FILTER")
+        })
+            .then(result => {
+                const arrRecord = result.recordset;
+                res.status(200).send(arrRecord);
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
+    //[GET] /school-year
+    getSchoolYear(req, res) {
+        sqlConnect.then(pool => {
+            return pool.request()
+                .query('select distinct NIENKHOA from LOPMONHOC where TRANGTHAI=1')
         })
             .then(result => {
                 const arrRecord = result.recordset;

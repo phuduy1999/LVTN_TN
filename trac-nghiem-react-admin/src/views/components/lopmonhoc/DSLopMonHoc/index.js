@@ -1,6 +1,6 @@
 import { cilArrowRight, cilBan, cilDelete, cilList, cilPenAlt } from '@coreui/icons';
 import CIcon from '@coreui/icons-react';
-import { CButton, CCard, CCardBody, CCardHeader, CCol, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
+import { CButton, CCard, CCardBody, CCardHeader, CCol, CForm, CFormLabel, CFormSelect, CRow, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTooltip } from '@coreui/react';
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import lopMHApi from 'src/api/lopMHApi';
@@ -10,6 +10,7 @@ import InfoUserLogin from 'src/_infoUser';
 
 export default function index() {
   const [ds, setDS] = useState([]);
+  const [dsNienKhoa, setDSNienKhoa] = useState([]);
   const [visible, setVisible] = useState(false)
   const [visibleCheck, setVisibleCheck] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -22,12 +23,21 @@ export default function index() {
 
   const [idCanXoa, setIdCanXoa] = useState('');
 
+  //add filter
+  const [filter, setFilter] = useState({
+    nienkhoa: '0',
+    hocky: '0',
+  });
+  const [isFilter, setIsFilter] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await lopMHApi.getAll();
+        const response = await lopMHApi.getAll(filter);
         setDS(response);
-        console.log(response);
+        const response1 = await lopMHApi.getSchoolYear();
+        setDSNienKhoa(response1);
+        console.log(response1);
       } catch (error) {
         console.log(error);
       }
@@ -129,6 +139,29 @@ export default function index() {
       })
   }
 
+  const handleFilter = () => {
+    if (filter.nienkhoa !== '0' || filter.hocky !== '0') {
+      setIsFilter(true);
+      setReload(!reload);
+    }
+    if (filter.nienkhoa === '0' && filter.hocky === '0') {
+      setIsFilter(false);
+      setReload(!reload);
+    }
+  }
+
+  const handleOffFilter = () => {
+    setIsFilter(false);
+    setFilter({ nienkhoa: '0', hocky: '0' });
+    setReload(!reload);
+  }
+
+  useEffect(() => {
+    handleFilter();
+  }, [filter])
+
+  console.log(filter)
+
   return (
     <CCol xs={12}>
       <CCard className="mb-4">
@@ -136,12 +169,46 @@ export default function index() {
           <strong>Danh sách lớp môn học</strong>
         </CCardHeader>
         <CCardBody>
-          <CCol xs={12} className="text-end">
-            <Link to="/lopmonhoc/ds-lopmonhoc-dahuy" >
-              <span>Danh sách lớp môn học đã hủy   </span>
-              <CIcon icon={cilArrowRight} />
-            </Link>
-          </CCol>
+          <CRow>
+            <CCol md={3}>
+              <div className="mb-3">
+                <CFormSelect className="mb-3"
+                  value={filter.nienkhoa}
+                  onChange={(e) => setFilter({ ...filter, nienkhoa: e.target.value })}>
+                  <option value="0">Chọn niên khóa...(All)</option>
+                  {dsNienKhoa && dsNienKhoa.map((nk, idx) => (
+                    <option key={idx} value={nk.NIENKHOA}>{nk.NIENKHOA}</option>
+                  ))}
+                </CFormSelect>
+              </div>
+            </CCol>
+            <CCol md={3}>
+              <div className="mb-3">
+                <CFormSelect className="mb-3"
+                  value={filter.hocky}
+                  onChange={(e) => setFilter({ ...filter, hocky: e.target.value })}>
+                  <option value="0">Chọn học kỳ...(All)</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </CFormSelect>
+              </div>
+            </CCol>
+            <CCol md={3}>
+              {isFilter &&
+                <CButton color="danger"
+                  onClick={handleOffFilter}
+                >
+                  Bỏ lọc
+                </CButton>}
+            </CCol>
+            <CCol className="text-end">
+              <Link to="/lopmonhoc/ds-lopmonhoc-dahuy" >
+                <span>Danh sách lớp môn học đã hủy   </span>
+                <CIcon icon={cilArrowRight} />
+              </Link>
+            </CCol>
+          </CRow>
+
           <CTable striped hover className="mt-3">
             <CTableHead>
               <CTableRow>
@@ -218,12 +285,12 @@ export default function index() {
             </Link>
           </div>
         </CCardBody>
-      </CCard>
+      </CCard >
       <AppModalCustom visible={visible} handleSetVisible={() => { setVisible(false) }}
         mess={mess} isSuccess={isSuccess} pageRedirect={pageRedirect} />
       <AppModalCustomDelete visibleCheck={visibleCheck}
         handleSetVisibleCheck={() => { setVisibleCheck(false) }}
         mess={messCheck} handleClickAccept={handleClickAccept} />
-    </CCol>
+    </CCol >
   )
 }

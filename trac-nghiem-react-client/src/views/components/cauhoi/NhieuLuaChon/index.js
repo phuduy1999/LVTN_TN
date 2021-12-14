@@ -1,5 +1,5 @@
 import { CAlert, CCard, CCardBody, CCardHeader, CCol, CFormCheck, CListGroup, CListGroupItem, CRow } from '@coreui/react';
-import { default as React, useState } from 'react';
+import { default as React, useEffect, useState } from 'react';
 
 export default function index(props) {
   const { cauhoi, luachonsv, handleSetLuaChon, idx, isDisabled } = props;
@@ -7,6 +7,11 @@ export default function index(props) {
   const [lc, setLuaChon] = useState('');
   const [ds, setDS] = useState(cauhoi.LUACHON);//danh sách lựa chọn
   const [isDaChon, setIsDaChon] = useState(false);
+
+  useEffect(() => {
+    setLuaChon(luachonsv);
+    setIsDaChon(luachonsv !== '');
+  }, [luachonsv])
 
   return (
     <div id={`cau-hoi-${idx + 1}`}>

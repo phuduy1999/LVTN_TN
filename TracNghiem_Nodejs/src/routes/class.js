@@ -11,6 +11,7 @@ router.put('/:id/restore', roleTeacher_PGV, classController.restoreOne)
 router.put('/:id', roleTeacher_PGV, validate.validateClass, classController.updateOne)
 router.delete('/:id', roleTeacher_PGV, classController.deleteOne);
 router.get('/cancel', classController.getAllCancel);
+router.get('/school-year', classController.getSchoolYear);
 router.get('/:id/check', roleTeacher_PGV, classController.checkFK);
 router.get('/:id/check-before-edit', roleTeacher_PGV, classController.checkBeforeEdit);
 router.get('/:id/check-before-cancel', roleTeacher_PGV, classController.checkBeforeCancel);

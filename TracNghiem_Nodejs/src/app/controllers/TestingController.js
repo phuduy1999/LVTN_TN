@@ -10,7 +10,7 @@ class TestingController {
             STT: Joi.number()
                 .required(),
             LUACHONSV: Joi.string()
-                .required(),
+                .allow(null, ""),
         })
 
         const result = schema.validate(req.body);
