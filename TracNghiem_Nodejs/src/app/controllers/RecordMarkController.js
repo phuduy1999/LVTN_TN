@@ -1,9 +1,8 @@
 const { sqlConnect, sql } = require('../config/db')
-const Joi = require('joi');
 
 class RecordMarkController {
     //[POST] /
-    addOne(req, res, next) {
+    addOne(req, res) {
         // console.log(req.body, req.body.length)
         const info = req.body.INFO;
         console.log(info, req.body.CTBT);

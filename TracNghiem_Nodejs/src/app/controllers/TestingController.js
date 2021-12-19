@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 class TestingController {
     //[PUT] /
-    updateChoice(req, res, next) {
+    updateChoice(req, res) {
         const schema = Joi.object({
             IDDK: Joi.number()
                 .required(),
@@ -37,7 +37,7 @@ class TestingController {
     }
 
     //[PUT] /timer
-    updateTimer(req, res, next) {
+    updateTimer(req, res) {
         const schema = Joi.object({
             IDDK: Joi.number()
                 .required(),

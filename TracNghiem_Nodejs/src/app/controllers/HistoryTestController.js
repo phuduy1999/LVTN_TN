@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 class HistoryTestController {
     //[POST] /
-    getHistoryTest(req, res, next) {
+    getHistoryTest(req, res) {
         sqlConnect.then(pool => {
             return pool.request()
                 .input('masv', sql.NChar(15), req.body.MASV)

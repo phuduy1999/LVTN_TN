@@ -27,7 +27,7 @@ const AppHeader = (props) => {
   useEffect(() => {
     const user = InfoUserLogin();
     if (user && user.accessToken) {
-      setEmail(email + user.EMAIL);
+      setEmail(email + user.EMAIL + ` (${user.MANQ})`);
       setIsLogin(true);
     }
   }, [])

@@ -1,5 +1,4 @@
 const { sqlConnect, sql } = require('../config/db')
-const Joi = require('joi');
 
 class RegisterClassController {
     //[GET] /:id
@@ -19,30 +18,6 @@ class RegisterClassController {
 
     //[POST] /
     addRegisterClass(req, res) {
-        const schema = Joi.object({
-            NIENKHOA: Joi.string()
-                .max(10)
-                .required(),
-            HOCKY: Joi.number()
-                .min(1)
-                .max(2)
-                .required(),
-            NHOM: Joi.number()
-                .required(),
-            MAMH: Joi.string()
-                .max(15)
-                .required(),
-            MASV: Joi.string()
-                .max(15)
-                .required(),
-        })
-
-        const result = schema.validate(req.body);
-        if (result.error) {
-            res.status(400).send({ err: result.error.details[0].message });
-            return;
-        }
-
         sqlConnect.then(pool => {
             return pool.request()
                 .input('hk', sql.SmallInt, req.body.HOCKY)

@@ -10,7 +10,7 @@ router.post('/', roleTeacher_PGV, validate.validateSubject, subjectController.ad
 router.put('/:id', roleTeacher_PGV, validate.validateSubject, subjectController.updateOne)
 router.delete('/:id', roleTeacher_PGV, subjectController.deleteOne);
 router.get('/:id/check', roleTeacher_PGV, subjectController.checkFK);
-router.get('/:id', roleTeacher_PGV, subjectController.getOne);
+router.get('/:id', roleTeacher, subjectController.getOne);
 router.get('/:name/name', roleTeacher, subjectController.getOneByName);
 router.get('/', subjectController.getAll);
 

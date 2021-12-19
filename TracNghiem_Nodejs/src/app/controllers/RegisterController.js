@@ -10,7 +10,7 @@ class RegisterController {
         })
             .then(result => {
                 const arrRecord = result.recordset;
-                console.log(arrRecord);
+                // console.log(arrRecord);
                 res.status(200).send(arrRecord);
             }).catch(err => {
                 console.log(err)

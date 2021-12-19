@@ -150,9 +150,9 @@ export default function index() {
             {
               dsch && dsch.map((ch, idx) => {
                 if (ch.MALOAICH.trim() === 'NLC') {
-                  return <CauHoiNLC key={'cau' + (idx + 1)} cauhoi={ch} handleSetLuaChon={handleSetLuaChon} idx={idx} />;
+                  return <CauHoiNLC key={'cau' + (idx + 1)} cauhoi={ch} luachonsv={dslc[idx]} handleSetLuaChon={handleSetLuaChon} idx={idx} />;
                 }
-                else return <CauHoiDK key={'cau' + (idx + 1)} cauhoi={ch} handleSetLuaChon={handleSetLuaChon} idx={idx} />;
+                else return <CauHoiDK key={'cau' + (idx + 1)} cauhoi={ch} luachonsv={dslc[idx]} handleSetLuaChon={handleSetLuaChon} idx={idx} />;
               })
             }
           </CCardBody>
