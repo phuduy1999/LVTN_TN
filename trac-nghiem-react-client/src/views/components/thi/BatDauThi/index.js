@@ -126,7 +126,7 @@ export default function index() {
           })
         }
         catch (e) {
-          console.log(e);
+          clearInterval(clockInterval);
         }
       }
     }, 1000)
