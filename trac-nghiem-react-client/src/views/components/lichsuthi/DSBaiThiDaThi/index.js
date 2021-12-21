@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import lichSuThiApi from 'src/api/lichSuThiApi';
 import { Link } from 'react-router-dom'
 import InfoUserLogin from 'src/_infoUser';
+import _formatDate from 'src/_formatDate';
 
 export default function index() {
   const [ds, setDS] = useState([]);
@@ -45,8 +46,7 @@ export default function index() {
                 </CCardBody>
                 <CCardFooter>
                   <small className="text-muted">
-                    Ngày thi {bt.NGAYTHI && bt.NGAYTHI.slice(8, 10) + "/" +
-                      bt.NGAYTHI.slice(5, 7) + "/" + bt.NGAYTHI.slice(0, 4)}
+                    Ngày thi {_formatDate(bt.NGAYTHI)}
                   </small>
                 </CCardFooter>
               </CCard>

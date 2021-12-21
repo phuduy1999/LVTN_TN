@@ -10,6 +10,8 @@ import AppModalCustom from 'src/components/AppModalCustom';
 import CauHoiDK from '../../cauhoi/DienKhuyet';
 import CauHoiNLC from '../../cauhoi/NhieuLuaChon';
 import InfoUserLogin from 'src/_infoUser';
+import _chuanHoaChuoi from 'src/_chuanHoaChuoi';
+import _formatDate from 'src/_formatDate';
 
 export default function index() {
   const { id } = useParams();
@@ -33,7 +35,7 @@ export default function index() {
     setVisible(!visible);
     let soCauDung = 0;
     for (let i = 0; i < dsch.length; i++) {
-      if (dslc[i].trim() === dsch[i].DAP_AN) {
+      if (_chuanHoaChuoi(dslc[i]).toUpperCase() === dsch[i].DAP_AN.toUpperCase()) {
         soCauDung++;
       }
     }
@@ -172,8 +174,7 @@ export default function index() {
                   <CTableHeaderCell scope="row">Sinh viên:</CTableHeaderCell>
                   <CTableDataCell>Mã sinh viên: {sv.MASV}</CTableDataCell>
                   <CTableDataCell>Họ tên: {sv.HO + " " + sv.TEN}</CTableDataCell>
-                  <CTableDataCell>Ngày sinh: {sv.NGAYSINH && sv.NGAYSINH.slice(8, 10) + "/" +
-                    sv.NGAYSINH.slice(5, 7) + "/" + sv.NGAYSINH.slice(0, 4)}</CTableDataCell>
+                  <CTableDataCell>Ngày sinh: {_formatDate(sv.NGAYSINH)}</CTableDataCell>
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell scope="row">Lớp môn học:</CTableHeaderCell>
@@ -188,8 +189,7 @@ export default function index() {
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell scope="row">Ngày thi:</CTableHeaderCell>
-                  <CTableDataCell colSpan="3">{thongTin.NGAYTHI && thongTin.NGAYTHI.slice(8, 10) + "/" +
-                    thongTin.NGAYTHI.slice(5, 7) + "/" + thongTin.NGAYTHI.slice(0, 4)}</CTableDataCell>
+                  <CTableDataCell colSpan="3">{_formatDate(thongTin.NGAYTHI)}</CTableDataCell>
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell scope="row">Thời gian thi:</CTableHeaderCell>

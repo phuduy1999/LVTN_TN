@@ -59,17 +59,17 @@ export default function index(props) {
               </div>
             </CCardBody>
           </CCard>
-          {isDisabled === true && cauhoi.LUACHONSV === cauhoi.DAP_AN &&
+          {isDisabled === true && _chuanHoaChuoi(cauhoi.LUACHONSV).toUpperCase() === _chuanHoaChuoi(cauhoi.DAP_AN).toUpperCase() &&
             <CAlert color="success">
               Your answer is correct!
             </CAlert>
           }
-          {isDisabled === true && cauhoi.LUACHONSV !== cauhoi.DAP_AN && cauhoi.LUACHONSV !== '' &&
+          {isDisabled === true && _chuanHoaChuoi(cauhoi.LUACHONSV).toUpperCase() !== _chuanHoaChuoi(cauhoi.DAP_AN).toUpperCase() && cauhoi.LUACHONSV !== '' &&
             <CAlert color="danger">
               Your answer is wrong!
             </CAlert>
           }
-          {isDisabled === true && cauhoi.LUACHONSV !== cauhoi.DAP_AN && cauhoi.LUACHONSV === '' &&
+          {isDisabled === true && _chuanHoaChuoi(cauhoi.LUACHONSV).toUpperCase() !== _chuanHoaChuoi(cauhoi.DAP_AN).toUpperCase() && cauhoi.LUACHONSV === '' &&
             <CAlert color="danger">
               Your not write the answer!
             </CAlert>

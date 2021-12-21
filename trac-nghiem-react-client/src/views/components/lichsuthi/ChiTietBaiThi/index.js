@@ -8,6 +8,8 @@ import sinhVienApi from 'src/api/sinhVienApi';
 import CauHoiDK from '../../cauhoi/DienKhuyet';
 import CauHoiNLC from '../../cauhoi/NhieuLuaChon';
 import InfoUserLogin from 'src/_infoUser';
+import _chuanHoaChuoi from 'src/_chuanHoaChuoi';
+import _formatDate from 'src/_formatDate';
 
 export default function index() {
   const { id, diem } = useParams();
@@ -63,8 +65,7 @@ export default function index() {
                   <CTableHeaderCell scope="row">Sinh viên:</CTableHeaderCell>
                   <CTableDataCell>Mã sinh viên: {sv.MASV}</CTableDataCell>
                   <CTableDataCell>Họ tên: {sv.HO + " " + sv.TEN}</CTableDataCell>
-                  <CTableDataCell>Ngày sinh: {sv.NGAYSINH && sv.NGAYSINH.slice(8, 10) + "/" +
-                    sv.NGAYSINH.slice(5, 7) + "/" + sv.NGAYSINH.slice(0, 4)}</CTableDataCell>
+                  <CTableDataCell>Ngày sinh: {_formatDate(sv.NGAYSINH)}</CTableDataCell>
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell scope="row">Lớp môn học:</CTableHeaderCell>
@@ -79,8 +80,7 @@ export default function index() {
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell scope="row">Ngày thi:</CTableHeaderCell>
-                  <CTableDataCell colSpan="3">{thongTin.NGAYTHI && thongTin.NGAYTHI.slice(8, 10) + "/" +
-                    thongTin.NGAYTHI.slice(5, 7) + "/" + thongTin.NGAYTHI.slice(0, 4)}</CTableDataCell>
+                  <CTableDataCell colSpan="3">{_formatDate(thongTin.NGAYTHI)}</CTableDataCell>
                 </CTableRow>
                 <CTableRow>
                   <CTableHeaderCell scope="row">Thời gian thi:</CTableHeaderCell>
@@ -130,12 +130,12 @@ export default function index() {
                     <Link smooth={true} offset={-120} duration={0}
                       key={`nav-${(idx + 1)}`}
                       to={`cau-hoi-${(idx + 1)}`} >
-                      {dslc[idx] !== dsda[idx] &&
+                      {_chuanHoaChuoi(dslc[idx]).toUpperCase() !== _chuanHoaChuoi(dsda[idx]).toUpperCase() &&
                         <span className="text-danger mt-3">
                           {((idx + 1) < 10 ? '0' + (idx + 1) : (idx + 1)) + ": " + (ch.MALOAICH.trim() === "NLC" ? dslc[idx] : '')}
                           {dslc[idx] !== '' && <span>{ch.MALOAICH.trim() === 'DK' ? <span>&#10003;</span> : ''}</span>}
                         </span>}
-                      {dslc[idx] === dsda[idx] &&
+                      {_chuanHoaChuoi(dslc[idx]).toUpperCase() === _chuanHoaChuoi(dsda[idx]).toUpperCase() &&
                         <span className="text-success mt-3">
                           {((idx + 1) < 10 ? '0' + (idx + 1) : (idx + 1)) + ": " + (ch.MALOAICH.trim() === "NLC" ? dslc[idx] : '')}
                           {dslc[idx] !== '' && <span>{ch.MALOAICH.trim() === 'DK' ? <span>&#10003;</span> : ''}</span>}
