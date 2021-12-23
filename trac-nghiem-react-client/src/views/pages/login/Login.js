@@ -133,7 +133,7 @@ const Login = () => {
                   <div>
                     <h2>Thi Trắc Nghiệm</h2>
                     <p>
-                      Trang thi trắc nghiệm tiếng anh online!. Dành cho sinh viên
+                      Trang thi trắc nghiệm online!. Dành cho sinh viên
                       thuộc trường đại học.
                     </p>
                   </div>

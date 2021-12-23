@@ -55,7 +55,7 @@ class StudentController {
                 .input('diachi', sql.NVarChar(200), req.body.DIACHI)
                 .input('ngaysinh', sql.DateTime, req.body.NGAYSINH)
                 .input('email', sql.NChar(50), req.body.EMAIL)
-                .query('exec SP_THEMSV_TAIKHOANMD @masv, @ho, @ten, @ngaysinh, @diachi, @email');
+                .execute('SP_THEMSV_TAIKHOANMD');
         })
             .then(result => {
                 if (result.rowsAffected[0] === 1) {
@@ -68,7 +68,7 @@ class StudentController {
                 else if (err.message.includes('UNIQUE KEY')) {
                     res.status(400).send({ err: 'Trùng khóa duy nhất!' });
                 }
-                else res.status(400).send({ err: 'Lỗi thêm sinh viên!' });
+                else res.status(400).send({ err: err.message });
             })
     }
 
@@ -95,7 +95,7 @@ class StudentController {
                 else if (err.message.includes('UNIQUE KEY')) {
                     res.status(400).send({ err: 'Trùng khóa duy nhất!' });
                 }
-                else res.status(400).send({ err: 'Lỗi sửa sinh viên!' });
+                else res.status(400).send({ err: err.message });
             })
     }
 

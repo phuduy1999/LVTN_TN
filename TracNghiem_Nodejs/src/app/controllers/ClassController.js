@@ -79,11 +79,8 @@ class ClassController {
                     res.send(req.body);
                 }
             }).catch(err => {
-                if (err.message.includes('PRIMARY KEY')) {
-                    res.status(400).send({ err: 'Trùng khóa chính!' });
-                }
-                else if (err.message.includes('UNIQUE KEY')) {
-                    res.status(400).send({ err: 'Trùng khóa duy nhất!' });
+                if (err.message.includes('UNIQUE KEY')) {
+                    res.status(400).send({ err: 'Lớp môn học đã tồn tại!' });
                 }
                 else res.status(400).send({ err: 'Lỗi thêm lớp môn học!' });
             })
@@ -111,11 +108,8 @@ class ClassController {
                     throw Error('Không có lớp nào được cập nhật!')
                 }
             }).catch(err => {
-                if (err.message.includes('PRIMARY KEY')) {
-                    res.status(400).send({ err: 'Trùng khóa chính!' });
-                }
-                else if (err.message.includes('UNIQUE KEY')) {
-                    res.status(400).send({ err: 'Trùng khóa duy nhất!' });
+                if (err.message.includes('UNIQUE KEY')) {
+                    res.status(400).send({ err: 'Lớp môn học đã tồn tại!' });
                 }
                 else if (err.message.includes('daduocdkthi')) {
                     res.status(400).send({ err: 'Lớp môn học đã được đăng ký thi!' });

@@ -79,7 +79,7 @@ export default function index() {
                   }
                   {_formatDate(moment().format()) !== _formatDate(bt.NGAYTHI)
                     && !dsDaThi.some((item) => item.IDLMH === bt.IDLMH) &&
-                    <CButton CButton disabled>Chưa tới ngày thi</CButton>
+                    <CButton CButton disabled>Chưa tới hoặc đã qua ngày thi</CButton>
                   }
                   {dsDaThi.some((item) => item.IDLMH === bt.IDLMH) &&
                     <CButton disabled>Đã thi</CButton>

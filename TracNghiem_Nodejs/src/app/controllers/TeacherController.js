@@ -57,7 +57,7 @@ class TeacherController {
                 .input('email', sql.NChar(50), req.body.EMAIL)
                 .input('makh', sql.NChar(15), req.body.MAKH)
                 .input('manq', sql.NChar(15), req.body.MANQ)
-                .query('exec SP_THEMGV_TAIKHOANMD @magv, @ho, @ten, @diachi, @sdt, @email, @makh, @manq');
+                .execute('SP_THEMGV_TAIKHOANMD');
         })
             .then(result => {
                 if (result.rowsAffected[0] === 1) {
@@ -70,7 +70,7 @@ class TeacherController {
                 else if (err.message.includes('UNIQUE KEY')) {
                     res.status(400).send({ err: 'Trùng khóa duy nhất!' });
                 }
-                else res.status(400).send({ err: 'Lỗi thêm giáo viên!' });
+                else res.status(400).send({ err: err.message });
             })
     }
 

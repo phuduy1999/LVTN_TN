@@ -131,7 +131,7 @@ const Login = (props) => {
                   <div>
                     <h2>Admin page</h2>
                     <p>
-                      Trang quản lý phần mềm thi trắc nghiệm tiếng anh online!. Dành cho
+                      Trang quản lý phần mềm thi trắc nghiệm online!. Dành cho
                       phòng giáo vụ và giáo viên làm việc tại trường đại học.
                     </p>
                   </div>

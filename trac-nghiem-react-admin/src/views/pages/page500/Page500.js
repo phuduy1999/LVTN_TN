@@ -18,8 +18,7 @@ const Page500 = () => {
                 The page you are looking for is temporarily unavailable.
               </p>
             </span>
-            <CNavLink href='https://google.com' target='_blank'>Home</CNavLink>
-            <CNavLink href='/logout'>Logout</CNavLink>
+            <CNavLink href='/login'>Logout</CNavLink>
           </CCol>
         </CRow>
       </CContainer>
